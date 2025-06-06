@@ -210,7 +210,7 @@ main > section:first-child {
         margin-right: 0.5rem;
     }
     .nav-link-item {
-        font-size: 0.7rem;
+        font-size: 0.9rem;
         padding: 0.3rem 0.3rem;
     }
      .header-nav-links > .nav-link-item:not(:first-child) {
