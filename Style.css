@@ -219,10 +219,6 @@ main > section:first-child {
     .header-nav-links {
         margin-right: 0.5rem;
     }
-    .hero-logo-main {
-        height: 250px;
-        width: 250px;
-    }
     .hero-subtitle-role {
         font-size: 19px;
     }
