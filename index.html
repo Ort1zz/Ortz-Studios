@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ortzing Studios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-custom-dark-primary text-custom-light-primary"> 
+
+
+    <header id="main-header" class="floating-header w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+        <div class="container mx-auto flex justify-center items-center"> 
+            <nav class="flex items-center space-x-2 sm:space-x-3 md:space-x-4"> 
+                <a href="#sobre" class="nav-link-item text-custom-light-primary">Sobre</a>
+                <a href="#experiencia" class="nav-link-item text-custom-light-primary">Experiência</a>
+                <a href="#pacotes" class="nav-link-item text-custom-light-primary">Pacotes</a>
+                <a href="#contato" class="nav-link-item nav-link-contact">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+
+        <section id="hero" class="bg-[var(--accent-purple-5)] text-white min-h-screen flex flex-col items-center justify-center">
+            <div class="container mx-auto px-6 text-center">
+                <img src="img/Logo Site.png" alt="Ortzign Logo Principal" class="hero-logo-main h-[30rem] sm:h-[34rem] md:h-[38rem] lg:h-[42rem] max-h-[80vh] w-auto mx-auto mb-8"> 
+                <p class="text-2xl md:text-3xl mt-10 text-[var(--text-light-secondary)] hero-subtitle-role">VideoMaker e Editor de Vídeos</p> 
+            </div>
+        </section>
+
+
+        <section id="sobre" class="py-20 bg-custom-dark-primary">
+            <div class="container mx-auto px-6">
+                <div class="md:flex md:items-center md:space-x-12">
+                    <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center md:justify-start">
+                        <img src="img/Eu.jpeg" alt="Foto de Ortzign" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-lg border-4 border-[var(--accent-purple-3)]">
+                    </div>
+                    <div class="md:w-2/3">
+                        <h2 class="text-3xl font-bold text-[var(--accent-purple-1)] mb-4">Contando Histórias Através das Lentes</h2>
+                        <p class="text-lg leading-relaxed text-custom-light-primary">Me chamo Lucas Ortiz, mas pode me chamar de Ortiz, sou editor de vídeos apaixonada por transformar ideias em narrativas visuais impactantes. Com um olhar criativo e atenção meticulosa aos detalhes, dedico-me a produzir conteúdo que não apenas informa, mas também engaja e emociona. Minha jornada no audiovisual é movida pela busca constante por inovação e pela satisfação de ver cada projeto ganhar vida, desde a concepção até a entrega final.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="experiencia" class="bg-custom-dark-secondary py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-[var(--accent-purple-1)] mb-12">Experiência em Destaque</h2>
+                <div class="flex justify-center"> 
+                    <a href="https://www.instagram.com/frizzoseguros/" target="_blank" rel="noopener noreferrer" class="block w-full md:w-3/4 lg:w-1/2 group experience-card-linkable">
+                        <div class="bg-custom-dark-primary p-8 rounded-lg shadow-lg h-full flex flex-col transition-all duration-300">
+                            <div class="flex items-center mb-4">
+                                <i data-lucide="building" class="text-[var(--accent-purple-2)] w-10 h-10 mr-4"></i>
+                                <h3 class="text-2xl font-bold text-custom-light-secondary">Frizzo Corretora de Seguros</h3>
+                            </div>
+                            <p class="text-custom-light-primary flex-grow">Atualmente, sou responsável pela gestão de social media e criação de conteúdo audiovisual para a Frizzo Corretora de Seguros. Meu trabalho envolve o planejamento, gravação e edição de vídeos institucionais e informativos, buscando fortalecer a comunicação da empresa e aumentar seu alcance digital.</p>
+                            <div class="mt-auto pt-4 text-right">
+                                <span class="text-sm text-[var(--accent-purple-1)] font-medium group-hover:text-[var(--accent-purple-2)] transition-colors hidden">Visitar Instagram &rarr;</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="servicos" class="py-20 bg-custom-dark-primary">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-[var(--accent-purple-1)] mb-12">O Que Eu Faço</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-6 bg-custom-dark-secondary rounded-lg shadow-md hover:scale-105 transition-transform duration-300 border border-custom">
+                        <i data-lucide="instagram" class="w-12 h-12 mx-auto text-[var(--accent-purple-2)] mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2 text-custom-light-secondary">Vídeos para Redes Sociais</h3>
+                        <p class="text-custom-light-primary">Crio conteúdo dinâmico e otimizado para engajar no Instagram, TikTok, YouTube e outras plataformas.</p>
+                    </div>
+                    <div class="text-center p-6 bg-custom-dark-secondary rounded-lg shadow-md hover:scale-105 transition-transform duration-300 border border-custom">
+                        <i data-lucide="film" class="w-12 h-12 mx-auto text-[var(--accent-purple-2)] mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2 text-custom-light-secondary">Edição de Vídeo Profissional</h3>
+                        <p class="text-custom-light-primary">Transformo seu material bruto em vídeos polidos, com narrativa envolvente e acabamento de alta qualidade.</p>
+                    </div>
+                    <div class="text-center p-6 bg-custom-dark-secondary rounded-lg shadow-md hover:scale-105 transition-transform duration-300 border border-custom">
+                        <i data-lucide="camera" class="w-12 h-12 mx-auto text-[var(--accent-purple-2)] mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2 text-custom-light-secondary">Direção de Imagem e Filmagem</h3>
+                        <p class="text-custom-light-primary">Cuido de toda a captação das suas imagens, utilizando equipamento e técnicas profissionais para garantir os melhores takes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="pacotes" class="bg-[var(--accent-purple-3)] text-white py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4 text-[var(--text-light-secondary)]">Pacotes de Vídeos</h2>
+                <p class="text-center text-lg text-[var(--accent-purple-1)] mb-12">Acredito em transparência e no melhor valor. Veja como o investimento se torna mais vantajoso com pacotes maiores.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <div class="bg-custom-dark-secondary p-8 rounded-lg shadow-lg price-card">
+                        <h3 class="text-2xl font-bold mb-2 text-custom-light-secondary text-main-on-hover">4 Vídeos</h3>
+                        <p class="text-5xl font-bold mb-4 text-custom-light-primary text-highlight-on-hover">R$360,00</p>
+                        <p class="text-[var(--accent-purple-1)] text-main-on-hover">R$ 90,00 por vídeo</p>
+                    </div>
+                    <div class="bg-custom-dark-secondary p-8 rounded-lg shadow-lg price-card">
+                        <h3 class="text-2xl font-bold mb-2 text-custom-light-secondary text-main-on-hover">6 Vídeos</h3>
+                        <p class="text-5xl font-bold mb-4 text-custom-light-primary text-highlight-on-hover">R$480,00</p>
+                        <p class="text-[var(--accent-purple-1)] text-main-on-hover">R$ 80,00 por vídeo</p>
+                    </div>
+                    <div class="bg-custom-dark-secondary p-8 rounded-lg shadow-lg price-card">
+                        <h3 class="text-2xl font-bold mb-2 text-custom-light-secondary text-main-on-hover">8 Vídeos</h3>
+                        <p class="text-5xl font-bold mb-4 text-custom-light-primary text-highlight-on-hover">R$560,00</p>
+                        <p class="text-[var(--accent-purple-1)] text-main-on-hover">R$ 70,00 por vídeo</p>
+                    </div>
+                    <div class="bg-custom-dark-secondary p-8 rounded-lg shadow-lg price-card">
+                        <h3 class="text-2xl font-bold mb-2 text-custom-light-secondary text-main-on-hover">10 Vídeos</h3>
+                        <p class="text-5xl font-bold mb-4 text-custom-light-primary text-highlight-on-hover">R$650,00</p>
+                        <p class="text-[var(--accent-purple-1)] text-main-on-hover">R$ 65,00 por vídeo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="diferenciais" class="py-20 bg-custom-dark-primary">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-[var(--accent-purple-1)] mb-12">Por Que Trabalhar Comigo?</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+                    <div class="text-center">
+                        <i data-lucide="sparkles" class="w-10 h-10 mx-auto text-[var(--accent-purple-2)] mb-3"></i>
+                        <h4 class="font-bold text-custom-light-secondary">Criatividade</h4>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="award" class="w-10 h-10 mx-auto text-[var(--accent-purple-2)] mb-3"></i>
+                        <h4 class="font-bold text-custom-light-secondary">Qualidade Técnica</h4>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="verified" class="w-10 h-10 mx-auto text-[var(--accent-purple-2)] mb-3"></i>
+                        <h4 class="font-bold text-custom-light-secondary">Experiência</h4>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="users" class="w-10 h-10 mx-auto text-[var(--accent-purple-2)] mb-3"></i>
+                        <h4 class="font-bold text-custom-light-secondary">Foco no Cliente</h4>
+                    </div>
+                    <div class="text-center">
+                        <i data-lucide="timer" class="w-10 h-10 mx-auto text-[var(--accent-purple-2)] mb-3"></i>
+                        <h4 class="font-bold text-custom-light-secondary">Compromisso</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contato" class="bg-custom-dark-secondary py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-[var(--accent-purple-1)] mb-4">Vamos Conversar?</h2>
+                <p class="text-lg mb-8 text-custom-light-primary">Estou pronta para ouvir sobre seu projeto e criarmos algo incrível juntos.</p>
+                <div class="flex justify-center space-x-6 mt-12">
+                    <a href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit" target="_blank" rel="noopener noreferrer" class="text-[var(--accent-purple-2)] hover:text-[var(--accent-purple-1)]" aria-label="LinkedIn">
+                        <i data-lucide="linkedin" class="w-8 h-8"></i>
+                    </a>
+                    <a href="https://www.instagram.com/lucas.ortizz_/" target="_blank" rel="noopener noreferrer" class="text-[var(--accent-purple-2)] hover:text-[var(--accent-purple-1)]" aria-label="Instagram">
+                        <i data-lucide="instagram" class="w-8 h-8"></i>
+                    </a>
+                    <a href="https://wa.me/5511994082371" target="_blank" rel="noopener noreferrer" class="text-[var(--accent-purple-2)] hover:text-[var(--accent-purple-1)]" aria-label="WhatsApp">
+                        <i data-lucide="message-circle" class="w-8 h-8"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <a href="https://wa.me/5511994082371" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+
+    <footer class="bg-black text-[var(--accent-purple-2)] py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Ortzign. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
