@@ -3,19 +3,17 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    /* --- Nova Paleta (Modo Escuro com Destaque Azul) --- */
-    --bg-dark-primary: #1a202c;       /* Fundo principal: Azul-marinho bem escuro */
-    --bg-dark-secondary: #2c3a4f;     /* Fundo secundário: Azul-marinho acinzentado */
-    --bg-header-float: rgba(44, 58, 79, 0.85); /* Versão com transparência do fundo secundário */
-    
-    --text-light-primary: #edf2f7;      /* Texto principal: Branco-azulado suave */
-    --text-light-secondary: #668C99;   /* Sua cor escolhida como destaque para títulos */
-    
-    --accent-purple-1: #668C99;        /* Sua cor escolhida para botões e links */
-    --accent-purple-2: #82a3af;        /* Versão mais clara para efeito hover */
-    --accent-purple-3: #35465e;        /* Tom mais escuro para hover de cards */
+    /* --- Paleta de Cores --- */
+    --bg-dark-primary: #1a202c;
+    --bg-dark-secondary: #2c3a4f;
+    --bg-header-float: rgba(44, 58, 79, 0.85);
+    --text-light-primary: #edf2f7;
+    --text-light-secondary: #668C99;
+    --accent-purple-1: #668C99;
+    --accent-purple-2: #82a3af;
+    --accent-purple-3: #35465e;
     --border-color: #35465e;
-    --nav-link-hover-bg: rgba(102, 140, 153, 0.2); /* Versão com transparência da cor de destaque */
+    --nav-link-hover-bg: rgba(102, 140, 153, 0.2);
 }
 
 h1, h2, h3, h4, h5, h6, .nav-link-item, .mobile-nav-link, #header-logo-container span, .hero-subtitle-studio, .hero-subtitle-role {
@@ -63,7 +61,6 @@ h1, h2, h3, h4, h5, h6, .nav-link-item, .mobile-nav-link, #header-logo-container
 .experience-card-linkable:hover i {
     color: var(--text-light-secondary) !important;
 }
-
 
 .whatsapp-float {
     position: fixed;
@@ -137,7 +134,6 @@ h1, h2, h3, h4, h5, h6, .nav-link-item, .mobile-nav-link, #header-logo-container
      margin-right: 0.15rem;
 }
 
-
 .nav-link-item:hover {
     background-color: var(--nav-link-hover-bg);
     color: var(--text-light-secondary);
@@ -203,7 +199,6 @@ main > section:first-child {
     width: 300px;
     height: 300px;
 }
-
 
 /* Small screens */
 @media (min-width: 320px) {
