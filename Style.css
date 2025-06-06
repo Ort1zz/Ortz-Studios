@@ -210,7 +210,7 @@ main > section:first-child {
         margin-right: 0.5rem;
     }
     .nav-link-item {
-        font-size: 0.85rem;
+        font-size: 0.8.5rem;
         padding: 0.3rem 0.3rem;
     }
      .header-nav-links > .nav-link-item:not(:first-child) {
@@ -224,7 +224,7 @@ main > section:first-child {
         width: 300px;
     }
     .hero-subtitle-role {
-        font-size: 21px;
+        font-size: 20px;
     }
 }
 
