@@ -22,7 +22,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS Configuration -->
     <script>
@@ -32,16 +32,19 @@
                     colors: {
                         'dark': '#1E1E1E',
                         'light': '#FCFCFC',
-                        'accent': '#B08D57',
+                        'brand-red': '#DC2626', // Vermelho para títulos
                         'gray-light': '#F0EBE3',
                     },
                     fontFamily: {
-                        'heading': ['Playfair Display', 'serif'],
-                        'body': ['Montserrat', 'sans-serif'],
+                        'heading': ['Poppins', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
                     },
                     filter: {
                         'drop-shadow-lg': 'drop-shadow(0 10px 8px rgb(0 0 0 / 0.1))',
-                    }
+                    },
+                    aspectRatio: {
+                        '3/4': '3 / 4',
+                    },
                 }
             }
         }
@@ -51,14 +54,14 @@
     <style>
         /* Estilos para o menu de navegação ativo */
         .nav-link.active {
-            color: #B08D57;
+            color: #FFFFFF;
             font-weight: 700;
         }
 
         /* Classe para o botão de planta ativo (controlado por JS) */
         .planta-botao.ativo {
-            border-color: #B08D57;
-            background-color: #F0EBE3;
+            border-color: #DC2626;
+            background-color: #fecaca;
             font-weight: 700;
             color: #1E1E1E;
         }
@@ -131,7 +134,7 @@
 <body class="font-body bg-light text-dark">
 
     <!-- CABEÇALHO SUPERIOR -->
-    <header id="header" class="bg-dark/50 text-light fixed top-0 w-full z-50 backdrop-blur-xl border-b border-accent/30 transition-all duration-300 initial-hidden animate-header">
+    <header id="header" class="bg-dark/50 text-light fixed top-0 w-full z-50 backdrop-blur-xl border-b border-white/20 transition-all duration-300 initial-hidden animate-header">
         <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
             <!-- Logo -->
             <a href="#" aria-label="Página Inicial">
@@ -141,16 +144,15 @@
             
             <!-- Menu de Navegação (Desktop) -->
             <nav class="hidden md:flex items-center gap-8">
-                <a href="#decorados" class="nav-link hover:text-accent transition-colors">Decorados</a>
-                <a href="#plantas" class="nav-link hover:text-accent transition-colors">Plantas</a>
-                <a href="#lazer" class="nav-link hover:text-accent transition-colors">Lazer</a>
-                <a href="#obras" class="nav-link hover:text-accent transition-colors">Obras</a>
-                <a href="#contato" class="nav-link hover:text-accent transition-colors">Contato</a>
+                <a href="#plantas" class="nav-link hover:text-brand-red transition-colors">Plantas</a>
+                <a href="#lazer" class="nav-link hover:text-brand-red transition-colors">Lazer</a>
+                <a href="#decorados" class="nav-link hover:text-brand-red transition-colors">Decorados</a>
+                <a href="#contato" class="nav-link hover:text-brand-red transition-colors">Contato</a>
             </nav>
 
             <!-- Botão WhatsApp e Menu Mobile -->
             <div class="flex items-center gap-2 sm:gap-4">
-                <a href="https://wa.me/5511960998000" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium tracking-wider hover:bg-accent/20 transition-colors p-2 rounded-full sm:px-4">
+                <a href="https://wa.me/5511960998000" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium tracking-wider hover:bg-white/10 transition-colors p-2 rounded-full sm:px-4">
                     <span class="relative flex h-3 w-3">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -167,11 +169,10 @@
         <!-- Menu Mobile (oculto por padrão) -->
         <div id="mobile-menu" class="md:hidden bg-dark/80 backdrop-blur-lg transform -translate-x-full absolute top-full left-0 w-full">
             <nav class="flex flex-col p-4">
-                <a href="#decorados" class="nav-link py-2 px-4 hover:bg-accent/20 rounded-md">Decorados</a>
-                <a href="#plantas" class="nav-link py-2 px-4 hover:bg-accent/20 rounded-md">Plantas</a>
-                <a href="#lazer" class="nav-link py-2 px-4 hover:bg-accent/20 rounded-md">Lazer</a>
-                <a href="#obras" class="nav-link py-2 px-4 hover:bg-accent/20 rounded-md">Obras</a>
-                <a href="#contato" class="nav-link py-2 px-4 hover:bg-accent/20 rounded-md">Contato</a>
+                <a href="#plantas" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Plantas</a>
+                <a href="#lazer" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Lazer</a>
+                <a href="#decorados" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Decorados</a>
+                <a href="#contato" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Contato</a>
             </nav>
         </div>
     </header>
@@ -189,15 +190,15 @@
                 
                 <!-- Títulos Superiores -->
                 <div class="absolute top-24 left-1/2 -translate-x-1/2 w-full px-6 initial-hidden animate-hero-titles">
-                    <h2 class="font-bold text-accent uppercase tracking-widest text-lg md:text-xl">78% VENDIDO</h2>
+                    <h2 class="font-bold text-brand-red uppercase tracking-widest text-lg md:text-xl">78% VENDIDO</h2>
                     <p class="uppercase tracking-widest text-sm text-gray-300 mt-2">Últimos dias do decorado</p>
                 </div>
 
                 <!-- Conteúdo Principal (Centralizado Verticalmente) -->
                 <div class="my-auto initial-hidden animate-hero-main">
                     <div class="flex justify-center gap-4 mt-6 mb-8">
-                        <span class="border border-accent text-light py-2 px-6 rounded-full text-xs uppercase tracking-widest bg-black/30">Exclusividade</span>
-                        <span class="border border-accent text-light py-2 px-6 rounded-full text-xs uppercase tracking-widest bg-black/30">Obras Aceleradas</span>
+                        <span class="border border-white/80 text-light py-2 px-6 rounded-full text-xs uppercase tracking-widest bg-black/30">Exclusividade</span>
+                        <span class="border border-white/80 text-light py-2 px-6 rounded-full text-xs uppercase tracking-widest bg-black/30">Obras Aceleradas</span>
                     </div>
                     <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-light/90 subtle-glow">Boulevard Butantã e a nova definição de morar bem.</h1>
                     <p class="mt-4 text-base md:text-lg max-w-2xl mx-auto">Fale agora com nosso especialista e descubra a melhor forma de pagamento!</p>
@@ -213,249 +214,229 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DECORADOS -->
-        <section id="decorados" class="pt-20 md:pt-28 pb-12 md:pb-16 text-center overflow-hidden">
-            <div class="container mx-auto px-6">
-                <p class="text-accent uppercase tracking-widest font-bold text-sm animate-on-scroll fade-in-blur">AGENDE SUA VISITA</p>
-                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mt-4 mb-8 animate-on-scroll fade-in-blur" style="--delay: 0.1s;">Decorados</h2>
-                <p class="max-w-3xl mx-auto text-gray-600 text-lg sm:text-xl animate-on-scroll fade-in-blur" style="--delay: 0.2s;">Surpreenda-se com ambientes que unem design, conforto e praticidade. Sinta a realidade de viver em um espaço pensado em cada detalhe.</p>
-                
-                <div id="decorados-carousel" class="relative w-full max-w-6xl mx-auto h-[450px] md:h-[650px] mt-12 md:mt-20 p-2 bg-white rounded-2xl shadow-2xl animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
-                    <div class="relative w-full h-full overflow-hidden rounded-xl">
-                        <!-- IMPORTANTE: Substitua pelas fotos reais do decorado -->
-                        <img src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=2080&auto=format&fit=crop" alt="Cozinha do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
-                        <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1932&auto=format&fit=crop" alt="Sala de estar do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1932&auto=format&fit=crop" alt="Quarto do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                    </div>
-                </div>
-
-                <div class="max-w-3xl mx-auto mt-12 md:mt-20">
-                    <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-base text-gray-600 font-medium mb-8 animate-on-scroll slide-up-fade">
-                        <span class="whitespace-nowrap">Localização Ímpar</span>
-                        <span class="text-accent">&#9679;</span>
-                        <span class="whitespace-nowrap">Melhor custo e benefício</span>
-                        <span class="text-accent">&#9679;</span>
-                        <span class="whitespace-nowrap">Valor de condomínio atrativo</span>
-                    </div>
-                    <p class="font-heading text-2xl md:text-3xl text-dark animate-on-scroll fade-in-blur" style="--delay: 0.1s;">
-                        ✨ Descubra como é morar nos apartamentos de 83m², 106m² e 134m² do Boulevard Butantã!
-                    </p>
-                    <p class="mt-4 text-gray-700 text-lg animate-on-scroll fade-in-blur" style="--delay: 0.2s;">
-                        Visite os decorados e sinta na prática todo o conforto, a sofisticação e a praticidade de viver em um espaço feito para o seu estilo de vida.
-                    </p>
-                    
-                    <div class="mt-12 animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
-                        <div class="max-w-3xl mx-auto rounded-2xl shadow-2xl overflow-hidden p-2 bg-white">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.035442587528!2d-46.71738282476597!3d-23.56708777879555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5668e833d739%3A0x6b1f25f7a40c9f0!2sR.%20Camargo%2C%2034%20-%20Butant%C3%A3%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005509-020!5e0!3m2!1spt-BR!2sbr!4v1694723932463!5m2!1spt-BR!2sbr"
-                                class="w-full h-[400px] rounded-xl" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-                    </div>
-
-                    <p class="mt-12 font-bold text-accent tracking-wider text-lg animate-on-scroll fade-in-blur" style="--delay: 0.3s;">
-                        📍 Boulevard Butantã – Mais do que um apartamento, o seu próximo lar.
-                    </p>
-                </div>
-            </div>
-        </section>
-
         <!-- SEÇÃO PLANTAS -->
-        <section id="plantas" class="pt-12 md:pt-16 pb-16 md:pb-28 bg-gray-50 overflow-hidden">
+        <section id="plantas" class="pt-20 md:pt-28 pb-12 md:pb-16 bg-gray-50 overflow-hidden">
             <div class="container mx-auto px-6">
                 <div class="text-center">
-                    <p class="text-accent uppercase tracking-widest font-bold text-sm animate-on-scroll fade-in-blur">Nossas Acomodações</p>
+                    <p class="text-brand-red uppercase tracking-widest font-bold text-sm animate-on-scroll fade-in-blur">Nossas Acomodações</p>
                     <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mt-4 mb-8 animate-on-scroll fade-in-blur" style="--delay: 0.1s;">Plantas Inteligentes</h2>
                     <p class="max-w-3xl mx-auto text-gray-600 text-lg sm:text-xl animate-on-scroll fade-in-blur" style="--delay: 0.2s;">Descubra plantas inteligentes e práticas que se adaptam ao seu estilo de vida, otimizando cada metro quadrado.</p>
                 </div>
                 
                 <div id="plantas-interactive-area" class="mt-12 md:mt-20 scroll-mt-20 animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
-                    <div id="plantas-botoes" class="grid grid-cols-2 gap-4 md:flex md:flex-wrap md:justify-center mb-8">
-                        <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-accent"><span>Apartamento de 83m²</span></button>
-                        <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-accent"><span>Apartamento de 106m² | 3Q</span></button>
-                        <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-accent"><span>Apartamento de 134m²</span></button>
-                        <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-accent"><span>Apartamento de 134m² | Master</span></button>
-                    </div>
-
-                    <!-- Container com layout responsivo para Plantas -->
-                    <div class="flex flex-col gap-8">
-                        <!-- Coluna da Imagem -->
-                        <div class="w-full">
-                            <div class="relative w-full max-w-5xl mx-auto">
-                                <div id="plantas-carousel" class="relative h-[400px] sm:h-[600px] md:h-[700px] overflow-hidden">
+                    <div class="lg:flex lg:gap-8 lg:items-start">
+                        <!-- Coluna da Esquerda: Imagem da Planta (55%) -->
+                        <div class="w-full lg:w-[55%]">
+                            <div class="relative w-full">
+                                <div id="plantas-carousel" class="relative h-[400px] sm:h-[600px] lg:h-[390px] overflow-hidden">
                                     <div class="flex transition-transform duration-500 ease-in-out h-full" id="plantas-carousel-track">
                                         <!-- 
                                             NOTA PARA O DESENVOLVEDOR: IMAGENS DAS PLANTAS
-                                            
-                                            1.  COLOQUE SUAS IMAGENS: 
-                                                - Salve suas imagens de planta (preferencialmente PNG com fundo transparente) em uma pasta como 'assets/'.
-                                                - Substitua os links 'https://placehold.co/...' abaixo no atributo 'src' de cada imagem pelo caminho correto (ex: src="assets/planta-83m.png").
-
-                                            2.  CONTROLE O TAMANHO DA IMAGEM:
-                                                - O tamanho da imagem é controlado pela altura do container logo acima (div com id="plantas-carousel").
-                                                - A altura atual é 'h-[400px]' para celulares e aumenta para telas maiores ('sm:h-[600px]', 'md:h-[700px]').
-                                                - Ajuste esses valores de altura (ex: 'h-[450px]') para aumentar ou diminuir o espaço que a planta ocupa na tela.
+                                            ... (Anotação mantida) ...
                                         -->
                                         <img src="https://placehold.co/800x1000/0000/fff?text=Planta+83m%C2%B2" alt="Planta do apartamento de 83m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
-                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+106m%C2%B2" alt="Planta do apartamento de 106m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
-                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+134m%C2%B2" alt="Planta do apartamento de 134m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
-                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+134m%C2%B2+Master" alt="Planta do apartamento de 134m² com suíte master" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+106m%C2%B²" alt="Planta do apartamento de 106m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+134m%C2%B²" alt="Planta do apartamento de 134m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+134m%C2%B²+Master" alt="Planta do apartamento de 134m² com suíte master" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
                                     </div>
                                 </div>
                             </div>
+                            <div class="mt-8 text-center lg:text-right">
+                                <a href="#contato" class="inline-block bg-brand-red text-light py-4 px-12 rounded-full font-bold uppercase tracking-wider hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 transform">
+                                    Atendimento Exclusivo
+                                </a>
+                            </div>
                         </div>
                         
-                        <!-- Coluna da Descrição -->
-                        <div class="w-full">
-                            <div id="plantas-info-box" class="h-full max-w-5xl mx-auto p-6 sm:p-8 bg-white rounded-lg min-h-[180px] shadow-xl">
+                        <!-- Coluna da Direita: Controles e Descrição (45%) -->
+                        <div class="w-full lg:w-[45%] mt-8 lg:mt-0">
+                            <div id="plantas-botoes" class="grid grid-cols-2 gap-4 mb-8">
+                                <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Apartamento de 83m²</span></button>
+                                <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Apartamento de 106m² | 3Q</span></button>
+                                <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Apartamento de 134m²</span></button>
+                                <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Apartamento de 134m² | Master</span></button>
+                            </div>
+                            <div id="plantas-info-box" class="h-full p-6 sm:p-8 bg-white rounded-lg min-h-[180px] shadow-xl">
                                 <!-- O conteúdo será injetado aqui pelo JS -->
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="mt-12 md:mt-20 max-w-5xl mx-auto animate-on-scroll slide-up-fade">
-                    <div class="bg-gray-light p-6 md:p-8 rounded-lg shadow-lg">
-                        <h3 class="font-heading text-2xl md:text-3xl text-center mb-6">Gostou de alguma planta?</h3>
-                        <p class="text-center text-gray-600 mb-6">Fale com um de nossos especialistas e receba mais informações.</p>
-                        <!-- FUNCIONALIDADE DO FORMULÁRIO -->
-                        <form action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST">
-                            <input class="w-full p-3 md:p-4 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent" type="text" name="name" placeholder="Nome" required>
-                            <input class="w-full p-3 md:p-4 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent" type="email" name="email" placeholder="* E-mail" required>
-                            <input class="w-full p-3 md:p-4 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent" type="text" name="phone" placeholder="Telefone" required>
-                            <button type="submit" class="w-full bg-accent text-light py-3 md:py-4 px-8 rounded-full font-bold uppercase tracking-wider hover:bg-amber-700 transition-colors">Quero Saber Mais</button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </section>
-
+        
         <!-- SEÇÃO ÁREA DE LAZER -->
-        <section id="lazer" class="pt-12 md:pt-16 pb-20 md:pb-28 text-center overflow-hidden">
+        <section id="lazer" class="pt-12 md:pt-16 pb-12 md:pb-16 text-center overflow-hidden">
              <div class="container mx-auto px-6">
-                <p class="text-accent uppercase tracking-widest font-bold text-sm animate-on-scroll fade-in-blur">Lazer para toda a família</p>
+                <p class="text-brand-red uppercase tracking-widest font-bold text-sm animate-on-scroll fade-in-blur">Lazer para toda a família</p>
                 <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mt-4 mb-8 animate-on-scroll fade-in-blur" style="--delay: 0.1s;">Lazer Exclusivo</h2>
-                <p class="max-w-3xl mx-auto text-gray-600 text-lg sm:text-xl animate-on-scroll fade-in-blur" style="--delay: 0.2s;">Um oásis de tranquilidade e diversão. Espaços projetados para o seu bem-estar, conforto e momentos inesquecíveis.</p>
+                <p class="max-w-4xl mx-auto text-gray-600 text-lg sm:text-xl animate-on-scroll fade-in-blur" style="--delay: 0.2s;">Um oásis de tranquilidade e diversão. Espaços projetados para o seu bem-estar, conforto e momentos inesquecíveis.</p>
                 
-                <div id="lazer-carousel" class="relative w-full max-w-6xl mx-auto h-[450px] md:h-[650px] mt-12 md:mt-20 p-2 bg-white rounded-2xl shadow-2xl animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
-                    <div class="relative w-full h-full overflow-hidden rounded-xl">
-                        <!-- IMPORTANTE: Substitua pelas fotos reais da área de lazer -->
-                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop" alt="Piscina do empreendimento" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
-                        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2070&auto=format&fit=crop" alt="Piscina com vista" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                        <img src="https://images.unsplash.com/photo-1576675762955-381c0c2738a9?q=80&w=2070&auto=format&fit=crop" alt="Academia moderna" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                        <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2071&auto=format&fit=crop" alt="Salão de festas" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                <div class="mt-12 md:mt-20 lg:grid lg:grid-cols-10 lg:gap-12 lg:items-stretch">
+                    <!-- Coluna Esquerda: Carrossel de Imagens (70%) -->
+                    <div id="lazer-carousel" class="lg:col-span-7 relative w-full h-[450px] md:h-[600px] p-2 bg-white rounded-2xl shadow-2xl animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
+                        <div class="relative w-full h-full overflow-hidden rounded-xl">
+                            <!-- IMPORTANTE: Substitua pelas fotos reais da área de lazer -->
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop" alt="Piscina do empreendimento" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
+                            <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2070&auto=format&fit=crop" alt="Piscina com vista" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                            <img src="https://images.unsplash.com/photo-1576675762955-381c0c2738a9?q=80&w=2070&auto=format&fit=crop" alt="Academia moderna" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2071&auto=format&fit=crop" alt="Salão de festas" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                        </div>
                     </div>
-                </div>
 
-                <div class="max-w-4xl mx-auto mt-12 md:mt-20 text-left bg-white p-6 md:p-10 rounded-lg shadow-lg border border-gray-100 animate-on-scroll slide-up-fade">
-                    <h3 class="font-heading text-2xl md:text-3xl text-dark mb-6">Diferenciais para Toda a Família</h3>
-                    <p class="text-gray-600 mb-8 text-lg">
-                        No Boulevard Butantã, a diversão e o relaxamento estão sempre ao seu alcance. Desfrute de um lazer completo, com opções para todas as idades e gostos.
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4 text-lg">
-                        <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-accent flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Quadra poliesportiva</span></div>
-                        <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-accent flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Piscina adulto e infantil</span></div>
-                        <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-accent flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Playground e brinquedoteca</span></div>
-                        <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-accent flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Amplo salão de festas</span></div>
-                        <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-accent flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Espaço para churrasqueira</span></div>
-                        <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-accent flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Espaço pet</span></div>
+                    <!-- Coluna Direita: Diferenciais Carrossel (30%) -->
+                    <div class="w-full lg:col-span-3 mt-12 lg:mt-0 text-left bg-white p-6 md:p-10 rounded-lg shadow-2xl animate-on-scroll slide-up-fade flex flex-col" style="--delay: 0.4s;">
+                        <h3 class="font-heading text-2xl md:text-3xl text-dark mb-4">Diferenciais para Toda a Família</h3>
+                        <p class="text-gray-600 text-base mb-6">
+                            No Boulevard Butantã, a diversão e o relaxamento estão sempre ao seu alcance. Desfrute de um lazer completo, com opções para todas as idades e gostos.
+                        </p>
+                        <div class="relative h-48 overflow-hidden mt-auto">
+                            <div id="diferenciais-track" class="absolute inset-0 flex transition-transform duration-700 ease-in-out">
+                                <!-- Slide 1 -->
+                                <div class="w-full flex-shrink-0 space-y-4 text-lg pr-4">
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Quadra poliesportiva</span></div>
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Piscina adulto e infantil</span></div>
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Playground e brinquedoteca</span></div>
+                                </div>
+                                <!-- Slide 2 -->
+                                <div class="w-full flex-shrink-0 space-y-4 text-lg pr-4">
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Amplo salão de festas</span></div>
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Espaço para churrasqueira</span></div>
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Espaço pet</span></div>
+                                </div>
+                                <!-- Slide 3 -->
+                                <div class="w-full flex-shrink-0 space-y-4 text-lg pr-4">
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Salão de jogos</span></div>
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Sauna e descanso</span></div>
+                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Espaço Delivery</span></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO OBRAS -->
-        <section id="obras" class="py-20 md:py-28 bg-gray-50 overflow-hidden">
-            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-                <div class="animate-on-scroll fade-in-blur">
-                    <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl">Obras em Ritmo Acelerado</h2>
-                    <p class="mt-6 text-gray-600 text-lg sm:text-xl">Com a solidez e a tradição da Diálogo Engenharia, seu sonho está cada vez mais perto de se tornar realidade.</p>
-                    <ul class="mt-8 space-y-4 text-gray-700 text-lg">
-                        <li class="flex items-center gap-4"><span class="bg-accent h-2.5 w-2.5 rounded-full"></span>+260 torres entregues e em construção</li>
-                        <li class="flex items-center gap-4"><span class="bg-accent h-2.5 w-2.5 rounded-full"></span>+20.000 apartamentos entregues</li>
-                        <li class="flex items-center gap-4"><span class="bg-accent h-2.5 w-2.5 rounded-full"></span>+2.8 milhões de m² de área construída</li>
-                    </ul>
-                </div>
-                <div id="obras-carousel" class="relative w-full h-[450px] md:h-[600px] rounded-2xl shadow-2xl p-2 bg-white animate-on-scroll slide-up-fade" style="--delay: 0.2s;">
-                    <div class="relative w-full h-full rounded-xl overflow-hidden">
-                        <!-- IMPORTANTE: Substitua pelas fotos reais da obra -->
-                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Foto aérea da obra 1" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
-                        <img src="https://images.unsplash.com/photo-1511055223743-9304a0e9a04b?q=80&w=2070&auto=format&fit=crop" alt="Foto da construção 2" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                        <img src="https://images.unsplash.com/photo-1581134086735-a1d234d353a1?q=80&w=2070&auto=format&fit=crop" alt="Foto da construção 3" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+        <!-- SEÇÃO DECORADOS -->
+        <section id="decorados" class="pt-12 md:pt-16 pb-20 md:pb-28 text-center overflow-hidden">
+            <div class="container mx-auto px-6">
+                <p class="text-brand-red uppercase tracking-widest font-bold text-sm animate-on-scroll fade-in-blur">AGENDE SUA VISITA</p>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mt-4 mb-8 animate-on-scroll fade-in-blur" style="--delay: 0.1s;">Decorados</h2>
+                <p class="max-w-3xl mx-auto text-gray-600 text-lg sm:text-xl animate-on-scroll fade-in-blur" style="--delay: 0.2s;">Surpreenda-se com ambientes que unem design, conforto e praticidade. Sinta a realidade de viver em um espaço pensado em cada detalhe.</p>
+                
+                <div class="mt-12 md:mt-20 grid grid-cols-1 lg:grid-cols-10 gap-12 items-stretch">
+                    <!-- Coluna Esquerda: Carrossel e Texto (60%) -->
+                    <div class="lg:col-span-6 animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
+                        <div class="bg-white rounded-2xl shadow-2xl p-2 md:p-4 h-full flex flex-col">
+                            <div id="decorados-carousel" class="relative w-full h-[450px] md:h-[550px]">
+                                <div class="relative w-full h-full overflow-hidden rounded-xl">
+                                    <!-- IMPORTANTE: Substitua pelas fotos reais do decorado -->
+                                    <img src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=2080&auto=format&fit=crop" alt="Cozinha do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
+                                    <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1932&auto=format&fit=crop" alt="Sala de estar do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1932&auto=format&fit=crop" alt="Quarto do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                                </div>
+                            </div>
+                            <div class="p-6 md:p-8 text-center">
+                                <p class="font-heading text-xl md:text-2xl text-dark">
+                                    ✨ Descubra como é morar nos apartamentos de 83m², 106m² e 134m² do Boulevard Butantã!
+                                </p>
+                                <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-600 font-medium my-6">
+                                    <span class="whitespace-nowrap">Localização Ímpar</span>
+                                    <span class="text-brand-red">&#9679;</span>
+                                    <span class="whitespace-nowrap">Melhor custo e benefício</span>
+                                    <span class="text-brand-red">&#9679;</span>
+                                    <span class="whitespace-nowrap">Valor de condomínio atrativo</span>
+                                </div>
+                                <p class="text-gray-700 text-base">
+                                    Visite os decorados e sinta na prática todo o conforto, a sofisticação e a praticidade de viver em um espaço feito para o seu estilo de vida.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Coluna Direita: Mapa (40%) -->
+                    <div class="lg:col-span-4 animate-on-scroll slide-up-fade h-full flex flex-col" style="--delay: 0.4s;">
+                        <div class="bg-white rounded-2xl shadow-2xl p-4 flex-grow flex flex-col">
+                            <div class="flex-grow rounded-xl overflow-hidden">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.035442587528!2d-46.71738282476597!3d-23.56708777879555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5668e833d739%3A0x6b1f25f7a40c9f0!2sR.%20Camargo%2C%2034%20-%20Butant%C3%A3%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005509-020!5e0!3m2!1spt-BR!2sbr!4v1694723932463!5m2!1spt-BR!2sbr"
+                                    class="w-full h-full min-h-[400px]" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                            <p class="pt-4 font-bold text-dark tracking-wider text-base text-center">
+                                📍 RUA CAMARGO, 34 BUTANTÃ - SP
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         
         <!-- SEÇÃO CONTATO FINAL -->
-        <section id="contato" class="py-20 md:py-28 bg-gray-light overflow-hidden">
+        <section id="contato" class="py-12 md:py-16 bg-light overflow-hidden">
             <div class="container mx-auto px-6">
-                <div class="bg-light p-6 md:p-12 rounded-lg shadow-xl animate-on-scroll slide-up-fade">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <div class="text-center">
-                            <div class="flex flex-col items-center gap-6">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" alt="Siqueira Campos" class="w-24 h-24 rounded-full object-cover flex-shrink-0">
-                                <div>
-                                    <h3 class="font-heading text-2xl md:text-3xl">Siqueira Campos</h3>
-                                    <p class="text-gray-600">Especialista em imóveis de alto padrão</p>
-                                </div>
+                <!-- Card Siqueira -->
+                <div class="bg-light p-6 md:p-8 rounded-lg shadow-xl animate-on-scroll slide-up-fade max-w-4xl mx-auto">
+                    <div class="flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 md:gap-8">
+                        <div class="w-full sm:w-auto sm:flex-shrink-0">
+                             <div class="w-48 h-64 mx-auto rounded-lg overflow-hidden shadow-lg">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" alt="Siqueira Campos" class="w-full h-full object-cover">
                             </div>
-                            <p class="mt-6 text-gray-700 text-base text-justify">
+                        </div>
+                        <div>
+                             <h3 class="font-heading text-xl md:text-2xl">Siqueira Campos</h3>
+                             <p class="text-gray-600 mt-1 mb-4 text-sm">Especialista em imóveis de alto padrão</p>
+                             <p class="text-gray-700 text-sm md:text-base text-justify sm:text-left">
                                 Com foco em imóveis prontos para morar e lançamentos exclusivos, nosso propósito vai muito além de apresentar imóveis — é sobre entender, orientar e conduzir cada cliente em toda a jornada, até a entrega das chaves.
                             </p>
                         </div>
-                        <div class="border-t-2 md:border-t-0 md:border-l-2 border-gray-200 pt-8 md:pt-0 md:pl-12 h-full flex flex-col justify-center">
-                             <h3 class="font-heading text-2xl md:text-3xl text-center">Alto Grau de Satisfação</h3>
-                             <div id="testimonial-carousel" class="relative overflow-hidden w-full mt-6 h-64 sm:h-56">
-                                 <div class="absolute top-0 left-0 w-full h-full flex transition-transform duration-500 ease-in-out" id="testimonial-track">
-                                     <div class="w-full flex-shrink-0 px-4 text-center flex flex-col items-center justify-center">
-                                         <div class="flex text-2xl text-accent"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                                         <p class="text-gray-600 italic mt-2">"Atendimento impecável e um projeto que superou todas as expectativas. Recomendo!"</p>
-                                         <p class="font-bold text-dark mt-4">- Mariana L.</p>
-                                     </div>
-                                     <div class="w-full flex-shrink-0 px-4 text-center flex flex-col items-center justify-center">
-                                          <div class="flex text-2xl text-accent"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
-                                         <p class="text-gray-600 italic mt-2">"A qualidade da construção e o cuidado com os detalhes são impressionantes. Feliz com a minha escolha."</p>
-                                         <p class="font-bold text-dark mt-4">- Ricardo F.</p>
-                                     </div>
-                                     <div class="w-full flex-shrink-0 px-4 text-center flex flex-col items-center justify-center">
-                                         <div class="flex text-2xl text-accent"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span class="text-gray-300">&#9733;</span></div>
-                                         <p class="text-gray-600 italic mt-2">"Todo o processo foi muito transparente. A equipe está de parabéns pela seriedade e competência."</p>
-                                         <p class="font-bold text-dark mt-4">- Família Almeida</p>
-                                     </div>
-                                 </div>
-                               </div>
-                        </div>
-                    </div>
-                    <div class="border-t-2 border-gray-200 mt-12 pt-10 text-center">
-                        <p class="text-gray-700 text-lg sm:text-xl max-w-2xl mx-auto">
-                            Podemos simular valores junto com você agora mesmo e encontrar a melhor solução, de maneira simples, rápida e sem pressões.
-                        </p>
-                        <a href="https://wa.me/5511960998000" target="_blank" rel="noopener noreferrer" class="mt-8 inline-block w-full sm:w-auto text-center bg-dark text-light py-4 px-10 rounded-full font-bold uppercase tracking-wider hover:bg-accent transition-colors">
-                            Fale com o especialista
-                        </a>
                     </div>
                 </div>
-        
-                <div class="mt-16 bg-white p-6 md:p-12 rounded-lg shadow-xl max-w-4xl mx-auto animate-on-scroll slide-up-fade" style="--delay: 0.2s;">
-                    <h3 class="font-heading text-3xl sm:text-4xl text-center">Deixe seu Contato</h3>
-                    <p class="mt-4 text-gray-600 text-lg text-center">Preencha o formulário para receber um contato personalizado e tirar todas as suas dúvidas.</p>
-                    <!-- FUNCIONALIDADE DO FORMULÁRIO -->
-                    <form class="mt-8" action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input class="w-full p-3 md:p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-lg" type="text" name="name" placeholder="Nome" required>
-                            <input class="w-full p-3 md:p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-lg" type="email" name="email" placeholder="* E-mail" required>
+
+                <!-- Obras e Formulário -->
+                <div class="mt-16 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 items-stretch animate-on-scroll slide-up-fade" style="--delay: 0.2s;">
+                    <!-- Coluna Esquerda: Obras -->
+                    <div class="bg-dark text-light p-6 md:p-12 rounded-lg shadow-xl flex flex-col lg:col-span-3">
+                        <div class="flex-grow">
+                            <h2 class="font-heading text-3xl md:text-4xl">Obras em Ritmo Acelerado</h2>
+                            <p class="mt-6 text-gray-400 text-base">Com a solidez e a tradição da Diálogo Engenharia, seu sonho está cada vez mais perto de se tornar realidade.</p>
+                            <ul class="mt-8 space-y-4 text-gray-300 text-sm md:text-base">
+                                <li class="flex items-center gap-4"><span class="bg-brand-red h-2.5 w-2.5 rounded-full"></span>+260 torres entregues e em construção</li>
+                                <li class="flex items-center gap-4"><span class="bg-brand-red h-2.5 w-2.5 rounded-full"></span>+20.000 apartamentos entregues</li>
+                                <li class="flex items-center gap-4"><span class="bg-brand-red h-2.5 w-2.5 rounded-full"></span>+2.8 milhões de m² de área construída</li>
+                            </ul>
                         </div>
-                        <input class="w-full p-3 md:p-4 mt-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-lg" name="phone" type="text" placeholder="Telefone">
-                        <label class="flex items-center gap-3 text-sm text-gray-600 cursor-pointer mt-4">
-                            <input type="checkbox" name="consent" class="h-5 w-5 rounded border-gray-300 text-accent focus:ring-accent" checked> Concordo em receber conteúdos e ofertas.
-                        </label>
-                        <button type="submit" class="mt-6 w-full bg-accent text-light py-4 px-8 rounded-full font-bold uppercase tracking-wider hover:bg-amber-700 transition-colors text-lg">Enviar Mensagem</button>
-                    </form>
+                        <div id="obras-carousel" class="mt-8 relative w-full h-[350px] rounded-2xl shadow-inner p-2 bg-black/20">
+                            <div class="relative w-full h-full rounded-xl overflow-hidden">
+                                <!-- IMPORTANTE: Substitua pelas fotos reais da obra -->
+                                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Foto aérea da obra 1" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
+                                <img src="https://images.unsplash.com/photo-1511055223743-9304a0e9a04b?q=80&w=2070&auto=format&fit=crop" alt="Foto da construção 2" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                                <img src="https://images.unsplash.com/photo-1581134086735-a1d234d353a1?q=80&w=2070&auto=format&fit=crop" alt="Foto da construção 3" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Coluna Direita: Formulário -->
+                    <div id="final-form" class="bg-white p-6 md:p-12 rounded-lg shadow-xl lg:col-span-2">
+                        <h3 class="font-heading text-3xl sm:text-4xl text-center">Deixe seu Contato</h3>
+                        <p class="mt-4 text-gray-600 text-lg text-center">Preencha o formulário para receber um contato personalizado.</p>
+                        <!-- FUNCIONALIDADE DO FORMULÁRIO -->
+                        <form class="mt-8 space-y-4" action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST">
+                            <input class="w-full p-3 md:p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-red" type="text" name="name" placeholder="Nome" required>
+                            <input class="w-full p-3 md:p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-red" type="email" name="email" placeholder="* E-mail" required>
+                            <input class="w-full p-3 md:p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-red" name="phone" type="text" placeholder="Telefone">
+                            <div class="text-xs text-gray-500">
+                                <label for="consent-checkbox" class="flex items-center gap-2 cursor-pointer">
+                                    <input id="consent-checkbox" type="checkbox" name="consent" class="h-4 w-4 rounded border-gray-300 text-brand-red focus:ring-brand-red" checked>
+                                    <span>Eu concordo com os</span>
+                                </label>
+                                <button type="button" id="open-privacy-policy" class="text-brand-red underline hover:text-red-700">Termos de Privacidade</button>.
+                            </div>
+                            <button type="submit" class="w-full bg-brand-red text-light py-4 px-8 rounded-full font-bold uppercase tracking-wider hover:bg-red-700 transition-colors text-lg">Enviar Mensagem</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -469,9 +450,28 @@
 
     <!-- BOTÃO FLUTUANTE DE WHATSAPP -->
     <a href="https://wa.me/5511960998000" target="_blank" rel="noopener noreferrer" class="fixed bottom-4 right-4 bg-dark text-light p-3 rounded-full shadow-lg flex items-center gap-3 font-bold z-50 hover:scale-105 transition-transform">
-        <svg class="w-7 h-7 fill-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.G51 4.383 1.89 6.223l.232.365-1.099 4.015 4.13-1.082.352.215z"/></svg>
+        <svg class="w-7 h-7 fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.G51 4.383 1.89 6.223l.232.365-1.099 4.015 4.13-1.082.352.215z"/></svg>
         <span class="hidden md:inline">Online</span>
     </a>
+
+    <!-- Modal de Privacidade -->
+    <div id="privacy-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-light rounded-lg shadow-xl max-w-2xl w-full p-6 md:p-8 relative">
+            <button id="close-privacy-modal" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-dark transition-colors">&times;</button>
+            <h3 class="font-heading text-2xl mb-4">Termos de Privacidade</h3>
+            <div class="prose max-h-[60vh] overflow-y-auto pr-4 text-sm text-gray-600 space-y-2">
+                <p><strong>Última atualização: 17 de setembro de 2025</strong></p>
+                <p>A sua privacidade é importante para nós. É política do Boulevard Butantã respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site.</p>
+                <p>Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.</p>
+                <p>Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis ​​para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.</p>
+                <p>Não compartilhamos informações de identificação pessoal publicamente ou com terceiros, exceto quando exigido por lei.</p>
+                <p>O nosso site pode ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas respectivas políticas de privacidade.</p>
+                <p>Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que talvez não possamos fornecer alguns dos serviços desejados.</p>
+                <p>O uso continuado de nosso site será considerado como aceitação de nossas práticas em torno de privacidade e informações pessoais. Se você tiver alguma dúvida sobre como lidamos com dados do usuário e informações pessoais, entre em contato conosco.</p>
+            </div>
+        </div>
+    </div>
+
 
     <!-- LÓGICA JAVASCRIPT -->
     <script>
@@ -493,10 +493,25 @@
                 }, interval);
             };
 
-            // Inicializa os carrosséis de fade
+            const createSlidingCarousel = (trackSelector, interval) => {
+                const track = document.getElementById(trackSelector);
+                if (!track) return;
+                const slides = track.children;
+                if (slides.length <= 1) return;
+                
+                let currentSlide = 0;
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    const offset = -currentSlide * 100;
+                    track.style.transform = `translateX(${offset}%)`;
+                }, interval);
+            }
+
+            // Inicializa os carrosséis
             createSimpleFadeCarousel('#decorados-carousel .carousel-image', 4000);
             createSimpleFadeCarousel('#lazer-carousel .carousel-lazer-image', 4000);
             createSimpleFadeCarousel('#obras-carousel .carousel-obras-image', 4000);
+            createSlidingCarousel('diferenciais-track', 5000);
 
             // --- LÓGICA PARA SEÇÃO DE PLANTAS ---
             const plantasBotoes = document.querySelectorAll('.planta-botao');
@@ -559,7 +574,7 @@
                 botao.addEventListener('click', () => {
                     updateInfoBox(index);
                     moveToSlide(index);
-                    if (window.innerWidth < 768 && plantasInteractiveArea) { // md breakpoint
+                    if (window.innerWidth < 1024 && plantasInteractiveArea) { // lg breakpoint
                         setTimeout(() => {
                             plantasInteractiveArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }, 200);
@@ -571,18 +586,6 @@
                 updateInfoBox(0);
                 moveToSlide(0);
                 window.addEventListener('resize', () => moveToSlide(Array.from(plantasBotoes).findIndex(btn => btn.classList.contains('ativo'))));
-            }
-
-            // --- LÓGICA PARA CARROSSEL DE TESTEMUNHOS ---
-            const testimonialTrack = document.getElementById('testimonial-track');
-            if(testimonialTrack) {
-                const testimonials = testimonialTrack.children;
-                let testimonialIndex = 0;
-                setInterval(() => {
-                    testimonialIndex = (testimonialIndex + 1) % testimonials.length;
-                    const offset = -testimonialIndex * 100;
-                    testimonialTrack.style.transform = `translateX(${offset}%)`;
-                }, 5000);
             }
 
             // --- LÓGICA PARA MENU MOBILE ---
@@ -632,6 +635,26 @@
 
             const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
             elementsToAnimate.forEach(el => scrollObserver.observe(el));
+            
+            // --- LÓGICA PARA MODAL DE PRIVACIDADE ---
+            const openModalBtn = document.getElementById('open-privacy-policy');
+            const closeModalBtn = document.getElementById('close-privacy-modal');
+            const modal = document.getElementById('privacy-modal');
+
+            if (openModalBtn && closeModalBtn && modal) {
+                openModalBtn.addEventListener('click', () => {
+                    modal.classList.remove('hidden');
+                });
+                closeModalBtn.addEventListener('click', () => {
+                    modal.classList.add('hidden');
+                });
+                // Fecha o modal se clicar fora dele
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            }
         });
     </script>
 </body>
