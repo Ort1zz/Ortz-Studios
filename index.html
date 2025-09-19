@@ -22,7 +22,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
 
     <!-- Tailwind CSS Configuration -->
     <script>
@@ -36,14 +37,15 @@
                         'gray-light': '#F0EBE3',
                     },
                     fontFamily: {
-                        'heading': ['Poppins', 'sans-serif'],
-                        'body': ['Inter', 'sans-serif'],
+                        'heading': ['Cormorant Garamond', 'serif'],
+                        'body': ['Lato', 'sans-serif'],
                     },
                     filter: {
                         'drop-shadow-lg': 'drop-shadow(0 10px 8px rgb(0 0 0 / 0.1))',
                     },
                     aspectRatio: {
                         '3/4': '3 / 4',
+                        '16/9': '16 / 9',
                     },
                 }
             }
@@ -129,30 +131,41 @@
             filter: blur(0);
         }
 
+        .carousel-container {
+            cursor: grab;
+        }
+        .carousel-container:active {
+            cursor: grabbing;
+        }
+
+        .carousel-track {
+            transition: transform 0.5s ease-in-out;
+        }
+
     </style>
 </head>
 <body class="font-body bg-light text-dark">
 
     <!-- CABEÇALHO SUPERIOR -->
     <header id="header" class="bg-dark/50 text-light fixed top-0 w-full z-50 backdrop-blur-xl border-b border-white/20 transition-all duration-300 initial-hidden animate-header">
-        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#" aria-label="Página Inicial">
-                <!-- IMPORTANTE: Substitua pelo link real da sua logo -->
-                <img src="https://placehold.co/160x40/FFFFFF/1E1E1E?text=SUA+LOGO&font=montserrat" alt="Logo da Empresa" class="h-8 md:h-10">
-            </a>
+        <div class="container mx-auto px-4 sm:px-6 py-3 relative flex justify-between items-center">
+            <!-- Espaço reservado para o logo, agora vazio para balancear o flexbox -->
+            <div></div>
             
-            <!-- Menu de Navegação (Desktop) -->
-            <nav class="hidden md:flex items-center gap-8">
-                <a href="#plantas" class="nav-link hover:text-brand-red transition-colors">Plantas</a>
-                <a href="#lazer" class="nav-link hover:text-brand-red transition-colors">Lazer</a>
-                <a href="#decorados" class="nav-link hover:text-brand-red transition-colors">Decorados</a>
-                <a href="#contato" class="nav-link hover:text-brand-red transition-colors">Contato</a>
-            </nav>
+            <!-- Center: Desktop Navigation (Absolutely Positioned) -->
+            <div class="absolute inset-0 hidden md:flex justify-center items-center pointer-events-none">
+                 <nav class="flex items-center gap-8 pointer-events-auto">
+                     <a href="#plantas" class="nav-link hover:text-brand-red transition-colors">Plantas</a>
+                     <a href="#lazer" class="nav-link hover:text-brand-red transition-colors">Lazer</a>
+                     <a href="#bairro" class="nav-link hover:text-brand-red transition-colors">Bairro</a>
+                     <a href="#decorados" class="nav-link hover:text-brand-red transition-colors">Decorados</a>
+                     <a href="#contato" class="nav-link hover:text-brand-red transition-colors">Contato</a>
+                 </nav>
+            </div>
 
-            <!-- Botão WhatsApp e Menu Mobile -->
+            <!-- Right Side: Buttons -->
             <div class="flex items-center gap-2 sm:gap-4">
-                <a href="https://wa.me/5511960998000" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium tracking-wider hover:bg-white/10 transition-colors p-2 rounded-full sm:px-4">
+                <a href="https://wa.me/5511960998000?text=Ol%C3%A1%20Siqueira%2C%20estou%20a%20procura%20de%20um%20apartamento%20do%20Boulevard%20Butant%C3%A3." target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium tracking-wider hover:bg-white/10 transition-colors p-2 rounded-full sm:px-4">
                     <span class="relative flex h-3 w-3">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -171,6 +184,7 @@
             <nav class="flex flex-col p-4">
                 <a href="#plantas" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Plantas</a>
                 <a href="#lazer" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Lazer</a>
+                <a href="#bairro" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Bairro</a>
                 <a href="#decorados" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Decorados</a>
                 <a href="#contato" class="nav-link py-2 px-4 hover:bg-white/10 rounded-md">Contato</a>
             </nav>
@@ -181,7 +195,7 @@
         <!-- SEÇÃO HERO (BANNER PRINCIPAL) -->
         <section class="relative h-screen min-h-[600px] text-center text-light overflow-hidden">
             <!-- IMAGEM DE FUNDO -->
-            <img src="assets/hero-image.jpg" alt="Sala de estar ampla e decorada do Boulevard Butantã" class="absolute inset-0 w-full h-full object-cover">
+            <img src="img/Principal.webp" alt="Sala de estar ampla e decorada do Boulevard Butantã" class="absolute inset-0 w-full h-full object-cover">
             
             <div class="absolute inset-0 bg-black/50"></div>
             
@@ -192,16 +206,27 @@
                 <div class="absolute top-24 left-1/2 -translate-x-1/2 w-full px-6 initial-hidden animate-hero-titles">
                     <h2 class="font-bold text-brand-red uppercase tracking-widest text-lg md:text-xl">78% VENDIDO</h2>
                     <p class="uppercase tracking-widest text-sm text-gray-300 mt-2">Últimos dias do decorado</p>
+                    <div class="flex justify-center gap-4 mt-4">
+                        <span class="border border-white/80 text-light py-2 px-6 rounded-full text-xs uppercase tracking-widest bg-black/30">Exclusividade</span>
+                        <span class="border border-white/80 text-light py-2 px-6 rounded-full text-xs uppercase tracking-widest bg-black/30">Obras Aceleradas</span>
+                    </div>
                 </div>
 
                 <!-- Conteúdo Principal (Centralizado Verticalmente) -->
                 <div class="my-auto initial-hidden animate-hero-main">
-                    <div class="flex justify-center gap-4 mt-6 mb-8">
-                        <span class="border border-white/80 text-light py-2 px-6 rounded-full text-xs uppercase tracking-widest bg-black/30">Exclusividade</span>
-                        <span class="border border-white/80 text-light py-2 px-6 rounded-full text-xs uppercase tracking-widest bg-black/30">Obras Aceleradas</span>
-                    </div>
                     <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-light/90 subtle-glow">Boulevard Butantã e a nova definição de morar bem.</h1>
                     <p class="mt-4 text-base md:text-lg max-w-2xl mx-auto">Fale agora com nosso especialista e descubra a melhor forma de pagamento!</p>
+
+                    <!-- LOGOS EM COLABORAÇÃO -->
+                    <div class="mt-8 flex justify-center items-center gap-x-6 md:gap-x-8">
+                         <a href="#" aria-label="Página Inicial">
+                            <img src="img/Logo dialogo.webp" alt="Logo da Empresa" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition-opacity duration-300">
+                        </a>
+                        <span class="h-12 md:h-14 border-l border-white/50"></span>
+                        <a href="#" aria-label="Corretor">
+                             <img src="https://placehold.co/160x40/FFFFFF/1E1E1E?text=CORRETOR&font=lato" alt="Logo do Corretor" class="h-12 md:h-14 opacity-80 hover:opacity-100 transition-opacity duration-300">
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -227,24 +252,20 @@
                     <div class="lg:flex lg:gap-8 lg:items-start">
                         <!-- Coluna da Esquerda: Imagem da Planta (55%) -->
                         <div class="w-full lg:w-[55%]">
-                            <div class="relative w-full">
-                                <div id="plantas-carousel" class="relative h-[400px] sm:h-[600px] lg:h-[390px] overflow-hidden">
-                                    <div class="flex transition-transform duration-500 ease-in-out h-full" id="plantas-carousel-track">
-                                        <!-- 
-                                            NOTA PARA O DESENVOLVEDOR: IMAGENS DAS PLANTAS
-                                            ... (Anotação mantida) ...
-                                        -->
-                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+83m%C2%B2" alt="Planta do apartamento de 83m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
-                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+106m%C2%B²" alt="Planta do apartamento de 106m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
-                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+134m%C2%B²" alt="Planta do apartamento de 134m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
-                                        <img src="https://placehold.co/800x1000/0000/fff?text=Planta+134m%C2%B²+Master" alt="Planta do apartamento de 134m² com suíte master" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
-                                    </div>
+                            <div id="plantas-carousel" class="relative w-full h-[400px] sm:h-[600px] lg:h-[390px] overflow-hidden carousel-container">
+                                <div class="flex h-full carousel-track" id="plantas-carousel-track">
+                                    <!-- 
+                                        NOTA PARA O DESENVOLVEDOR: IMAGENS DAS PLANTAS
+                                        ... (Anotação mantida) ...
+                                    -->
+                                    <img src="img/83m2.png" alt="Planta do apartamento de 83m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                    <img src="img/106m2 2 dorm.png" alt="Planta do apartamento de 106m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                    <img src="img/106m2 3 dorm.png" alt="Planta do apartamento de 134m²" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                    <img src="img/134m2 2 dorm.png" alt="Planta do apartamento de 134m² com suíte master" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                    <img src="img/134m2 3 dorm.png" alt="Nova Planta 1" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                    <img src="img/218m2.png" alt="Nova Planta 2" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
+                                    <img src="img/275m2.png" alt="Nova Planta 3" class="w-full flex-shrink-0 h-full object-contain filter drop-shadow-lg">
                                 </div>
-                            </div>
-                            <div class="mt-8 text-center lg:text-right">
-                                <a href="#contato" class="inline-block bg-brand-red text-light py-4 px-12 rounded-full font-bold uppercase tracking-wider hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 transform">
-                                    Atendimento Exclusivo
-                                </a>
                             </div>
                         </div>
                         
@@ -255,11 +276,21 @@
                                 <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Apartamento de 106m² | 3Q</span></button>
                                 <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Apartamento de 134m²</span></button>
                                 <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Apartamento de 134m² | Master</span></button>
+                                <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Nova Planta 1</span></button>
+                                <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red"><span>Nova Planta 2</span></button>
+                                <button class="planta-botao flex items-center justify-center flex-grow py-3 px-4 rounded-lg font-medium cursor-pointer transition-all duration-300 ease-in-out text-center shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-red col-span-2"><span>Nova Planta 3</span></button>
                             </div>
                             <div id="plantas-info-box" class="h-full p-6 sm:p-8 bg-white rounded-lg min-h-[180px] shadow-xl">
                                 <!-- O conteúdo será injetado aqui pelo JS -->
                             </div>
                         </div>
+                    </div>
+
+                    <!-- BOTÃO DE ATENDIMENTO ABAIXO DAS COLUNAS -->
+                    <div class="mt-12 text-center">
+                        <a href="#contato" class="inline-block bg-brand-red text-light py-4 px-12 rounded-full font-bold uppercase tracking-wider hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 transform">
+                            Atendimento Exclusivo
+                        </a>
                     </div>
                 </div>
             </div>
@@ -267,54 +298,134 @@
         
         <!-- SEÇÃO ÁREA DE LAZER -->
         <section id="lazer" class="pt-12 md:pt-16 pb-12 md:pb-16 text-center overflow-hidden">
-             <div class="container mx-auto px-6">
+                <div class="container mx-auto px-6">
                 <p class="text-brand-red uppercase tracking-widest font-bold text-sm animate-on-scroll fade-in-blur">Lazer para toda a família</p>
                 <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mt-4 mb-8 animate-on-scroll fade-in-blur" style="--delay: 0.1s;">Lazer Exclusivo</h2>
                 <p class="max-w-4xl mx-auto text-gray-600 text-lg sm:text-xl animate-on-scroll fade-in-blur" style="--delay: 0.2s;">Um oásis de tranquilidade e diversão. Espaços projetados para o seu bem-estar, conforto e momentos inesquecíveis.</p>
                 
-                <div class="mt-12 md:mt-20 lg:grid lg:grid-cols-10 lg:gap-12 lg:items-stretch">
+                <div class="mt-12 md:mt-20 lg:flex lg:gap-12 lg:items-stretch">
                     <!-- Coluna Esquerda: Carrossel de Imagens (70%) -->
-                    <div id="lazer-carousel" class="lg:col-span-7 relative w-full h-[450px] md:h-[600px] p-2 bg-white rounded-2xl shadow-2xl animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
-                        <div class="relative w-full h-full overflow-hidden rounded-xl">
-                            <!-- IMPORTANTE: Substitua pelas fotos reais da área de lazer -->
-                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop" alt="Piscina do empreendimento" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
-                            <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2070&auto=format&fit=crop" alt="Piscina com vista" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                            <img src="https://images.unsplash.com/photo-1576675762955-381c0c2738a9?q=80&w=2070&auto=format&fit=crop" alt="Academia moderna" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=2071&auto=format&fit=crop" alt="Salão de festas" class="carousel-lazer-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                    <div class="lg:w-[70%] animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
+                        <div id="lazer-carousel" class="relative w-full h-full bg-white rounded-2xl shadow-2xl overflow-hidden carousel-container">
+                            <div class="flex h-full carousel-track" id="lazer-carousel-track">
+                                <!-- IMPORTANTE: Substitua pelas fotos reais da área de lazer -->
+                                <img src="img/lazer-sauna.webp" alt="Piscina do empreendimento" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/Lazer Churrasqueira.webp" alt="Academia moderna" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/Lazer Quadra.webp" alt="Salão de festas" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/Lazer- entrada.webp" alt="Piscina com vista" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/Lazer-criança.webp" alt="Academia moderna" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/Lazer-Descanso.webp" alt="Salão de festas" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/Lazer-Piscina.webp" alt="Piscina com vista" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/Lazer-Playground.webp" alt="Piscina com vista" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                            </div>
+                            </div>
                         </div>
-                    </div>
 
                     <!-- Coluna Direita: Diferenciais Carrossel (30%) -->
-                    <div class="w-full lg:col-span-3 mt-12 lg:mt-0 text-left bg-white p-6 md:p-10 rounded-lg shadow-2xl animate-on-scroll slide-up-fade flex flex-col" style="--delay: 0.4s;">
-                        <h3 class="font-heading text-2xl md:text-3xl text-dark mb-4">Diferenciais para Toda a Família</h3>
-                        <p class="text-gray-600 text-base mb-6">
-                            No Boulevard Butantã, a diversão e o relaxamento estão sempre ao seu alcance. Desfrute de um lazer completo, com opções para todas as idades e gostos.
+                    <div class="w-full lg:w-[30%] mt-12 lg:mt-0 text-left bg-white p-6 md:p-10 rounded-lg shadow-2xl animate-on-scroll slide-up-fade flex flex-col" style="--delay: 0.4s;">
+                        <h3 class="font-heading text-2xl md:text-3xl text-dark mb-4 text-center">Diferenciais para Toda a Família</h3>
+                        <p class="text-gray-600 text-base mb-6 text-center">
+                            No Boulevard Butantã, a diversão e o relaxamento estão sempre ao seu alcance. Desfrute de um lazer completo, com opções para todas as idades, gostos e momentos, garantindo que cada dia seja uma nova descoberta.
                         </p>
-                        <div class="relative h-48 overflow-hidden mt-auto">
-                            <div id="diferenciais-track" class="absolute inset-0 flex transition-transform duration-700 ease-in-out">
+                        <div id="diferenciais-lazer-carousel" class="relative h-64 overflow-hidden mt-auto carousel-container">
+                            <div class="flex h-full carousel-track" id="diferenciais-lazer-track">
+                                <!-- 
+                                    NOTA PARA O DESENVOLVEDOR: ÍCONES DE LAZER
+                                    Para cada item abaixo, substitua o link 'https://placehold.co/...' pelo caminho do seu ícone PNG. 
+                                    Exemplo: src="assets/icons/brinquedoteca.png"
+                                -->
                                 <!-- Slide 1 -->
-                                <div class="w-full flex-shrink-0 space-y-4 text-lg pr-4">
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Quadra poliesportiva</span></div>
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Piscina adulto e infantil</span></div>
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Playground e brinquedoteca</span></div>
+                                <div class="w-full flex-shrink-0 grid grid-cols-2 gap-x-4 gap-y-4 text-sm pr-4">
+                                    <div class="flex items-center gap-3"><img src="img/lazer-brinquedoteca.svg " alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Brinquedoteca</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-playground.svg " alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Playground</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-piscina-adulto.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Piscina Adulto e Infantil</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-sauna.svg " alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Sauna com Descanso</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-solarium.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Solarium</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-churrasqueira.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Bar da Piscina</span></div>
                                 </div>
                                 <!-- Slide 2 -->
-                                <div class="w-full flex-shrink-0 space-y-4 text-lg pr-4">
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Amplo salão de festas</span></div>
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Espaço para churrasqueira</span></div>
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Espaço pet</span></div>
+                                <div class="w-full flex-shrink-0 grid grid-cols-2 gap-x-4 gap-y-4 text-sm pr-4">
+                                    <div class="flex items-center gap-3"><img src="img/lazer-bicicletario.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Bicicletário</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-lobby.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Lobby Residencial</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-fitness.svg " alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Fitness</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-pet-place.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Pet Place</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-quadra-recreativa.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Quadra Esportiva</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-churrasqueira.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Churrasqueira</span></div>
                                 </div>
                                 <!-- Slide 3 -->
-                                <div class="w-full flex-shrink-0 space-y-4 text-lg pr-4">
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Salão de jogos</span></div>
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Sauna e descanso</span></div>
-                                    <div class="flex items-center gap-3"><svg class="w-5 h-5 fill-brand-red flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span class="text-gray-700">Espaço Delivery</span></div>
+                                <div class="w-full flex-shrink-0 grid grid-cols-2 gap-x-4 gap-y-4 text-sm pr-4">
+                                    <div class="flex items-center gap-3"><img src="img/lazer-salao-de-festas.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Salão de Festas</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-espaco-gourmet.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Espaço Gourmet</span></div>
+                                    <div class="flex items-center gap-3"><img src="img/lazer-espaco-coworking.svg" alt="Ícone" class="w-6 h-6 flex-shrink-0"><span class="text-gray-700">Coworking</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- SEÇÃO SOBRE O BAIRRO -->
+        <section id="bairro" class="pt-12 md:pt-16 pb-12 md:pb-16 bg-light overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <p class="text-brand-red uppercase tracking-widest font-bold text-sm animate-on-scroll fade-in-blur">Conveniência e Qualidade de Vida</p>
+                    <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mt-4 mb-8 animate-on-scroll fade-in-blur" style="--delay: 0.1s;">Sobre o Bairro</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600 text-lg sm:text-xl animate-on-scroll fade-in-blur" style="--delay: 0.2s;">Descubra por que o Butantã é um dos bairros mais desejados de São Paulo, combinando infraestrutura completa, áreas verdes e fácil acesso a toda a cidade.</p>
+
+                    <div class="mt-12 md:mt-20 max-w-7xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-10 animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
+                        <div class="lg:flex lg:gap-12 lg:items-center">
+                            <!-- Coluna Esquerda: Texto (70%) -->
+                            <div class="lg:w-[70%] text-left">
+                                <h3 class="font-heading text-2xl md:text-3xl text-dark mb-6">Tudo ao seu alcance</h3>
+                                <div class="space-y-6">
+                                    <!-- Tópico 1 -->
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <svg class="w-8 h-8 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-lg text-dark">Localização Estratégica</h4>
+                                            <p class="text-gray-600 mt-1 text-base">Acesso rápido às principais vias da cidade, como a Marginal Pinheiros e a Rodovia Raposo Tavares, além da proximidade com a USP e estações de metrô.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Tópico 2 -->
+                                    <div class="flex items-start gap-4">
+                                         <div class="flex-shrink-0">
+                                            <svg class="w-8 h-8 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-lg text-dark">Educação e Cultura</h4>
+                                            <p class="text-gray-600 mt-1 text-base">Sede da maior universidade do país, a USP, e do renomado Instituto Butantan, o bairro respira conhecimento, inovação e cultura.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Tópico 3 -->
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <svg class="w-8 h-8 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-lg text-dark">Comércio e Serviços</h4>
+                                            <p class="text-gray-600 mt-1 text-base">Uma infraestrutura completa com shoppings, supermercados, restaurantes e hospitais que garantem praticidade para o dia a dia de toda a família.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Coluna Direita: Carrossel (30%) -->
+                            <div class="lg:w-[30%] mt-8 lg:mt-0">
+                                <div id="bairro-carousel" class="relative w-full h-[450px] rounded-2xl shadow-xl overflow-hidden carousel-container">
+                                    <div class="flex h-full carousel-track" id="bairro-carousel-track">
+                                     <!-- Placeholder Images -->
+                                      <img src="img/metro.webp" alt="Vista do bairro" class="w-full h-full object-cover flex-shrink-0 rounded-2xl">
+                                      <img src="img/usp.jpeg" alt="Parque no bairro" class="w-full h-full object-cover flex-shrink-0 rounded-2xl">
+                                      <img src="img/eldorado.webp" alt="Comércio local" class="w-full h-full object-cover flex-shrink-0 rounded-2xl">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </section>
 
         <!-- SEÇÃO DECORADOS -->
@@ -328,12 +439,27 @@
                     <!-- Coluna Esquerda: Carrossel e Texto (60%) -->
                     <div class="lg:col-span-6 animate-on-scroll slide-up-fade" style="--delay: 0.3s;">
                         <div class="bg-white rounded-2xl shadow-2xl p-2 md:p-4 h-full flex flex-col">
-                            <div id="decorados-carousel" class="relative w-full h-[450px] md:h-[550px]">
-                                <div class="relative w-full h-full overflow-hidden rounded-xl">
+                            <div id="decorados-carousel" class="relative w-full h-[450px] md:h-[550px] overflow-hidden rounded-xl carousel-container">
+                                <div class="flex h-full carousel-track" id="decorados-carousel-track">
                                     <!-- IMPORTANTE: Substitua pelas fotos reais do decorado -->
-                                    <img src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=2080&auto=format&fit=crop" alt="Cozinha do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
-                                    <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1932&auto=format&fit=crop" alt="Sala de estar do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1932&auto=format&fit=crop" alt="Quarto do apartamento decorado" class="carousel-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                                    <img src="img/decorado 1.webp" alt="decorado 1" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 2.jpg" alt="decorado 2" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 3.png" alt="decorado 3" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 4.jpg" alt="decorado 4" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 5.jpg" alt="decorado 5" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 6.jpg" alt="decorado 6" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 7.jpg" alt="decorado 7" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 8.jpg" alt="decorado 8" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 9.webp" alt="decorado 9" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 10.jpg" alt="decorado 10" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 11.jpg" alt="decorado 11" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 12.jpg" alt="decorado 12" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 13.webp" alt="decorado 13" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 14.jpg" alt="decorado 14" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 15.jpg" alt="decorado 15" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 16.jpg" alt="decorado 16" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 17.jpg" alt="decorado 17" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                    <img src="img/decorado 18.jpg" alt="decorado 18" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
                                 </div>
                             </div>
                             <div class="p-6 md:p-8 text-center">
@@ -383,7 +509,7 @@
                     <div class="flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 md:gap-8">
                         <div class="w-full sm:w-auto sm:flex-shrink-0">
                              <div class="w-48 h-64 mx-auto rounded-lg overflow-hidden shadow-lg">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" alt="Siqueira Campos" class="w-full h-full object-cover">
+                                <img src="img/siqueira.jpeg" alt="Siqueira Campos" class="w-full h-full object-cover">
                             </div>
                         </div>
                         <div>
@@ -401,21 +527,81 @@
                     <!-- Coluna Esquerda: Obras -->
                     <div class="bg-dark text-light p-6 md:p-12 rounded-lg shadow-xl flex flex-col lg:col-span-3">
                         <div class="flex-grow">
-                            <h2 class="font-heading text-3xl md:text-4xl">Obras em Ritmo Acelerado</h2>
-                            <p class="mt-6 text-gray-400 text-base">Com a solidez e a tradição da Diálogo Engenharia, seu sonho está cada vez mais perto de se tornar realidade.</p>
-                            <ul class="mt-8 space-y-4 text-gray-300 text-sm md:text-base">
-                                <li class="flex items-center gap-4"><span class="bg-brand-red h-2.5 w-2.5 rounded-full"></span>+260 torres entregues e em construção</li>
-                                <li class="flex items-center gap-4"><span class="bg-brand-red h-2.5 w-2.5 rounded-full"></span>+20.000 apartamentos entregues</li>
-                                <li class="flex items-center gap-4"><span class="bg-brand-red h-2.5 w-2.5 rounded-full"></span>+2.8 milhões de m² de área construída</li>
-                            </ul>
-                        </div>
-                        <div id="obras-carousel" class="mt-8 relative w-full h-[350px] rounded-2xl shadow-inner p-2 bg-black/20">
-                            <div class="relative w-full h-full rounded-xl overflow-hidden">
-                                <!-- IMPORTANTE: Substitua pelas fotos reais da obra -->
-                                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Foto aérea da obra 1" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
-                                <img src="https://images.unsplash.com/photo-1511055223743-9304a0e9a04b?q=80&w=2070&auto=format&fit=crop" alt="Foto da construção 2" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                                <img src="https://images.unsplash.com/photo-1581134086735-a1d234d353a1?q=80&w=2070&auto=format&fit=crop" alt="Foto da construção 3" class="carousel-obras-image absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                            <h2 class="font-heading text-3xl md:text-4xl">Andamento das Obras</h2>
+                            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-gray-300">
+                                <!-- Fundação -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1 text-sm font-semibold">
+                                        <span>Fundação</span>
+                                        <span>85%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-brand-red h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <!-- Estruturação -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1 text-sm font-semibold">
+                                        <span>Estruturação</span>
+                                        <span>15%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-brand-red h-2 rounded-full" style="width: 15%"></div>
+                                    </div>
+                                </div>
+                                <!-- Alvenaria -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1 text-sm font-semibold">
+                                        <span>Alvenaria</span>
+                                        <span>0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-brand-red h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <!-- Acabamento Interno -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1 text-sm font-semibold">
+                                        <span>Acabamento Interno</span>
+                                        <span>0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-brand-red h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <!-- Fachada -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1 text-sm font-semibold">
+                                        <span>Fachada</span>
+                                        <span>0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-brand-red h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <!-- Pintura -->
+                                <div>
+                                    <div class="flex justify-between items-center mb-1 text-sm font-semibold">
+                                        <span>Pintura</span>
+                                        <span>0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-600 rounded-full h-2">
+                                        <div class="bg-brand-red h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div id="obras-carousel" class="mt-8 relative w-full h-[350px] rounded-2xl shadow-inner bg-black/20 overflow-hidden carousel-container">
+                             <div class="flex h-full carousel-track" id="obras-carousel-track">
+                                <!-- IMPORTANTE: Substitua pelas fotos reais da obra -->
+                                <img src="img/obras 1.jpg" alt="Foto aérea da obra 1" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/Obras 2.jpg" alt="Foto da construção 2" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/obras 3.jpg" alt="Foto da construção 3" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                                <img src="img/obras 4.jpg" alt="Foto da construção 4" class="w-full h-full object-cover flex-shrink-0 rounded-xl">
+                            </div>
+                        </div>
+                        <div class="text-right text-xs text-gray-400 mt-2">
+                           Atualizado em Setembro 2025.
                         </div>
                     </div>
                     <!-- Coluna Direita: Formulário -->
@@ -442,17 +628,30 @@
         </section>
     </main>
 
-    <footer class="bg-dark text-gray-400 py-12">
+    <footer class="bg-dark text-gray-400 py-8">
         <div class="container mx-auto px-6 text-center text-sm">
             <p>© 2024 Boulevard Butantã. Todos os direitos reservados. As informações e imagens são preliminares e podem sofrer alterações.</p>
         </div>
     </footer>
 
+    <!-- BOTÃO FLUTUANTE DE VÍDEO -->
+    <button id="open-video-modal" class="fixed bottom-4 left-4 bg-dark text-light p-3 rounded-full shadow-lg flex items-center justify-center w-12 h-12 z-50 hover:scale-105 transition-transform">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="https://www.youtube.com/watch?v=mjKs9puyIyk&t=1s"><path d="M8 5v14l11-7z"></path></svg>
+    </button>
+
     <!-- BOTÃO FLUTUANTE DE WHATSAPP -->
-    <a href="https://wa.me/5511960998000" target="_blank" rel="noopener noreferrer" class="fixed bottom-4 right-4 bg-dark text-light p-3 rounded-full shadow-lg flex items-center gap-3 font-bold z-50 hover:scale-105 transition-transform">
+    <a href="https://wa.me/5511960998000?text=Ol%C3%A1%20Siqueira%2C%20estou%20a%20procura%20de%20um%20apartamento%20do%20Boulevard%20Butant%C3%A3." target="_blank" rel="noopener noreferrer" class="fixed bottom-4 right-4 bg-dark text-light p-3 rounded-full shadow-lg flex items-center gap-3 font-bold z-50 hover:scale-105 transition-transform">
         <svg class="w-7 h-7 fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.G51 4.383 1.89 6.223l.232.365-1.099 4.015 4.13-1.082.352.215z"/></svg>
-        <span class="hidden md:inline">Online</span>
+        <span class="hidden md:inline">WhatsApp</span>
     </a>
+
+    <!-- Modal de Vídeo -->
+    <div id="video-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 md:p-8">
+        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+            <button id="close-video-modal" class="absolute top-2 right-2 md:top-3 md:right-3 text-3xl text-white bg-black/30 rounded-full w-10 h-10 flex items-center justify-center leading-none hover:text-brand-red hover:bg-black/50 transition-all z-10">&times;</button>
+            <iframe id="youtube-video" class="absolute inset-0 w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
 
     <!-- Modal de Privacidade -->
     <div id="privacy-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -477,22 +676,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             
-            // --- LÓGICA GERAL ---
-            // Função reutilizável para criar carrosséis de fade
-            const createSimpleFadeCarousel = (selector, interval) => {
-                const images = document.querySelectorAll(selector);
-                if (images.length === 0) return;
-                
-                let currentIndex = 0;
-                setInterval(() => {
-                    images[currentIndex].classList.remove('opacity-100');
-                    images[currentIndex].classList.add('opacity-0');
-                    currentIndex = (currentIndex + 1) % images.length;
-                    images[currentIndex].classList.remove('opacity-0');
-                    images[currentIndex].classList.add('opacity-100');
-                }, interval);
-            };
-
             const createSlidingCarousel = (trackSelector, interval) => {
                 const track = document.getElementById(trackSelector);
                 if (!track) return;
@@ -507,17 +690,17 @@
                 }, interval);
             }
 
-            // Inicializa os carrosséis
-            createSimpleFadeCarousel('#decorados-carousel .carousel-image', 4000);
-            createSimpleFadeCarousel('#lazer-carousel .carousel-lazer-image', 4000);
-            createSimpleFadeCarousel('#obras-carousel .carousel-obras-image', 4000);
-            createSlidingCarousel('diferenciais-track', 5000);
+            // Inicializa os carrosséis automáticos
+            createSlidingCarousel('lazer-carousel-track', 5000);
+            createSlidingCarousel('bairro-carousel-track', 5000);
+            createSlidingCarousel('decorados-carousel-track', 5000);
+            createSlidingCarousel('obras-carousel-track', 5000);
+            createSlidingCarousel('diferenciais-lazer-track', 5000);
 
-            // --- LÓGICA PARA SEÇÃO DE PLANTAS ---
+            // --- LÓGICA PARA SEÇÃO DE PLANTAS (INTERATIVA) ---
             const plantasBotoes = document.querySelectorAll('.planta-botao');
             const plantasInfoBox = document.getElementById('plantas-info-box');
-            const plantasInteractiveArea = document.getElementById('plantas-interactive-area');
-            const track = document.getElementById('plantas-carousel-track');
+            const plantasTrack = document.getElementById('plantas-carousel-track');
             
             const plantasConteudos = [
                 {
@@ -539,14 +722,19 @@
                     title: "Planta Master com 2 Suítes",
                     description: "Uma planta que se adapta perfeitamente ao seu estilo de vida, com hall privativo, 2 suítes, closet master e sala ampliada.",
                     items: []
-                }
+                },
+                { title: "Nova Planta 1", description: "Descrição para a nova planta 1.", items: ["Característica 1", "Característica 2", "Característica 3"] },
+                { title: "Nova Planta 2", description: "Descrição para a nova planta 2.", items: ["Característica A", "Característica B", "Característica C"] },
+                { title: "Nova Planta 3", description: "Descrição para a nova planta 3.", items: ["Diferencial X", "Diferencial Y", "Diferencial Z"] }
             ];
 
-            const moveToSlide = (targetIndex) => {
-                if (!track || targetIndex < 0 || targetIndex >= track.children.length) return;
-                const slideWidth = track.children[0].getBoundingClientRect().width;
-                track.style.transform = `translateX(-${slideWidth * targetIndex}px)`;
-            };
+             const moveToSlide = (track, index) => {
+                 if (!track || index < 0 || index >= track.children.length) return;
+                 const slideWidth = track.children[0].getBoundingClientRect().width;
+                 track.style.transition = 'transform 0.5s ease-out';
+                 track.style.transform = `translateX(-${slideWidth * index}px)`;
+             };
+
 
             const updateInfoBox = (index) => {
                 const content = plantasConteudos[index];
@@ -572,20 +760,16 @@
 
             plantasBotoes.forEach((botao, index) => {
                 botao.addEventListener('click', () => {
+                    moveToSlide(plantasTrack, index);
                     updateInfoBox(index);
-                    moveToSlide(index);
-                    if (window.innerWidth < 1024 && plantasInteractiveArea) { // lg breakpoint
-                        setTimeout(() => {
-                            plantasInteractiveArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 200);
-                    }
                 });
             });
 
             if (plantasBotoes.length > 0) {
                 updateInfoBox(0);
-                moveToSlide(0);
-                window.addEventListener('resize', () => moveToSlide(Array.from(plantasBotoes).findIndex(btn => btn.classList.contains('ativo'))));
+                plantasBotoes[0].classList.add('ativo');
+                // Adiciona a chamada inicial para posicionar o carrossel
+                setTimeout(() => moveToSlide(plantasTrack, 0), 100);
             }
 
             // --- LÓGICA PARA MENU MOBILE ---
@@ -619,7 +803,7 @@
                         });
                     }
                 });
-            }, { rootMargin: '-30% 0px -70% 0px' }); // Ativa o link quando a seção está no meio da tela
+            }, { rootMargin: '-30% 0px -70% 0px' }); 
 
             sections.forEach(section => observer.observe(section));
 
@@ -637,21 +821,46 @@
             elementsToAnimate.forEach(el => scrollObserver.observe(el));
             
             // --- LÓGICA PARA MODAL DE PRIVACIDADE ---
-            const openModalBtn = document.getElementById('open-privacy-policy');
-            const closeModalBtn = document.getElementById('close-privacy-modal');
-            const modal = document.getElementById('privacy-modal');
+            const openPrivacyModalBtn = document.getElementById('open-privacy-policy');
+            const closePrivacyModalBtn = document.getElementById('close-privacy-modal');
+            const privacyModal = document.getElementById('privacy-modal');
 
-            if (openModalBtn && closeModalBtn && modal) {
-                openModalBtn.addEventListener('click', () => {
-                    modal.classList.remove('hidden');
+            if (openPrivacyModalBtn && closePrivacyModalBtn && privacyModal) {
+                openPrivacyModalBtn.addEventListener('click', () => {
+                    privacyModal.classList.remove('hidden');
                 });
-                closeModalBtn.addEventListener('click', () => {
-                    modal.classList.add('hidden');
+                closePrivacyModalBtn.addEventListener('click', () => {
+                    privacyModal.classList.add('hidden');
                 });
-                // Fecha o modal se clicar fora dele
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.classList.add('hidden');
+                privacyModal.addEventListener('click', (e) => {
+                    if (e.target === privacyModal) {
+                        privacyModal.classList.add('hidden');
+                    }
+                });
+            }
+
+            // --- LÓGICA PARA MODAL DE VÍDEO ---
+            const openVideoModalBtn = document.getElementById('open-video-modal');
+            const closeVideoModalBtn = document.getElementById('close-video-modal');
+            const videoModal = document.getElementById('video-modal');
+            const youtubeVideo = document.getElementById('youtube-video');
+            const videoSrc = "https://www.youtube.com/embed/mjKs9puyIyk?si=a_ci-pMS3m7a-ow5"; // IMPORTANTE: Coloque o link do seu vídeo do YouTube aqui
+
+            if(openVideoModalBtn && closeVideoModalBtn && videoModal && youtubeVideo) {
+                openVideoModalBtn.addEventListener('click', () => {
+                    youtubeVideo.src = videoSrc + "?autoplay=1";
+                    videoModal.classList.remove('hidden');
+                });
+
+                const closeVideo = () => {
+                    videoModal.classList.add('hidden');
+                    youtubeVideo.src = "";
+                }
+
+                closeVideoModalBtn.addEventListener('click', closeVideo);
+                videoModal.addEventListener('click', (e) => {
+                    if (e.target === videoModal) {
+                        closeVideo();
                     }
                 });
             }
