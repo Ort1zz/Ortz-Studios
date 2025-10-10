@@ -12,6 +12,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            /* A rolagem é bloqueada inicialmente */
             overflow: hidden;
             background-color: #111827; /* bg-gray-900 */
             -webkit-user-select: none;  /* Safari */
@@ -123,18 +124,18 @@
             <!-- O player do Spotify será inserido aqui pelo JavaScript -->
         </div>
 
-        <!-- Bloco do Carrossel com a animação de crescimento -->
+        <!-- Bloco do Carrossel com as fotos corretas -->
         <div data-seq="2" class="carousel-grow">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"><img src="img/amor1.jpg" alt="Foto do casal 1"></div>
                     <div class="swiper-slide"><img src="img/amor2.jpg" alt="Foto do casal 2"></div>
                     <div class="swiper-slide"><img src="img/amor3.jpg" alt="Foto do casal 3"></div>
-                    <div class="swiper-slide"><img src="img/amor4.jpg" alt="Foto do casal 1"></div>
-                    <div class="swiper-slide"><img src="img/amor5.jpg" alt="Foto do casal 2"></div>
-                    <div class="swiper-slide"><img src="img/amor6.jpg" alt="Foto do casal 3"></div>
-                    <div class="swiper-slide"><img src="img/amor7.jpg" alt="Foto do casal 2"></div>
-                    <div class="swiper-slide"><img src="img/amor8.jpg" alt="Foto do casal 3"></div>
+                    <div class="swiper-slide"><img src="img/amor4.jpg" alt="Foto do casal 4"></div>
+                    <div class="swiper-slide"><img src="img/amor5.jpg" alt="Foto do casal 5"></div>
+                    <div class="swiper-slide"><img src="img/amor6.jpg" alt="Foto do casal 6"></div>
+                    <div class="swiper-slide"><img src="img/amor7.jpg" alt="Foto do casal 7"></div>
+                    <div class="swiper-slide"><img src="img/amor8.jpg" alt="Foto do casal 8"></div>
                 </div>
             </div>
         </div>
@@ -195,6 +196,13 @@
                         el.classList.add('visible');
                     }, delay);
                 });
+                
+                // CORREÇÃO: Libera a rolagem da página após o último elemento começar a aparecer
+                const lastElement = elements[elements.length - 1];
+                const lastDelay = (parseInt(lastElement.dataset.seq) - 1) * 800;
+                setTimeout(() => {
+                    document.body.style.overflow = 'auto';
+                }, lastDelay + 500); // Adiciona um pequeno delay para a animação finalizar
             }
 
             const heartsContainer = document.getElementById('hearts-container');
