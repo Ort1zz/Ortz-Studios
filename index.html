@@ -100,6 +100,17 @@
         .cta-button:hover::after {
             left: 150%;
         }
+
+        /* ATUALIZAÇÃO: Animação do Menu Mobile (Slide Down) */
+        #mobile-menu {
+            max-height: 0;
+            transition: max-height 0.5s ease-in-out;
+            /* O fundo (bg-white/80 backdrop-blur-sm) é herdado do <header> */
+            /* A classe 'overflow-hidden' está no HTML */
+        }
+        #mobile-menu.menu-open {
+            max-height: 300px; /* Altura suficiente para os 4 links */
+        }
         
         /* Estilos do Carrossel Marquee (CSS Puro) */
         .scroller {
@@ -173,7 +184,8 @@
                 <button id="mobile-menu-button" class="text-gray-800 focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
             </div>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-sm">
+        <!-- ATUALIZAÇÃO: Classes 'hidden', 'bg-white/95', 'backdrop-blur-sm' removidas. Adicionado 'rounded-b-lg' e 'overflow-hidden' -->
+        <div id="mobile-menu" class="md:hidden overflow-hidden rounded-b-lg">
             <a href="#inicio" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Início</a>
             <a href="#seguros" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Seguros</a>
             <!-- ATUALIZAÇÃO: Frizzolândia para mobile (link padrão) -->
@@ -188,10 +200,29 @@
             <!-- Lado Esquerdo: Texto e CTA -->
             <!-- ATUALIZAÇÃO: Animação AOS (slide-right) -->
             <div class="text-center lg:text-left" data-aos="fade-right">
+                
+                <!-- ATUALIZAÇÃO: Logo visível no mobile -->
+                <div class="flex lg:hidden justify-center mb-8" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="relative z-10 bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 rounded-2xl shadow-xl">
+                        <img src="https://placehold.co/192x192/193c5c/FFFFFF?text=Frizzo" alt="Logo Frizzo" class="w-40 h-40">
+                    </div>
+                </div>
+
                 <h1 class="text-5xl lg:text-6xl font-extrabold text-frizzo-dark-blue mb-4">Frizzo Corretora<br>de Seguros</h1>
                 <p class="text-lg text-gray-600 max-w-lg mx-auto lg:mx-0 mb-8">
                     Encontramos a proteção ideal para cada fase da sua vida. Com atendimento personalizado e as melhores seguradoras, cuidamos do que é essencial para você.
                 </p>
+
+                <!-- ATUALIZAÇÃO: Media Player 16:9 adicionado -->
+                <div class="w-full max-w-lg mx-auto lg:mx-0 mb-8 rounded-lg overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-[16/9]">
+                        <video class="w-full h-full object-cover rounded-lg bg-gray-900" controls poster="https://placehold.co/1280x720/193c5c/FFFFFF?text=Video+Institucional">
+                            <!-- <source src="seu-video-horizontal.mp4" type="video/mp4"> -->
+                            Seu navegador não suporta a tag de vídeo.
+                        </video>
+                    </div>
+                </div>
+                
                 <a href="#contato" class="inline-block bg-frizzo-medium-blue text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-frizzo-light-blue transition-all duration-300 transform hover:scale-105 shadow-lg">
                     Faça sua Cotação Gratuita
                 </a>
@@ -587,12 +618,14 @@
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            // ATUALIZAÇÃO: Troca 'hidden' por 'menu-open' para animar
+            mobileMenu.classList.toggle('menu-open');
         });
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+                // ATUALIZAÇÃO: Remove 'menu-open' ao clicar
+                mobileMenu.classList.remove('menu-open');
             });
         });
 
@@ -615,5 +648,8 @@
 
 </body>
 </html>
+
+
+
 
 
