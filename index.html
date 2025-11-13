@@ -10,8 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- ATUALIZAÇÃO: Animate On Scroll (AOS) CSS -->
+    <!-- Animate On Scroll (AOS) CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- ATUALIZAÇÃO: Swiper.js (Carrossel) CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,6 +39,15 @@
         /* Define a fonte Inter como padrão */
         body {
             font-family: 'Inter', sans-serif;
+        }
+
+        html, body {
+            overflow-x: hidden;
+        }
+
+        /* Adiciona um espaçamento no topo para que o conteúdo não fique escondido atrás do header ao navegar para uma âncora. */
+        html {
+            scroll-padding-top: 80px; /* Ajuste este valor se a altura do header mudar */
         }
 
         /* ATUALIZAÇÃO: Animação de slide-down para o Header */
@@ -67,25 +79,6 @@
             width: 100%;
         }
 
-        /* ATUALIZAÇÃO: Animação de hover "Surpresa" para Frizzolândia */
-        @keyframes rainbowText {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        .nav-link-frizzo {
-            background: linear-gradient(90deg, #6228d7, #ee2a7b, #f98f24, #6228d7);
-            background-size: 200% auto;
-            color: #000;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: all 0.4s ease;
-        }
-        .nav-link-frizzo:hover {
-            animation: rainbowText 1.5s linear infinite;
-            transform: scale(1.1); /* Efeito de pulo leve */
-        }
-        
         /* Animação de brilho do botão CTA */
         .cta-button::after {
             content: '';
@@ -101,12 +94,10 @@
             left: 150%;
         }
 
-        /* ATUALIZAÇÃO: Animação do Menu Mobile (Slide Down) */
+        /* Animação do Menu Mobile (Slide Down) */
         #mobile-menu {
             max-height: 0;
             transition: max-height 0.5s ease-in-out;
-            /* O fundo (bg-white/80 backdrop-blur-sm) é herdado do <header> */
-            /* A classe 'overflow-hidden' está no HTML */
         }
         #mobile-menu.menu-open {
             max-height: 300px; /* Altura suficiente para os 4 links */
@@ -148,7 +139,7 @@
         .svg-placeholder:hover {
             filter: grayscale(0) opacity(1);
         }
-        .svg-placeholder svg {
+        .svg-placeholder img, .svg-placeholder svg {
             width: auto;
             height: 100%;
             max-width: 120px;
@@ -158,25 +149,179 @@
             flex-shrink: 0;
         }
 
+        /* Animação de pulso para o botão do WhatsApp */
+        @keyframes pulse-whatsapp {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+            }
+        }
+
+        /* Estilos para a Hotbar da Seção Hero */
+        .hero-tab {
+            transition: all 0.3s ease-in-out;
+        }
+        .hero-tab.active {
+            background-color: white;
+            color: #193c5c; /* frizzo-dark-blue */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        /* Fundo animado para a hotbar (Liquid Glass) */
+        #hotbar-active-bg {
+            z-index: 0;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .hero-content {
+            display: none;
+        }
+        /* Garante que o conteúdo animado não afete o layout ao sair */
+        .hero-content-wrapper {
+            position: relative;
+            min-height: 350px; /* Altura mínima para evitar colapso durante a transição */
+        }
+
+        /* Filtro para ícones da hotbar */
+        .hero-tab .hero-tab-icon {
+            filter: brightness(0) invert(1); /* Transforma o ícone preto em branco */
+            transition: filter 0.3s ease-in-out;
+        }
+        .hero-tab.active .hero-tab-icon {
+            filter: none; /* Remove o filtro, mostrando o ícone na cor original (preto) */
+        }
+
+        /* Animações de entrada */
+        .hero-content.visible {
+            display: block;
+        }
+
+        /* Keyframes para animações da seção Hero */
+        @keyframes fadeInUp-extravagant {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft-extravagant {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes zoomIn-dramatic {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Classes de animação para controle via JS */
+        .animate-fade-in-up { animation: fadeInUp-extravagant 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .animate-fade-in-right { animation: slideInLeft-extravagant 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .animate-zoom-in { animation: zoomIn-dramatic 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+
+        /* Estilos para a seção de Redes Sociais */
+        .social-tab {
+            transition: all 0.3s ease-in-out;
+        }
+        .social-tab.active {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .social-carousel-content {
+            display: none;
+        }
+        .social-carousel-content.active {
+            display: block;
+        }
+
+        /* ATUALIZAÇÃO: Estilos para as abas de redes sociais (restaurados) */
+        .social-carousel-content {
+            display: none;
+        }
+        .social-carousel-content.active {
+            display: block;
+        }
+
+
+        /* Animações de Hover para os Botões Sociais */
+        /* Base para todos os botões */
+        .social-tab {
+            position: relative;
+            overflow: hidden;
+            /* Define a transição de crescimento para TODOS os botões */
+            transition: transform 0.3s ease;
+        }
+
+        /* Efeito de crescimento para TODOS os botões */
+        .social-tab:hover {
+            transform: scale(1.25);
+        }
+
+        /* Animação para Instagram (Gradiente) */
+        .social-tab[data-social="instagram"] {
+            background-size: 200% 200%;
+            /* Adiciona a transição do gradiente à transição de crescimento já existente */
+            transition-property: transform, background-position;
+            transition-duration: 0.3s, 0.5s;
+        }
+        .social-tab[data-social="instagram"]:hover {
+            background-position: right center;
+        }
+
+        /* Animação para Facebook (Onda) */
+        .social-tab[data-social="facebook"]::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 100%; height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            transform: scale(0);
+        }
+        .social-tab[data-social="facebook"]:hover::before {
+            animation: ripple-effect 0.6s ease-out;
+        }
+
+        /* Animação para LinkedIn (Brilho) */
+        .social-tab[data-social="linkedin"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease-in-out;
+        }
+        .social-tab[data-social="linkedin"]:hover::before {
+            left: 150%;
+        }
+
+        /* Keyframes para a animação do Facebook */
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
     </style>
 </head>
-<body class="font-sans bg-slate-50 overflow-x-hidden">
+<body class="font-sans bg-white">
 
     <!-- HEADER REPAGINADO -->
-    <!-- ATUALIZAÇÃO: ID adicionado para a animação slideDown -->
     <header id="main-header" class="bg-white/80 backdrop-blur-sm shadow-md fixed top-0 left-0 right-0 z-50">
         <div class="h-0.5 bg-gradient-to-r from-frizzo-light-blue to-frizzo-dark-blue"></div>
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <nav class="container mx-auto px-6 py-2 flex justify-between items-center">
             <a href="#inicio" class="flex items-center space-x-3">
-                <img src="https://placehold.co/40x40/193c5c/FFFFFF?text=F" alt="Logo Pequena Frizzo" class="w-10 h-10 rounded-full">
-                <span class="text-base font-semibold text-gray-800 hidden sm:block">Frizzo Corretora de Seguros</span>
+                <img src="Img/logo header.png" alt="Logo Frizzo Corretora" class="h-16 w-auto">
             </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#inicio" class="nav-link relative pb-[6px] text-gray-600 hover:text-frizzo-light-blue transition-colors">Início</a>
                 <a href="#seguros" class="nav-link relative pb-[6px] text-gray-600 hover:text-frizzo-light-blue transition-colors">Seguros</a>
                 
-                <!-- ATUALIZAÇÃO: Classes de hover "Surpresa" adicionadas -->
-                <a href="#frizzolandia" class="nav-link-frizzo relative pb-[6px] font-medium transition-colors">Frizzolândia</a>
+                <a href="#porque-frizzo" class="nav-link relative pb-[6px] font-medium text-frizzo-dark-blue hover:text-frizzo-medium-blue transition-colors">Frizzolândia</a>
+                <a href="#contato" class="nav-link relative pb-[6px] text-gray-600 hover:text-frizzo-light-blue transition-colors">Contato</a>
+                <a href="#frizzolandia" class="nav-link relative pb-[6px] text-gray-600 hover:text-frizzo-light-blue transition-colors">Redes Sociais</a>
                 
                 <a href="#contato" class="cta-button relative overflow-hidden bg-frizzo-medium-blue text-white px-5 py-2 rounded-lg hover:bg-frizzo-light-blue transition-all duration-500 transform hover:scale-105">Cotação Online</a>
             </div>
@@ -184,53 +329,96 @@
                 <button id="mobile-menu-button" class="text-gray-800 focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
             </div>
         </nav>
-        <!-- ATUALIZAÇÃO: Classes 'hidden', 'bg-white/95', 'backdrop-blur-sm' removidas. Adicionado 'rounded-b-lg' e 'overflow-hidden' -->
         <div id="mobile-menu" class="md:hidden overflow-hidden rounded-b-lg">
             <a href="#inicio" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Início</a>
             <a href="#seguros" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Seguros</a>
-            <!-- ATUALIZAÇÃO: Frizzolândia para mobile (link padrão) -->
-            <a href="#frizzolandia" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Frizzolândia</a>
+            <a href="#porque-frizzo" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Frizzolândia</a>
+            <a href="#contato" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Contato</a>
+            <a href="#frizzolandia" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Redes Sociais</a>
             <a href="#contato" class="block py-4 px-4 text-center text-sm bg-frizzo-medium-blue text-white hover:bg-frizzo-light-blue">Cotação Online</a>
         </div>
     </header>
 
-    <!-- NOVA SEÇÃO PRINCIPAL -->
-    <main id="inicio" class="w-full min-h-screen flex items-center p-4 pt-24 lg:pt-0">
-        <div class="container mx-auto grid lg:grid-cols-2 gap-8 items-center">
-            <!-- Lado Esquerdo: Texto e CTA -->
-            <!-- ATUALIZAÇÃO: Animação AOS (slide-right) -->
-            <div class="text-center lg:text-left" data-aos="fade-right">
-                
-                <!-- ATUALIZAÇÃO: Logo visível no mobile REMOVIDA -->
+    <!-- SEÇÃO PRINCIPAL -->
+    <main id="inicio" class="relative w-full min-h-screen flex items-center p-4 pt-24 lg:pt-0 bg-frizzo-dark-blue overflow-hidden">
+        <div class="container mx-auto">
+            <!-- Grid principal da seção Hero -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Lado Esquerdo: Conteúdo Dinâmico (que muda) -->
+                <div class="hero-content-wrapper text-center lg:text-left z-10">
+                    <!-- Conteúdo da Aba Saúde -->
+                    <div data-content="saude" class="hero-content">
+                        <h1 class="text-6xl lg:text-7xl font-extrabold text-white mb-6">O Plano de Saúde Ideal para Você e sua Família.</h1>
+                        <p class="text-xl text-white/90 max-w-lg mx-auto lg:mx-0 mb-10">
+                            Com os melhores planos de saúde do mercado, garantimos que você e sua família tenham acesso a um atendimento de excelência. Cuidar da saúde é investir em qualidade de vida.
+                        </p>
+                        <a href="https://wa.me/5511987654321?text=Olá!%20Gostaria%20de%20fazer%20uma%20cotação%20para%20um%20plano%20de%20saúde." 
+                           target="_blank" rel="noopener noreferrer" 
+                           class="inline-block bg-white text-frizzo-dark-blue font-bold py-4 px-10 text-xl rounded-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg">Faça sua Cotação Gratuita</a>
+                    </div>
 
-                <h1 class="text-5xl lg:text-6xl font-extrabold text-frizzo-dark-blue mb-4">Frizzo Corretora<br>de Seguros</h1>
-                <p class="text-lg text-gray-600 max-w-lg mx-auto lg:mx-0 mb-8">
-                    Encontramos a proteção ideal para cada fase da sua vida. Com atendimento personalizado e as melhores seguradoras, cuidamos do que é essencial para você.
-                </p>
+                    <!-- Conteúdo da Aba Consórcio -->
+                    <div data-content="consorcio" class="hero-content">
+                        <h1 class="text-6xl lg:text-7xl font-extrabold text-white mb-6">Realize Seus Sonhos<br>com o Consórcio Certo.</h1>
+                        <p class="text-xl text-white/90 max-w-lg mx-auto lg:mx-0 mb-10">
+                            Planeje a conquista do seu carro ou imóvel de forma inteligente e sem juros. Oferecemos as melhores opções de consórcio para você alcançar seus objetivos com segurança e economia.
+                        </p>
+                        <a href="https://wa.me/5511987654321?text=Olá!%20Gostaria%20de%20simular%20um%20consórcio." 
+                           target="_blank" rel="noopener noreferrer" 
+                           class="inline-block bg-white text-frizzo-dark-blue font-bold py-4 px-10 text-xl rounded-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg">Simule seu Consórcio</a>
+                    </div>
 
-                <!-- ATUALIZAÇÃO: Media Player 16:9 adicionado -->
-                <div class="w-full max-w-lg mx-auto lg:mx-0 mb-8 rounded-lg overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="100">
-                    <div class="aspect-[16/9]">
-                        <video class="w-full h-full object-cover rounded-lg bg-gray-900" controls poster="https://placehold.co/1280x720/193c5c/FFFFFF?text=Video+Institucional">
-                            <!-- <source src="seu-video-horizontal.mp4" type="video/mp4"> -->
-                            Seu navegador não suporta a tag de vídeo.
-                        </video>
+                    <!-- Conteúdo da Aba Seguro Auto -->
+                    <div data-content="auto" class="hero-content">
+                        <h1 class="text-6xl lg:text-7xl font-extrabold text-white mb-6">Seu Veículo Seguro,<br>Sua Rotina sem Imprevistos.</h1>
+                        <p class="text-xl text-white/90 max-w-lg mx-auto lg:mx-0 mb-10">
+                            Dirija com a tranquilidade de saber que seu carro está protegido. Oferecemos coberturas completas e assistência 24h para que você esteja amparado em qualquer situação.
+                        </p>
+                        <a href="https://wa.me/5511987654321?text=Olá!%20Gostaria%20de%20cotar%20um%20seguro%20para%20meu%20veículo." 
+                           target="_blank" rel="noopener noreferrer" 
+                           class="inline-block bg-white text-frizzo-dark-blue font-bold py-4 px-10 text-xl rounded-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg">Cote seu Seguro Auto</a>
+                    </div>
+
+                    <!-- Hotbar para telas menores -->
+                    <div class="mt-10 flex justify-center lg:hidden">
+                        <div id="hotbar-container-mobile" class="relative bg-white/10 backdrop-blur-sm border border-white/20 p-2 rounded-full flex space-x-2">
+                            <div id="hotbar-active-bg-mobile" class="absolute top-2 h-[calc(100%-1rem)] bg-white rounded-full"></div>
+                            <button data-tab="saude" class="hero-tab active relative font-semibold text-white py-2 px-4 rounded-full flex items-center gap-2"> <img src="Img/coracao.png" alt="Ícone Saúde" class="hero-tab-icon w-5 h-5 hidden"> Saúde </button>
+                            <button data-tab="consorcio" class="hero-tab relative font-semibold text-white py-2 px-4 rounded-full flex items-center gap-2"> <img src="Img/sedan.png" alt="Ícone Consórcio" class="hero-tab-icon w-5 h-5 hidden"> Consórcio </button>
+                            <button data-tab="auto" class="hero-tab relative font-semibold text-white py-2 px-4 rounded-full flex items-center gap-2"> <img src="Img/seguro-de-automovel.png" alt="Ícone Seguro Auto" class="hero-tab-icon w-5 h-5 hidden"> Seguro Auto </button>
+                        </div>
                     </div>
                 </div>
-                
-                <a href="#contato" class="inline-block bg-frizzo-medium-blue text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-frizzo-light-blue transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Faça sua Cotação Gratuita
-                </a>
+
+                <!-- Lado Direito: Conteúdo Estático (que não muda) -->
+                <div class="relative w-full max-w-xl mx-auto flex flex-col justify-center">
+                    <div class="absolute w-64 h-64 bg-white/5 rounded-full -top-10 -left-10 blur-2xl opacity-90"></div>
+                    <div class="absolute w-72 h-72 bg-white/5 rounded-full -bottom-12 -right-10 blur-2xl opacity-90"></div>
+                    <!-- Card de estatísticas (visível apenas em desktop) -->
+                    <div class="hidden lg:block relative z-10 w-full p-4 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 mb-6">
+                        <div class="flex flex-col sm:flex-row justify-around items-center text-white">
+                            <div class="text-center p-2"><span class="text-3xl font-bold">25+</span><span class="block text-sm opacity-90">Anos de Mercado</span></div>
+                            <div class="w-px h-10 bg-white/30 hidden sm:block"></div>
+                            <div class="text-center p-2"><span class="text-3xl font-bold">40+</span><span class="block text-sm opacity-90">companias</span></div>
+                            <div class="w-px h-10 bg-white/30 hidden sm:block"></div>
+                            <div class="flex items-center text-center sm:text-left p-2"><span class="text-sm opacity-90">Regulamentado<br class="hidden sm:block"> pela SUSEP</span></div>
+                        </div>
+                    </div>
+                    <div class="relative z-10 w-full p-4 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl border border-white/20">
+                        <div class="aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
+                            <video class="w-full h-full object-cover rounded-lg bg-gray-900" controls poster="https://placehold.co/1280x720/193c5c/FFFFFF?text=Video+Institucional">Seu navegador não suporta a tag de vídeo.</video>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Lado Direito: Visual Abstrato -->
-            <!-- ATUALIZAÇÃO: Animação AOS (slide-left) -->
-            <div class="relative hidden lg:flex items-center justify-center h-96" data-aos="fade-left" data-aos-delay="200">
-                <!-- Formas de fundo -->
-                <div class="absolute w-64 h-64 bg-frizzo-light-blue rounded-full -top-10 -left-10 opacity-70 bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)]"></div>
-                <div class="absolute w-72 h-72 bg-frizzo-dark-blue rounded-full -bottom-12 -right-10 opacity-70 bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)]"></div>
-                <!-- Logo Central -->
-                <div class="relative z-10 bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-8 rounded-2xl shadow-2xl">
-                    <img src="https://placehold.co/192x192/193c5c/FFFFFF?text=Frizzo" alt="Logo Frizzo" class="w-48 h-48">
+
+            <!-- Hotbar de Categorias (Posicionada no final da seção) -->
+            <div class="absolute bottom-10 left-0 right-0 hidden lg:flex justify-center" data-aos="fade-up">
+                <div id="hotbar-container-desktop" class="relative bg-white/10 backdrop-blur-sm border border-white/20 p-2 rounded-full flex space-x-2">
+                    <div id="hotbar-active-bg-desktop" class="absolute top-2 h-[calc(100%-1rem)] bg-white rounded-full"></div>
+                    <button data-tab="saude" class="hero-tab active relative font-semibold text-white py-2 pl-4 pr-6 rounded-full flex items-center gap-2"> <img src="Img/coracao.png" alt="Ícone Saúde" class="hero-tab-icon w-5 h-5"> Saúde </button>
+                    <button data-tab="consorcio" class="hero-tab relative font-semibold text-white py-2 pl-4 pr-6 rounded-full flex items-center gap-2"> <img src="Img/sedan.png" alt="Ícone Consórcio" class="hero-tab-icon w-5 h-5"> Consórcio </button>
+                    <button data-tab="auto" class="hero-tab relative font-semibold text-white py-2 pl-4 pr-6 rounded-full flex items-center gap-2"> <img src="Img/seguro-de-automovel.png" alt="Ícone Seguro Auto" class="hero-tab-icon w-5 h-5"> Seguro Auto </button>
                 </div>
             </div>
         </div>
@@ -239,61 +427,75 @@
     <!-- Seção Nossos Seguros ATUALIZADA -->
     <section id="seguros" class="py-16 lg:py-24">
         <div class="container mx-auto px-6">
-            <!-- ATUALIZAÇÃO: Animação AOS (fade-up) -->
             <div class="text-center mb-12" data-aos="fade-up">
                 <h2 class="text-3xl md:text-4xl font-bold text-frizzo-dark-blue">Nossos Seguros</h2>
                 <p class="text-gray-600 mt-2">Soluções completas para proteger o que mais importa para você.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
                 
-                <!-- Card 1 -->
-                <!-- ATUALIZAÇÃO: Animação AOS (fade-up com delay) -->
-                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 text-center rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
-                    <div class="bg-frizzo-medium-blue/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><svg class="w-10 h-10 text-frizzo-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11v5m-2.5-2.5h5"></path></svg></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Planos de Saúde</h3>
-                    <p class="text-gray-600">Cuidado e bem-estar para você e sua família.</p>
+                <!-- Card 1: Planos de Saúde -->
+                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-4 lg:p-6 text-center rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div class="bg-frizzo-medium-blue/10 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mx-auto mb-4 lg:mb-6">
+                        <img src="Img/coracao.png" alt="Planos de Saúde" class="w-10 h-10 lg:w-12 lg:h-12">
+                    </div>
+                    <h3 class="text-base lg:text-xl font-bold text-gray-800 mb-2">Planos de Saúde</h3>
+                    <p class="text-gray-600 hidden lg:block">Cuidado e bem-estar para você e sua família.</p>
                 </div>
-                <!-- Card 2 -->
-                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 text-center rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
-                    <div class="bg-frizzo-medium-blue/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><svg class="w-10 h-10 text-frizzo-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Consórcio</h3>
-                    <p class="text-gray-600">A forma inteligente de conquistar seus sonhos.</p>
+                <!-- Card 2: Consórcio -->
+                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-4 lg:p-6 text-center rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div class="bg-frizzo-medium-blue/10 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mx-auto mb-4 lg:mb-6">
+                        <img src="Img/sedan.png" alt="Consórcio" class="w-10 h-10 lg:w-12 lg:h-12">
+                    </div>
+                    <h3 class="text-base lg:text-xl font-bold text-gray-800 mb-2">Consórcio</h3>
+                    <p class="text-gray-600 hidden lg:block">A forma inteligente de conquistar seus sonhos.</p>
                 </div>
-                <!-- Card 3 -->
-                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 text-center rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
-                    <div class="bg-frizzo-medium-blue/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><svg class="w-10 h-10 text-frizzo-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17l-2 2-2-2m4-4h6l2-2-2-2h-6l-2 2 2 2zm0 0l-2-2-2 2m4 4V9"></path></svg></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Seguro Auto</h3>
-                    <p class="text-gray-600">Proteção completa para seu veículo em qualquer situação.</p>
+                <!-- Card 3: Seguro Auto -->
+                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-4 lg:p-6 text-center rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div class="bg-frizzo-medium-blue/10 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mx-auto mb-4 lg:mb-6">
+                        <img src="Img/seguro-de-automovel.png" alt="Seguro Auto" class="w-10 h-10 lg:w-12 lg:h-12">
+                    </div>
+                    <h3 class="text-base lg:text-xl font-bold text-gray-800 mb-2">Seguro Auto</h3>
+                    <p class="text-gray-600 hidden lg:block">Proteção completa para seu veículo em qualquer situação.</p>
                 </div>
-                <!-- Card 4 -->
-                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 text-center rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-delay="400">
-                    <div class="bg-frizzo-medium-blue/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><svg class="w-10 h-10 text-frizzo-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Seguro de Vida</h3>
-                    <p class="text-gray-600">Garanta a tranquilidade de quem você mais ama.</p>
+                <!-- Card 4: Seguro de Vida -->
+                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-4 lg:p-6 text-center rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div class="bg-frizzo-medium-blue/10 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mx-auto mb-4 lg:mb-6">
+                        <img src="Img/plano-de-saude.png" alt="Seguro de Vida" class="w-10 h-10 lg:w-12 lg:h-12">
+                    </div>
+                    <h3 class="text-base lg:text-xl font-bold text-gray-800 mb-2">Seguro de Vida</h3>
+                    <p class="text-gray-600 hidden lg:block">Garanta a tranquilidade de quem você mais ama.</p>
                 </div>
-                <!-- Card 5 -->
-                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 text-center rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
-                    <div class="bg-frizzo-medium-blue/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><svg class="w-10 h-10 text-frizzo-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Seguro Empresarial</h3>
-                    <p class="text-gray-600">Soluções para proteger e impulsionar seu negócio.</p>
+                <!-- Card 5: Seguro Empresarial -->
+                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-4 lg:p-6 text-center rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div class="bg-frizzo-medium-blue/10 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mx-auto mb-4 lg:mb-6">
+                        <img src="Img/seguro-empresarial.png" alt="Seguro Empresarial" class="w-10 h-10 lg:w-12 lg:h-12">
+                    </div>
+                    <h3 class="text-base lg:text-xl font-bold text-gray-800 mb-2">Seguro Empresarial</h3>
+                    <p class="text-gray-600 hidden lg:block">Soluções para proteger e impulsionar seu negócio.</p>
                 </div>
-                <!-- Card 6 -->
-                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 text-center rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
-                    <div class="bg-frizzo-medium-blue/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><svg class="w-10 h-10 text-frizzo-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Seguro Residencial</h3>
-                    <p class="text-gray-600">A segurança que seu lar e seus bens merecem.</p>
+                <!-- Card 6: Seguro Residencial -->
+                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-4 lg:p-6 text-center rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div class="bg-frizzo-medium-blue/10 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mx-auto mb-4 lg:mb-6">
+                        <img src="Img/casa.png" alt="Seguro Residencial" class="w-10 h-10 lg:w-12 lg:h-12">
+                    </div>
+                    <h3 class="text-base lg:text-xl font-bold text-gray-800 mb-2">Seguro Residencial</h3>
+                    <p class="text-gray-600 hidden lg:block">A segurança que seu lar e seus bens merecem.</p>
                 </div>
-                <!-- Card 7 -->
-                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 text-center rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
-                    <div class="bg-frizzo-medium-blue/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><svg class="w-10 h-10 text-frizzo-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Seguro Celular</h3>
-                    <p class="text-gray-600">Proteja seu smartphone contra roubos e danos.</p>
+                <!-- Card 7: Seguro Celular -->
+                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-4 lg:p-6 text-center rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div class="bg-frizzo-medium-blue/10 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mx-auto mb-4 lg:mb-6">
+                        <img src="Img/smartphone.png" alt="Seguro Celular" class="w-10 h-10 lg:w-12 lg:h-12">
+                    </div>
+                    <h3 class="text-base lg:text-xl font-bold text-gray-800 mb-2">Seguro Celular</h3>
+                    <p class="text-gray-600 hidden lg:block">Proteja seu smartphone contra roubos e danos.</p>
                 </div>
-                <!-- Card 8 -->
-                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-6 text-center rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500" data-aos="fade-up" data-aos-delay="400">
-                    <div class="bg-frizzo-medium-blue/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><svg class="w-10 h-10 text-frizzo-dark-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg></div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Seguro Viagem</h3>
-                    <p class="text-gray-600">Viaje pelo mundo com total tranquilidade e segurança.</p>
+                <!-- Card 8: Seguro Viagem -->
+                <div class="bg-[rgba(255,255,255,0.65)] backdrop-blur-[15px] border border-[rgba(255,255,255,0.2)] p-4 lg:p-6 text-center rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div class="bg-frizzo-medium-blue/10 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mx-auto mb-4 lg:mb-6">
+                        <img src="Img/seguro-de-viagem.png" alt="Seguro Viagem" class="w-10 h-10 lg:w-12 lg:h-12">
+                    </div>
+                    <h3 class="text-base lg:text-xl font-bold text-gray-800 mb-2">Seguro Viagem</h3>
+                    <p class="text-gray-600 hidden lg:block">Viaje pelo mundo com total tranquilidade e segurança.</p>
                 </div>
             </div>
 
@@ -301,83 +503,88 @@
             <div class="mt-16 lg:mt-24">
                 <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-frizzo-dark-blue">Trabalhamos com as Melhores Seguradoras</h2>
-                    <p class="text-gray-600 mt-2">Mais de 50 opções para garantir a sua tranquilidade.</p>
                 </div>
                 
                 <!-- Carrossel CSS Marquee -->
-                <div class="scroller" data-aos="fade-in" data-aos-delay="200">
+                <div class="scroller overflow-hidden" data-aos="fade-in" data-aos-delay="200">
                     <div class="scroller-inner">
-                        <!-- Lista de 20 Logos (Placeholders) -->
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 1</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 2</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 3</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 4</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 5</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 6</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 7</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 8</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 9</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 10</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 11</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 12</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 13</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 14</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 15</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="1G0" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 16</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2Oflo2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 17</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2G00/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 18</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2L00/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 19</text></svg></div>
-                        <div class="svg-placeholder"><svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="40" rx="8" fill="#E5E7EB"/><text x="50" y="25" font-family="Arial" font-size="10" fill="#9CA3AF" text-anchor="middle">Logo 20</text></svg></div>
+                        <!-- Logos das Seguradoras -->
+                        <div class="svg-placeholder"><img src="Img/allianz.png" alt="Palmeiras nao tem mundial"></div>
+                        <div class="svg-placeholder"><img src="Img/Amil.png" alt="allianz"></div>
+                        <div class="svg-placeholder"><img src="Img/Azul.png" alt="Azul"></div>
+                        <div class="svg-placeholder"><img src="Img/HDI.png" alt="HDI"></div>
+                        <div class="svg-placeholder"><img src="Img/itau.png" alt="Itau"></div>
+                        <div class="svg-placeholder"><img src="Img/Mapfre.png" alt="Mapfre"></div>
+                        <div class="svg-placeholder"><img src="Img/Medsenior.png" alt="Medsenior"></div>
+                        <div class="svg-placeholder"><img src="Img/Notredame.png" alt="Logo Seguradora 20"></div>
+                        <div class="svg-placeholder"><img src="Img/Porto.png" alt="Porto"></div>
+                        <div class="svg-placeholder"><img src="Img/Prevent Senior.png" alt="Prevent Senior"></div>
+                        <div class="svg-placeholder"><img src="Img/Suhai.png" alt="Suhai"></div>
+                        <div class="svg-placeholder"><img src="Img/SulAmérica.png" alt="SulAmérica"></div>
+                        <div class="svg-placeholder"><img src="Img/Tokio.png" alt="tokio"></div>
+                        <div class="svg-placeholder"><img src="Img/Yelum.png" alt="Yelum"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção Por que escolher a Frizzo? -->
-    <section id="porque-frizzo" class="py-16 lg:py-24">
+    <!-- Seção Frizzolândia -->
+    <section id="porque-frizzo" class="py-16 lg:py-24 bg-frizzo-dark-blue">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold text-frizzo-dark-blue">Por que escolher a Frizzo?</h2>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Nossos pilares são a base da confiança que nossos clientes depositam em nós. Veja como trabalhamos.</p>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-white" data-aos="zoom-in">Bem-vindo à Frizzolândia!</h2>
+                <p class="text-white/90 mt-4 max-w-2xl mx-auto text-lg" data-aos="fade-up" data-aos-delay="100">
+                    Um dos principais motivos para nos escolher é a nossa comunidade exclusiva.
+                </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                
-                <!-- Card 1: Atendimento Personalizado -->
-                <!-- ATUALIZAÇÃO: Animação AOS (zoom-in) -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-xl cursor-pointer transition-all duration-1000 ease-out" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://images.pexels.com/photos/3184431/pexels-photo-3184431.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                         alt="Atendimento Personalizado" 
-                         class="w-full h-[400px] md:h-[500px] object-cover transition-all duration-700 group-hover:grayscale group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2 transition-all duration-500 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">Atendimento Personalizado</h3>
-                        <p class="text-white/90 transition-all duration-500 delay-100 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">Nossa equipe está pronta para entender suas necessidades e oferecer o seguro ideal.</p>
+            <!-- Card de Destaque da Frizzolândia -->
+            <div>
+                <div class="max-w-5xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden p-8 lg:p-12" data-aos="zoom-in-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        
+                        <!-- Coluna Esquerda: O que é Frizzolândia? -->
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+                                O que é a FrizzoLândia?
+                            </h3>
+                            <p class="text-white/90 text-base md:text-lg mb-6">
+                                É a nossa comunidade exclusiva para clientes, com relacionamento próximo e vantagens que crescem com o vínculo.
+                            </p> 
+                            <ul class="space-y-4 text-white/90">
+                                <li class="flex items-start space-x-3" data-aos="fade-right" data-aos-delay="400">
+                                    <svg class="w-6 h-6 text-frizzo-light-blue flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span class="text-sm md:text-base">Consultoria diferenciada para escolher, usar e revisar seus planos com segurança.</span>
+                                </li>
+                                <li class="flex items-start space-x-3" data-aos="fade-right" data-aos-delay="500">
+                                    <svg class="w-6 h-6 text-frizzo-light-blue flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span class="text-sm md:text-base">Atendimento humanizado e prioritário com canal direto e resolução rápida.</span>
+                                </li>
+                                <li class="flex items-start space-x-3" data-aos="fade-right" data-aos-delay="600">
+                                    <svg class="w-6 h-6 text-frizzo-light-blue flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span class="text-sm md:text-base">Crédito/cashback e condições diferenciadas em novas contratações.</span>
+                                </li>
+                            </ul>
+                        </div>
+        
+                        <!-- Coluna Direita: CTA -->
+                        <div class="bg-white/10 rounded-lg p-6 text-center mt-8 md:mt-0" data-aos="fade-left" data-aos-delay="300">
+                            <h4 class="text-xl md:text-2xl font-bold text-white mb-3">
+                                Faça Parte da Comunidade!
+                            </h4>
+                            <p class="text-white/90 mb-6">
+                                Quer saber como participar e desbloquear todos os seus benefícios? Nossos especialistas estão prontos para te guiar.
+                            </p>
+                            <a href="https://wa.me/5511973039860" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-white text-frizzo-dark-blue font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg" data-aos="zoom-in" data-aos-delay="600">
+                                <img src="Img/wpp azul.png" alt="Ícone WhatsApp" class="w-5 h-5 mr-2">
+                                Converse com um especialista
+                            </a>
+                            <p class="text-white/70 text-sm mt-4 italic" data-aos="fade-up" data-aos-delay="700">Frizzo Seguros: você SEGURO conosco!</p>
+                        </div>
+        
                     </div>
                 </div>
-                
-                <!-- Card 2: Melhores Preços (Alinhado) -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-xl cursor-pointer transition-all duration-1000 ease-out" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                         alt="Melhores Preços" 
-                         class="w-full h-[400px] md:h-[500px] object-cover transition-all duration-700 group-hover:grayscale group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2 transition-all duration-500 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">Melhores Preços</h3>
-                        <p class="text-white/90 transition-all duration-500 delay-100 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">Trabalhamos com as melhores seguradoras para garantir o melhor custo-benefício.</p>
-                    </div>
-                </div>
-
-                <!-- Card 3: Experiência e Confiança -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-xl cursor-pointer transition-all duration-1000 ease-out" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                         alt="Experiência e Confiança" 
-                         class="w-full h-[400px] md:h-[500px] object-cover transition-all duration-700 group-hover:grayscale group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2 transition-all duration-500 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">Experiência e Confiança</h3>
-                        <p class="text-white/90 transition-all duration-500 delay-100 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">Anos de experiência no mercado, garantindo a segurança que você merece.</p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -385,78 +592,89 @@
     <!-- NOVA SEÇÃO COMBINADA: CONTATO E COTAÇÃO -->
     <section id="contato" class="py-20 lg:py-24">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold text-frizzo-dark-blue">Entre em Contato</h2>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Tire suas dúvidas ou solicite sua cotação online gratuita.</p>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-frizzo-dark-blue" data-aos="fade-down">Entre em Contato</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Tire suas dúvidas ou solicite sua cotação online gratuita.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
 
                 <!-- Coluna da Esquerda (Mapa e Infos) -->
-                <!-- ATUALIZAÇÃO: Animação AOS (fade-right) -->
-                <div class="lg:col-span-3 flex flex-col space-y-8 p-8 rounded-3xl shadow-2xl bg-gradient-to-br from-frizzo-dark-blue to-frizzo-medium-blue h-full" data-aos="fade-right" data-aos-delay="100">
+                <!-- ATUALIZAÇÃO: Fundo sólido azul escuro -->
+                <div class="lg:col-span-3 flex flex-col space-y-8 p-8 rounded-3xl shadow-2xl bg-frizzo-dark-blue h-full" data-aos="fade-right" data-aos-duration="900">
                     <!-- Mapa -->
                     <div class="w-full aspect-video rounded-lg overflow-hidden shadow-xl">
                         <iframe class="w-full h-full" src="https://maps.google.com/maps?q=Rua%20das%20Flores,%20123,%20Centro,%20S%C3%A3o%20Paulo%20-%20SP&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" loading="lazy"></iframe>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <!-- ATUALIZAÇÃO: Layout para Desktop (3 colunas) -->
+                    <div class="hidden md:grid md:grid-cols-3 gap-6">
                         <!-- Endereço -->
-                        <a href="#" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300">
-                            <svg class="w-8 h-8 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <div>
-                                <h4 class="text-md font-semibold text-white">Nosso Endereço</h4>
-                                <p class="text-white/90 text-sm">Rua das Flores, 123, SP</p>
-                            </div>
-                        </a>
+                        <a href="#" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300"><img src="Img/Endereço.png" alt="Ícone de Endereço" class="w-8 h-8 flex-shrink-0"><div><h4 class="text-md font-semibold text-white">Nosso Endereço</h4><p class="text-white/90 text-sm">Rua das Flores, 123, SP</p></div></a>
                         <!-- Horário -->
-                        <div class="flex items-center gap-4 p-4 rounded-lg">
-                            <svg class="w-8 h-8 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <div>
-                                <h4 class="text-md font-semibold text-white">Horário</h4>
-                                <p class="text-white/90 text-sm">Seg a Sex, 9h às 18h</p>
-                            </div>
-                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-lg"><img src="Img/Relogio.png" alt="Ícone de Horário" class="w-8 h-8 flex-shrink-0"><div><h4 class="text-md font-semibold text-white">Horário</h4><p class="text-white/90 text-sm">Seg a Sex, 9h às 18h</p></div></div>
                         <!-- Telefone -->
-                        <a href="tel:+5511987654321" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300">
-                            <svg class="w-8 h-8 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            <div>
-                                <h4 class="text-md font-semibold text-white">Telefone</h4>
-                                <p class="text-white/90 text-sm">(11) 98765-4321</p>
-                            </div>
-                        </a>
+                        <a href="tel:+5511987654321" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300"><img src="Img/telefone.png" alt="Ícone de Telefone" class="w-8 h-8 flex-shrink-0"><div><h4 class="text-md font-semibold text-white">Telefone</h4><p class="text-white/90 text-sm">(11) 98765-4321</p></div></a>
                         <!-- E-mail -->
-                        <a href="mailto:contato@frizzo.com.br" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300">
-                            <svg class="w-8 h-8 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <div>
-                                <h4 class="text-md font-semibold text-white">E-mail</h4>
-                                <p class="text-white/90 text-sm">contato@frizzo.com.br</p>
-                            </div>
-                        </a>
+                        <a href="mailto:contato@frizzo.com.br" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300"><img src="Img/email.png" alt="Ícone de E-mail" class="w-8 h-8 flex-shrink-0"><div><h4 class="text-md font-semibold text-white">E-mail</h4><p class="text-white/90 text-sm">contato@frizzo.com.br</p></div></a>
                         <!-- WhatsApp -->
-                        <a href="https://wa.me/5511987654321" target="_blank" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300">
-                           <svg class="w-8 h-8 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.52 3.48 1.44 4.93l-1.55 5.65l5.77-1.53c1.38.83 2.94 1.32 4.58 1.32h.01c5.46 0 9.9-4.45 9.9-9.91c0-5.46-4.44-9.9-9.9-9.9zM17.29 15.8c-.29.29-1.42.69-1.66.79c-.24.1-.41.1-.64.05c-.23-.05-.52-.2-.79-.35c-.27-.15-1.09-.51-2.08-1.48c-.99-.97-1.64-2.18-1.9-2.55c-.26-.37-.53-.84-.53-1.54c0-.7.26-1.08.46-1.28c.2-.2.43-.25.58-.25s.28.01.41.02c.13.01.29.01.44.21c.15.2.21.43.21.66v.15c0 .23-.05.46-.1.61c-.05.15-.1.2-.15.25c-.05.05-.1.1-.15.15c-.05.05-.1.1-.1.15c0 .05.05.1.1.15c.05.05.33.41.74.82c.41.41.74.74.82.82c.08.08.13.1.2.13c.07.03.15.05.23.05c.08 0 .2-.03.29-.08c.09-.05.23-.18.34-.29c.11-.11.2-.2.29-.2s.2.05.34.1c.14.05.86.41 1.01.48c.15.07.26.1.29.15c.03.05.03.28-.02.57c-.05.29-.29.52-.41.64z"/></svg>
-                           <div>
-                                <h4 class="text-md font-semibold text-white">WhatsApp</h4>
-                                <p class="text-white/90 text-sm">Converse com a gente!</p>
-                            </div>
-                        </a>
+                        <a href="https://wa.me/5511973039860" target="_blank" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300"><img src="Img/wpp.png" alt="Ícone do WhatsApp" class="w-8 h-8 flex-shrink-0"><div><h4 class="text-md font-semibold text-white">WhatsApp</h4><p class="text-white/90 text-sm">Converse com a gente!</p></div></a>
                         <!-- Avalie no Google -->
-                        <a href="#" target="_blank" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300">
-                            <svg class="w-8 h-8 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.02,10.18v3.7h6.48c-.3,1.94-2.43,3.34-4.58,3.34-2.76,0-5-2.24-5-5s2.24-5,5-5c1.25,0,2.38.47,3.25,1.27l2.88-2.88C16.4,2.71,14.33,2,12.02,2,6.51,2,2.02,6.49,2.02,12s4.49,10,10,10c5.51,0,9.7-3.83,9.7-9.84,0-.65-.06-1.28-.17-1.89h-9.53Z"/></svg>
-                            <div>
-                                <h4 class="text-md font-semibold text-white">Avalie-nos</h4>
-                                <p class="text-white/90 text-sm">Sua opinião é importante!</p>
+                        <a href="#" target="_blank" class="flex items-center gap-4 p-4 rounded-lg hover:bg-white/10 transition-colors duration-300"><img src="Img/google.png" alt="Ícone do Google" class="w-8 h-8 flex-shrink-0"><div><h4 class="text-md font-semibold text-white">Avalie-nos</h4><p class="text-white/90 text-sm">Sua opinião é importante!</p></div></a>
+                    </div>
+
+                    <!-- ATUALIZAÇÃO: Layout para Mobile (Botões de Ação + Lista) -->
+                    <div class="md:hidden space-y-6">
+                        <!-- Botões de Ação Rápida -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="https://wa.me/5511973039860" target="_blank" class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300">
+                                <img src="Img/wpp.png" alt="Ícone do WhatsApp" class="w-8 h-8">
+                                <span class="font-semibold text-white">WhatsApp</span>
+                            </a>
+                            <a href="tel:+5511987654321" class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300">
+                                <img src="Img/telefone.png" alt="Ícone de Telefone" class="w-8 h-8">
+                                <span class="font-semibold text-white">Ligar Agora</span>
+                            </a>
+                        </div>
+                        <!-- Lista de Informações -->
+                        <div class="flex flex-col items-center space-y-2 pt-4 border-t border-white/20">
+                            <a href="#" class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/10 transition-colors duration-300">
+                                <img src="Img/Endereço.png" alt="Ícone de Endereço" class="w-6 h-6 flex-shrink-0">
+                                <div>
+                                    <h4 class="text-md font-semibold text-white">Nosso Endereço</h4>
+                                    <p class="text-white/90 text-sm">Rua das Flores, 123, SP</p>
+                                </div>
+                            </a>
+                            <div class="flex items-center gap-4 p-3 rounded-lg">
+                                <img src="Img/Relogio.png" alt="Ícone de Horário" class="w-6 h-6 flex-shrink-0">
+                                <div>
+                                    <h4 class="text-md font-semibold text-white">Horário</h4>
+                                    <p class="text-white/90 text-sm">Seg a Sex, 9h às 18h</p>
+                                </div>
                             </div>
-                        </a>
+                            <a href="mailto:contato@frizzo.com.br" class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/10 transition-colors duration-300">
+                                <img src="Img/email.png" alt="Ícone de E-mail" class="w-6 h-6 flex-shrink-0">
+                                <div>
+                                    <h4 class="text-md font-semibold text-white">E-mail</h4>
+                                    <p class="text-white/90 text-sm">contato@frizzo.com.br</p>
+                                </div>
+                            </a>
+                            <a href="#" target="_blank" class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/10 transition-colors duration-300">
+                                <img src="Img/google.png" alt="Ícone do Google" class="w-6 h-6 flex-shrink-0">
+                                <div>
+                                    <h4 class="text-md font-semibold text-white">Avalie-nos</h4>
+                                    <p class="text-white/90 text-sm">Sua opinião é importante!</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Coluna da Direita (Formulário) -->
-                <!-- ATUALIZAÇÃO: Animação AOS (fade-left) -->
-                <div class="lg:col-span-2 p-8 sm:p-12 rounded-3xl shadow-2xl bg-gradient-to-br from-frizzo-dark-blue to-frizzo-medium-blue h-full" data-aos="fade-left" data-aos-delay="200">
+                <!-- ATUALIZAÇÃO: Fundo sólido azul escuro -->
+                <div class="lg:col-span-2 p-8 sm:p-12 rounded-3xl shadow-2xl bg-frizzo-dark-blue h-full" data-aos="fade-left" data-aos-duration="900">
                     <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-8">Faça sua Cotação Online</h2>
-                    <form action="#" method="POST">
+                    <form id="cotacao-form">
                         <div class="space-y-6">
                             <div>
                                 <label for="full-name" class="block text-sm font-medium text-white mb-2">Seu nome completo</label>
@@ -504,76 +722,64 @@
     </section>
     
     <!-- NOVA SEÇÃO FRIZZOLÂNDIA (ATUALIZADA) -->
-    <section id="frizzolandia" class="pt-10 pb-20 lg:pt-12 lg:pb-24 bg-gradient-to-r from-frizzo-dark-blue to-frizzo-light-blue">
+    <!-- ATUALIZAÇÃO: Seção focada em Redes Sociais -->
+    <section id="frizzolandia" class="pt-10 pb-20 lg:pt-12 lg:pb-24 bg-frizzo-dark-blue">
         <div class="container mx-auto px-6">
-            <div class="text-center" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold text-white">Bem-vindo à Frizzolândia!</h2>
+            <!-- ATUALIZAÇÃO: Animação de entrada para o título -->
+            <div class="text-center" data-aos="fade-down">
+                <h2 class="text-4xl md:text-5xl font-bold text-white">Conecte-se Conosco</h2>
                 <p class="text-white/90 mt-4 max-w-2xl mx-auto text-lg">
                     Conecte-se conosco em nossas redes e veja nossos conteúdos exclusivos.
                 </p>
             </div>
 
-            <!-- CAMADA 3: Cards de Mídia Social -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-                
-                <!-- Card 1: Instagram -->
-                <!-- ATUALIZAÇÃO: Animação AOS (flip-left) -->
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl" data-aos="flip-left" data-aos-delay="100">
-                    <div class="p-4 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500">
-                        <a href="https://www.instagram.com/seu-usuario" target="_blank" rel="noopener noreferrer" class="block text-2xl font-bold text-white text-center hover:opacity-80 transition-opacity">Instagram</a>
+            <!-- ATUALIZAÇÃO: Animações de entrada para os botões e carrossel -->
+            <div class="mt-16">
+                <!-- ATUALIZAÇÃO: Botões de abas restaurados -->
+                <div class="flex justify-center items-center space-x-4 md:space-x-8 mb-12" data-aos="fade-up">
+                    <button data-social="instagram" class="social-tab active text-white font-bold py-3 px-6 rounded-xl shadow-lg bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500"><span>Instagram</span></button>
+                    <button data-social="facebook" class="social-tab text-white font-bold py-3 px-6 rounded-xl shadow-lg bg-[#1877F2]"><span>Facebook</span></button>
+                    <button data-social="linkedin" class="social-tab text-white font-bold py-3 px-6 rounded-xl shadow-lg bg-[#0A66C2]"><span>LinkedIn</span></button>
+                </div>
+
+                <!-- ATUALIZAÇÃO: Conteúdo em abas com grades estáticas -->
+                <div class="relative">
+                    <!-- Conteúdo Instagram -->
+                    <div id="instagram-content" class="social-carousel-content active" data-aos="fade-up" data-aos-delay="200">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Vídeo 1 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><video class="w-full h-auto rounded-lg" controls preload="metadata"><source src="Img/teste.mp4" type="video/mp4"></video></div>
+                            <!-- Vídeo 2 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><video class="w-full h-auto rounded-lg" controls preload="metadata"><source src="Img/teste.mp4" type="video/mp4"></video></div>
+                            <!-- Vídeo 3 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><video class="w-full h-auto rounded-lg" controls preload="metadata"><source src="Img/teste.mp4" type="video/mp4"></video></div>
+                            <!-- Vídeo 4 -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><video class="w-full h-auto rounded-lg" controls preload="metadata"><source src="Img/teste.mp4" type="video/mp4"></video></div>
+                        </div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <p class="text-gray-700 text-sm mb-4">
-                            Siga nosso dia a dia, dicas rápidas e os bastidores da Frizzo Corretora. O conteúdo mais dinâmico você encontra aqui!
-                        </p>
-                        <!-- ATUALIZAÇÃO: Vídeo escondido no mobile (hidden) e visível a partir de md: (md:block) -->
-                        <div class="mt-auto hidden md:block">
-                            <video class="w-full mx-auto aspect-[3/4] rounded-lg bg-gray-900" controls poster="https://placehold.co/480x640/333/FFF?text=Video+Frizzo+Reels">
-                                <!-- <source src="seu-video-vertical.mp4" type="video/mp4"> -->
-                                Seu navegador não suporta a tag de vídeo.
-                            </video>
+
+                    <!-- Conteúdo Facebook -->
+                    <div id="facebook-content" class="social-carousel-content">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Coloque aqui os 4 vídeos do Facebook -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><p class="text-white text-center p-20">Vídeos do Facebook aqui</p></div>
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><p class="text-white text-center p-20">Vídeos do Facebook aqui</p></div>
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><p class="text-white text-center p-20">Vídeos do Facebook aqui</p></div>
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><p class="text-white text-center p-20">Vídeos do Facebook aqui</p></div>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo LinkedIn -->
+                    <div id="linkedin-content" class="social-carousel-content">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Coloque aqui os 4 vídeos do LinkedIn -->
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><p class="text-white text-center p-20">Vídeos do LinkedIn aqui</p></div>
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><p class="text-white text-center p-20">Vídeos do LinkedIn aqui</p></div>
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><p class="text-white text-center p-20">Vídeos do LinkedIn aqui</p></div>
+                            <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 p-2"><p class="text-white text-center p-20">Vídeos do LinkedIn aqui</p></div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Card 2: Facebook -->
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl" data-aos="flip-left" data-aos-delay="200">
-                    <div class="p-4 bg-[#1877F2]">
-                        <a href="https://www.facebook.com/seu-usuario" target="_blank" rel="noopener noreferrer" class="block text-2xl font-bold text-white text-center hover:opacity-80 transition-opacity">Facebook</a>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <p class="text-gray-700 text-sm mb-4">
-                            Acompanhe nossas novidades, artigos completos e comunicados importantes. Conecte-se com nossa comunidade.
-                        </p>
-                        <!-- ATUALIZAÇÃO: Vídeo escondido no mobile (hidden) e visível a partir de md: (md:block) -->
-                        <div class="mt-auto hidden md:block">
-                            <video class="w-full mx-auto aspect-[3/4] rounded-lg bg-gray-900" controls poster="https://placehold.co/480x640/1877F2/FFF?text=Video+Frizzo+Facebook">
-                                <!-- <source src="seu-video-vertical.mp4" type="video/mp4"> -->
-                                Seu navegador não suporta a tag de vídeo.
-                            </video>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3: LinkedIn -->
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden flex flex-col h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl" data-aos="flip-left" data-aos-delay="300">
-                    <div class="p-4 bg-[#0A66C2]">
-                        <a href="https://www.linkedin.com/company/seu-usuario" target="_blank" rel="noopener noreferrer" class="block text-2xl font-bold text-white text-center hover:opacity-80 transition-opacity">LinkedIn</a>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <p class="text-gray-700 text-sm mb-4">
-                            Focado no mercado corporativo. Veja nossas soluções em seguros empresariais, saúde PME e conecte-se com nossa equipe.
-                        </p>
-                        <!-- ATUALIZAÇÃO: Vídeo escondido no mobile (hidden) e visível a partir de md: (md:block) -->
-                        <div class="mt-auto hidden md:block">
-                            <video class="w-full mx-auto aspect-[3/4] rounded-lg bg-gray-900" controls poster="https://placehold.co/480x640/0A66C2/FFF?text=Video+Frizzo+LinkedIn">
-                                <!-- <source src="seu-video-vertical.mp4" type="video/mp4"> -->
-                                Seu navegador não suporta a tag de vídeo.
-                            </video>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -587,17 +793,24 @@
                 <a href="#" class="hover:text-frizzo-light-blue">Termos de Uso</a>
             </div>
             <div class="w-full md:w-auto flex justify-center space-x-5">
-                <a href="#" class="text-gray-500 hover:text-frizzo-light-blue"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
-                <a href="#" class="text-gray-500 hover:text-frizzo-light-blue"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2zM12 0C9.58 0 9.22.01 8.134.059 7.05.107 6.168.272 5.36.566a6.902 6.902 0 00-2.448 1.624A6.902 6.902 0 00.566 5.36C.272 6.168.107 7.05.059 8.134.01 9.22 0 9.58 0 12s.01 2.78.059 3.866c.049 1.086.216 1.968.507 2.772a6.902 6.902 0 001.624 2.448 6.902 6.902 0 002.448 1.624c.804.295 1.686.459 2.772.507C9.22 23.99 9.58 24 12 24s2.78-.01 3.866-.059c1.086-.049 1.968-.216 2.772-.507a6.902 6.902 0 002.448-1.624 6.902 6.902 0 001.624-2.448c.295-.804.459-1.686.507-2.772C23.99 14.78 24 14.42 24 12s-.01-2.78-.059-3.866c-.049-1.086-.216-1.968-.507-2.772a6.902 6.902 0 00-1.624-2.448A6.902 6.902 0 0018.64.566c-.804-.295-1.686-.459-2.772-.507C14.78.01 14.42 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z" clip-rule="evenodd" /></svg></a>
-                <a href="#" class="text-gray-500 hover:text-frizzo-light-blue"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.52 3.48 1.44 4.93l-1.55 5.65l5.77-1.53c1.38.83 2.94 1.32 4.58 1.32h.01c5.46 0 9.9-4.45 9.9-9.91c0-5.46-4.44-9.9-9.9-9.9zM17.29 15.8c-.29.29-1.42.69-1.66.79c-.24.1-.41.1-.64.05c-.23-.05-.52-.2-.79-.35c-.27-.15-1.09-.51-2.08-1.48c-.99-.97-1.64-2.18-1.9-2.55c-.26-.37-.53-.84-.53-1.54c0-.7.26-1.08.46-1.28c.2-.2.43-.25.58-.25s.28.01.41.02c.13.01.29.01.44.21c.15.2.21.43.21.66v.15c0 .23-.05.46-.1.61c-.05.15-.1.2-.15.25c-.05.05-.1.1-.15.15c-.05.05-.1.1-.1.15c0 .05.05.1.1.15c.05.05.33.41.74.82c.41.41.74.74.82.82c.08.08.13.1.2.13c.07.03.15.05.23.05c.08 0 .2-.03.29-.08c.09-.05.23-.18.34-.29c.11-.11.2-.2.29-.2s.2.05.34.1c.14.05.86.41 1.01.48c.15.07.26.1.29.15c.03.05.03.28-.02.57c-.05.29-.29.52-.41.64z"/></svg></a>
+                <a href="https://www.facebook.com/seu-usuario" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:opacity-75 transition-opacity"><img src="Img/facebook azul.png" alt="Facebook" class="w-6 h-6"></a>
+                <a href="https://www.instagram.com/seu-usuario" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:opacity-75 transition-opacity"><img src="Img/insta azul.png" alt="Instagram" class="w-6 h-6"></a>
+                <a href="https://wa.me/5511987654321" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:opacity-75 transition-opacity"><img src="Img/wpp azul.png" alt="WhatsApp" class="w-6 h-6"></a>
             </div>
         </div>
     </footer>
 
     <!-- Botão Flutuante do WhatsApp -->
-    <a href="https://wa.me/5511987654321" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300 z-40">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.52 3.48 1.44 4.93l-1.55 5.65l5.77-1.53c1.38.83 2.94 1.32 4.58 1.32h.01c5.46 0 9.9-4.45 9.9-9.91c0-5.46-4.44-9.9-9.9-9.9zM17.29 15.8c-.29.29-1.42.69-1.66.79c-.24.1-.41.1-.64.05c-.23-.05-.52-.2-.79-.35c-.27-.15-1.09-.51-2.08-1.48c-.99-.97-1.64-2.18-1.9-2.55c-.26-.37-.53-.84-.53-1.54c0-.7.26-1.08.46-1.28c.2-.2.43-.25.58-.25s.28.01.41.02c.13.01.29.01.44.21c.15.2.21.43.21.66v.15c0 .23-.05.46-.1.61c-.05.15-.1.2-.15.25c-.05.05-.1.1-.15.15c-.05.05-.1.1-.1.15c0 .05.05.1.1.15c.05.05.33.41.74.82c.41.41.74.74.82.82c.08.08.13.1.2.13c.07.03.15.05.23.05c.08 0 .2-.03.29-.08c.09-.05.23-.18.34-.29c.11-.11.2-.2.29-.2s.2.05.34.1c.14.05.86.41 1.01.48c.15.07.26.1.29.15c.03.05.03.28-.02.57c-.05.29-.29.52-.41.64z"/></svg>
+    <!-- ATUALIZAÇÃO: Botão flutuante com alto contraste e ícone de imagem -->
+    <a href="https://wa.me/5511973039860" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white w-14 h-14 lg:w-auto lg:px-4 lg:py-3 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 z-40 group"
+       style="animation: pulse-whatsapp 2s infinite;">
+        <img src="Img/wpp.png" alt="Ícone do WhatsApp" class="w-8 h-8 lg:w-6 lg:h-6 lg:mr-2 transition-transform duration-300 group-hover:scale-110">
+        <span class="hidden lg:inline font-semibold text-sm">Estamos Online</span>
     </a>
+
+    <!-- ATUALIZAÇÃO: Swiper.js (Carrossel) JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- ATUALIZAÇÃO: Scripts do AOS.js -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -613,18 +826,14 @@
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
-            // ATUALIZAÇÃO: Troca 'hidden' por 'menu-open' para animar
             mobileMenu.classList.toggle('menu-open');
         });
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                // ATUALIZAÇÃO: Remove 'menu-open' ao clicar
                 mobileMenu.classList.remove('menu-open');
             });
         });
-
-        // ATUALIZAÇÃO: Script do IntersectionObserver foi REMOVIDO (agora usamos AOS)
 
         // Script para duplicar o carrossel de logos (CSS Marquee)
         const scroller = document.querySelector('.scroller');
@@ -639,8 +848,115 @@
                 scrollerInner.appendChild(duplicatedItem);
             });
         }
+
+        // ATUALIZAÇÃO: Unificação de todos os scripts em um único DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Script para a Hotbar da seção Hero
+            const tabs = document.querySelectorAll('.hero-tab');
+            const contents = document.querySelectorAll('.hero-content');
+
+            // ATUALIZAÇÃO: Lógica para o "Liquid Glass" da Hotbar
+            const hotbarContainerDesktop = document.getElementById('hotbar-container-desktop');
+            const activeBgDesktop = document.getElementById('hotbar-active-bg-desktop');
+            const hotbarContainerMobile = document.getElementById('hotbar-container-mobile');
+            const activeBgMobile = document.getElementById('hotbar-active-bg-mobile');
+
+            function moveActiveBg(activeTab) {
+                const isMobile = window.innerWidth < 1024;
+                const container = isMobile ? hotbarContainerMobile : hotbarContainerDesktop;
+                const bg = isMobile ? activeBgMobile : activeBgDesktop;
+                
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                bg.style.width = `${tabRect.width}px`;
+                bg.style.left = `${tabRect.left - containerRect.left}px`;
+            }
+
+            if (tabs.length > 0 && contents.length > 0) {
+                // Função para mostrar o conteúdo com a animação correta
+                function showContent(tabName) {
+                    contents.forEach(content => {
+                        content.classList.remove('visible', 'animate-fade-in-up', 'animate-fade-in-right', 'animate-zoom-in');
+                    });
+                    const targetContent = document.querySelector(`[data-content="${tabName}"]`);
+                    if (targetContent) {
+                        if (tabName === 'saude') targetContent.classList.add('animate-fade-in-up');
+                        else if (tabName === 'consorcio') targetContent.classList.add('animate-fade-in-right');
+                        else if (tabName === 'auto') targetContent.classList.add('animate-zoom-in');
+                        targetContent.classList.add('visible');
+                    }
+                }
+
+                const initialActiveTab = document.querySelector('.hero-tab.active');
+                if (initialActiveTab) {
+                    setTimeout(() => moveActiveBg(initialActiveTab), 50); // Garante que o layout foi calculado
+                    showContent(initialActiveTab.dataset.tab);
+                }
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        // Sincroniza os botões entre mobile e desktop
+                        const targetTab = tab.dataset.tab;
+                        tabs.forEach(t => {
+                            t.classList.toggle('active', t.dataset.tab === targetTab);
+                        });
+                        moveActiveBg(document.querySelector(`.hero-tab[data-tab="${targetTab}"].active`));
+                        showContent(tab.dataset.tab);
+                    });
+                });
+            }
+
+            // ATUALIZAÇÃO: Script para as abas de redes sociais (restaurado)
+            const socialTabs = document.querySelectorAll('.social-tab');
+            const socialContents = document.querySelectorAll('.social-carousel-content');
+
+            if (socialTabs.length > 0) {
+                socialTabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        socialTabs.forEach(t => t.classList.remove('active'));
+                        socialContents.forEach(c => c.classList.remove('active'));
+
+                        tab.classList.add('active');
+                        const socialNetwork = tab.dataset.social;
+                        document.getElementById(`${socialNetwork}-content`).classList.add('active');
+                    });
+                });
+            }
+
+            // ATUALIZAÇÃO: Script para o formulário de cotação do WhatsApp
+            const cotacaoForm = document.getElementById('cotacao-form');
+            if (cotacaoForm) {
+                cotacaoForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Impede o envio padrão do formulário
+
+                    // Número de WhatsApp da Frizzo (use o número correto)
+                    const frizzoWhatsAppNumber = '5511973039860';
+
+                    // Coleta os dados do formulário
+                    const name = document.getElementById('full-name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const insuranceType = document.getElementById('insurance-type').value;
+                    const message = document.getElementById('message').value;
+
+                    // Monta a mensagem
+                    const fullMessage = `Olá! Gostaria de solicitar uma cotação.\n\n*Nome:* ${name}\n*E-mail:* ${email}\n*Telefone:* ${phone}\n*Tipo de Seguro:* ${insuranceType}\n\n*Mensagem:*\n${message}`;
+
+                    // Codifica a mensagem para a URL
+                    const encodedMessage = encodeURIComponent(fullMessage);
+
+                    // Cria a URL do WhatsApp
+                    const whatsappUrl = `https://wa.me/${frizzoWhatsAppNumber}?text=${encodedMessage}`;
+
+                    // Abre o WhatsApp em uma nova aba
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+        });
+
     </script>
 
 </body>
 </html>
-
