@@ -75,7 +75,9 @@ const getStyles = (isDark) => `
   .glass-container .glass:hover svg { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.4)); color: var(--accent); }
   @media (max-width: 640px) { .glass-container .glass { margin: 0; transform: none; } .glass-container { gap: 15px; } }
 
+  /* Nav Centralizada (Método margin: auto) - CORRIGIDO */
   .nav-pill-wrapper { position: fixed; bottom: 2rem; left: 0; right: 0; margin-left: auto; margin-right: auto; z-index: 100; width: fit-content; max-width: 95vw; display: flex; justify-content: center; }
+  
   .dock-container { display: flex; align-items: center; background: var(--nav-bg); border-radius: 24px; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--nav-border); box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1); padding: 6px 12px; height: 64px; transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); }
   
   .nav-section { position: relative; display: flex; align-items: center; height: 100%; }
@@ -121,12 +123,19 @@ const getStyles = (isDark) => `
   .preview-info-minimal.active { transform: translateY(0); opacity: 1; }
 
   @media (max-width: 768px) {
-    .showcase-wrapper { flex-direction: column; height: auto; gap: 20px; }
-    .project-preview { height: 45vh; min-height: 350px; width: 100%; flex: none; }
-    .project-list { flex: none; width: 100%; margin-bottom: 10px; }
-    .project-item { font-size: 1.4rem; padding: 15px 20px; }
-    .project-action-btn { width: 36px; height: 36px; } 
-    .project-action-btn svg { width: 18px; height: 18px; }
+    /* Navbar mais baixa no mobile */
+    .nav-pill-wrapper { bottom: 1rem; } 
+    /* Compactação dos Espaços para Mobile */
+    .showcase-wrapper { flex-direction: column; height: auto; gap: 15px; }
+    .project-preview { height: 220px; width: 100%; flex: none; border-radius: 20px; }
+    .project-list { flex: none; width: 100%; margin-bottom: 0; display: flex; flex-direction: column; gap: 8px; }
+    .project-item { font-size: 1.1rem; padding: 12px 15px; border-radius: 12px; }
+    .coming-soon-item { font-size: 1rem; padding: 12px 15px; }
+    .project-action-btn { width: 32px; height: 32px; } 
+    .project-action-btn svg { width: 16px; height: 16px; }
+    .preview-info-minimal { padding: 20px; }
+    .preview-info-minimal h3 { font-size: 1.5rem; margin-bottom: 4px; }
+    .glass-container { display: none; }
   }
 `;
 
@@ -182,7 +191,6 @@ const TypewriterTitle = ({ isDark, phrases, highlightClassName }) => {
     const part2 = splitIndex !== -1 ? fullText.slice(splitIndex) : "";
     const showPart2 = text.length > part1.length;
     
-    // CORREÇÃO: Use a classe passada ou o padrão
     const highlightColor = highlightClassName ? highlightClassName : (isDark ? "text-purple-300" : "text-violet-700");
     
     return <>{text.slice(0, part1.length)}<br className="hidden md:block"/> <span className={highlightColor}>{showPart2 ? text.slice(part1.length) : ""}</span><span className="cursor-blink"></span></>;
@@ -213,7 +221,7 @@ const ThemeToggle = ({ isDark, toggle }) => (
 const ProfileCard = ({ isDark }) => {
   const cardRef = useRef(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  const [isPressed, setIsPressed] = useState(false); // New state for subtle interaction
+  const [isPressed, setIsPressed] = useState(false); 
   
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -224,7 +232,7 @@ const ProfileCard = ({ isDark }) => {
   const handleEasterEgg = (e) => {
       e.stopPropagation();
       setIsPressed(true);
-      setTimeout(() => setIsPressed(false), 200); // Quick press effect
+      setTimeout(() => setIsPressed(false), 200); 
   };
 
   return (
@@ -339,14 +347,13 @@ export default function OrtLabsPortfolio() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    if (formError) setFormError(false); // Limpa o erro ao digitar
+    if (formError) setFormError(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
         setFormError(true);
-        // Pequena vibração ou feedback visual
         const formBtn = document.getElementById('submit-btn');
         if(formBtn) {
             formBtn.classList.add('animate-shake');
@@ -354,7 +361,6 @@ export default function OrtLabsPortfolio() {
         }
         return;
     }
-    // Lógica de envio aqui (console log por enquanto)
     console.log("Enviando...", formData);
     alert("Mensagem enviada com sucesso! (Simulação)");
     setFormData({ name: '', email: '', message: '' });
@@ -385,7 +391,7 @@ export default function OrtLabsPortfolio() {
 
             <div className="site-content-enter">
                 {/* HERO SECTION - Grid Assimétrico para Mobile/Desktop */}
-                <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 md:pt-48 pb-12 md:pb-20"> {/* Reduzi pt e pb para mobile */}
+                <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 md:pt-48 pb-8 md:pb-20"> {/* Reduzi pt e pb para mobile */}
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -422,7 +428,7 @@ export default function OrtLabsPortfolio() {
                             {/* Bloco de Botões (Ordem 3 no Mobile, Col 1 Row 2 no Desktop) */}
                             <div className="order-3 md:col-start-1 md:row-start-2 flex flex-col sm:flex-row gap-6 justify-center md:justify-start items-center">
                                 <Reveal delay={600}>
-                                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                                    <div className="flex flex-col sm:flex-row gap-4 w-[320px] sm:w-auto">
                                         <button onClick={() => scrollTo('portfolio')} className="neu-button purple-glass w-full sm:w-auto">Ver Projetos</button>
                                         <button onClick={() => scrollTo('contato')} className="neu-button w-full sm:w-auto">Fale Comigo</button>
                                     </div>
@@ -432,11 +438,11 @@ export default function OrtLabsPortfolio() {
                     </div>
                 </section>
 
-                <section id="sobre" className={`py-24 relative border-t overflow-hidden ${isDarkMode ? 'border-slate-900' : 'border-slate-100'}`}>
+                <section id="sobre" className={`py-12 md:py-24 relative border-t overflow-hidden ${isDarkMode ? 'border-slate-900' : 'border-slate-100'}`}>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-2 gap-16 items-start"> 
+                    <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start"> 
                         {/* COLUNA ESQUERDA: VISUAL + STACK TÉCNICA */}
-                        <div className="order-2 lg:order-1 flex flex-col gap-10">
+                        <div className="order-2 lg:order-1 flex flex-col gap-8 lg:gap-10">
                             <Reveal>
                                 <div className="glass-container py-10">
                                     <div data-text="HTML / CSS" style={{ '--r': -15 }} className="glass group select-none"><Braces size={48} strokeWidth={1.5} /></div>
@@ -452,7 +458,7 @@ export default function OrtLabsPortfolio() {
                             
                             {/* FRAMEWORKS (Movia para a esquerda) */}
                              <Reveal delay={300}>
-                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 select-none ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}><Layers size={16} /> Frameworks & Libs</h3><div className="flex flex-wrap gap-3 justify-center lg:justify-start select-none">{[{ name: 'React.js', desc: 'Core' }, { name: 'Next.js', desc: 'Fullstack/SEO' }, { name: 'Tailwind CSS', desc: 'Estilização' }, { name: 'Node.js', desc: 'Backend Basics' }, { name: 'Vite', desc: 'Build Tool' }].map((tech) => (<div key={tech.name} className={`group flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-semibold transition-all hover:-translate-y-1 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white hover:bg-purple-900/30 hover:border-purple-500' : 'bg-white border-slate-200 text-slate-800 hover:bg-violet-50 hover:border-violet-500 shadow-sm'}`}><span>{tech.name}</span><span className={`text-[10px] uppercase px-1.5 py-0.5 rounded opacity-60 group-hover:opacity-100 transition-opacity ${isDarkMode ? 'bg-slate-700 text-purple-200' : 'bg-slate-100 text-violet-700'}`}>{tech.desc}</span></div>))}</div></div>
+                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 select-none ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}><Layers size={16} /> Frameworks & Libs</h3><div className="flex flex-wrap gap-3 justify-center lg:justify-start select-none">{['React.js', 'Next.js', 'Tailwind CSS', 'Node.js', 'Vite'].map((tech) => (<div key={tech} className={`group flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-semibold transition-all hover:-translate-y-1 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white hover:bg-purple-900/30 hover:border-purple-500' : 'bg-white border-slate-200 text-slate-800 hover:bg-violet-50 hover:border-violet-500 shadow-sm'}`}>{tech}</div>))}</div></div>
                             </Reveal>
                         </div>
 
@@ -486,15 +492,15 @@ export default function OrtLabsPortfolio() {
                     </div>
                 </section>
 
-                <section id="portfolio" className={`py-24 border-t ${isDarkMode ? 'border-slate-900' : 'border-slate-200'}`}>
+                <section id="portfolio" className={`py-12 md:py-24 border-t ${isDarkMode ? 'border-slate-900' : 'border-slate-200'}`}>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <Reveal><div className="mb-16"><span className={`font-bold tracking-widest text-sm uppercase ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>OrtLabs Work</span><h2 className={`text-3xl md:text-5xl font-bold mt-2 ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>Projetos Selecionados</h2></div></Reveal>
+                    <Reveal><div className="mb-8 md:mb-16"><span className={`font-bold tracking-widest text-sm uppercase ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>OrtLabs Work</span><h2 className={`text-3xl md:text-5xl font-bold mt-2 ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>Projetos Selecionados</h2></div></Reveal>
                     <ProjectShowcase isDark={isDarkMode} />
                     </div>
                 </section>
 
-                <section id="contato" className={`pt-32 pb-8 relative overflow-hidden border-t ${isDarkMode ? 'border-slate-900' : 'border-slate-200'}`}>
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-24">
+                <section id="contato" className={`pt-12 md:pt-32 pb-8 relative overflow-hidden border-t ${isDarkMode ? 'border-slate-900' : 'border-slate-200'}`}>
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-12 md:mb-24">
                     <Reveal>
                         <div className={`rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row ${isDarkMode ? 'bg-slate-900/50 border border-slate-800' : 'bg-white border border-slate-200 shadow-xl'}`}>
                             <div className={`md:w-2/5 p-10 md:p-12 flex flex-col justify-between relative overflow-hidden ${isDarkMode ? 'bg-purple-900/20' : 'bg-violet-900/80'}`}> {/* Violeta escuro sólido no light mode */}
@@ -546,7 +552,7 @@ export default function OrtLabsPortfolio() {
                     </Reveal>
                     </div>
 
-                    <div className="relative pt-12 pb-8">
+                    <div className="relative pt-8 md:pt-12 pb-8">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                             <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
                                 <div className="text-center md:text-left"><div className={`flex items-center justify-center md:justify-start gap-2 mb-1 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}><div className={`p-1.5 rounded-lg ${isDarkMode ? 'bg-white/5' : 'bg-slate-200'}`}><Layers size={20} className="text-purple-500" /></div><span className="text-lg font-bold tracking-tight">ORT<span className="text-purple-500">LABS</span></span></div><p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Transformando ideias em experiências digitais.</p></div>
