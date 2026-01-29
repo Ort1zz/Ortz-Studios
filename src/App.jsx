@@ -71,7 +71,9 @@ const getStyles = (isDark) => `
   .glass-container .glass:hover svg { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.4)); color: var(--accent); }
   @media (max-width: 640px) { .glass-container .glass { margin: 0; transform: none; } .glass-container { gap: 15px; } }
 
-  .nav-pill-wrapper { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 100; width: auto; max-width: 95vw; }
+  /* Nav Centralizada com Flexbox e Translate */
+  .nav-pill-wrapper { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 100; width: auto; max-width: 95vw; display: flex; justify-content: center; }
+  
   .dock-container { display: flex; align-items: center; background: var(--nav-bg); border-radius: 24px; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--nav-border); box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1); padding: 6px 12px; height: 64px; transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); }
   
   .nav-section { position: relative; display: flex; align-items: center; height: 100%; }
@@ -345,6 +347,7 @@ export default function OrtLabsPortfolio() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
                             
                             {/* Bloco de Texto (Ordem 1 no Mobile, Col 1 Row 1 no Desktop) */}
+                            {/* Adicionado min-h no título para evitar pulo na animação */}
                             <div className="text-center md:text-left order-1 md:col-start-1 md:row-start-1">
                                 <Reveal>
                                     <div className={`inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border backdrop-blur-sm ${isDarkMode ? 'border-purple-300/20 bg-purple-400/5' : 'border-purple-200 bg-white/50'}`}>
@@ -353,7 +356,8 @@ export default function OrtLabsPortfolio() {
                                     </div>
                                 </Reveal>
                                 <Reveal delay={200}>
-                                    <h1 className={`text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>
+                                    {/* min-h-[3.2em] garante espaço para 2 linhas de texto, evitando o "pulo" */}
+                                    <h1 className={`text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight min-h-[3.2em] md:min-h-[2.5em] ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>
                                         <TypewriterTitle isDark={isDarkMode} phrases={["Transformando ideias em | experiências digitais", "Tem um projeto? | Vamos trabalhar?"]} />
                                     </h1>
                                 </Reveal>
@@ -370,11 +374,12 @@ export default function OrtLabsPortfolio() {
                             </div>
 
                             {/* Bloco de Botões (Ordem 3 no Mobile, Col 1 Row 2 no Desktop) */}
+                            {/* Ajustado: flex-col no mobile, row no desktop, largura full no mobile */}
                             <div className="order-3 md:col-start-1 md:row-start-2 flex flex-col sm:flex-row gap-6 justify-center md:justify-start items-center">
                                 <Reveal delay={600}>
-                                    <div className="flex gap-4">
-                                        <button onClick={() => scrollTo('portfolio')} className="neu-button purple-glass">Ver Projetos</button>
-                                        <button onClick={() => scrollTo('contato')} className="neu-button">Fale Comigo</button>
+                                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                                        <button onClick={() => scrollTo('portfolio')} className="neu-button purple-glass w-full sm:w-auto">Ver Projetos</button>
+                                        <button onClick={() => scrollTo('contato')} className="neu-button w-full sm:w-auto">Fale Comigo</button>
                                     </div>
                                 </Reveal>
                             </div>
@@ -394,13 +399,13 @@ export default function OrtLabsPortfolio() {
                                 </div>
                             </Reveal>
                             <Reveal delay={200}>
-                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center gap-2 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}><Award size={16} /> Certificações</h3>
-                                    <div className="flex flex-wrap gap-2">{['Desenvolvimento Web Completo', 'Algoritmos e Lógica', 'React: The Complete Guide', 'UX/UI Fundamentals'].map((cert) => (<div key={cert} className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold transition-all hover:scale-105 cursor-default ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:text-white' : 'bg-slate-50 border-slate-200 text-slate-600 hover:shadow-sm'}`}><span>{cert}</span></div>))}</div>
+                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}><Award size={16} /> Certificações</h3>
+                                    <div className="flex flex-wrap gap-2 justify-center lg:justify-start">{['Desenvolvimento Web Completo', 'Algoritmos e Lógica', 'React: The Complete Guide', 'UX/UI Fundamentals'].map((cert) => (<div key={cert} className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold transition-all hover:scale-105 cursor-default ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:text-white' : 'bg-slate-50 border-slate-200 text-slate-600 hover:shadow-sm'}`}><span>{cert}</span></div>))}</div>
                                 </div>
                             </Reveal>
                             <Reveal delay={300}>
-                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center gap-2 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}><User size={16} /> Soft Skills</h3>
-                                    <div className="flex flex-wrap gap-2">{['Comunicação Clara', 'Resolução de Problemas', 'Trabalho em Equipe', 'Aprendizado Contínuo'].map((skill) => (<div key={skill} className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold transition-all hover:scale-105 cursor-default ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:text-white' : 'bg-slate-50 border-slate-200 text-slate-600 hover:shadow-sm'}`}><span>{skill}</span></div>))}</div>
+                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}><User size={16} /> Soft Skills</h3>
+                                    <div className="flex flex-wrap gap-2 justify-center lg:justify-start">{['Comunicação Clara', 'Resolução de Problemas', 'Trabalho em Equipe', 'Aprendizado Contínuo'].map((skill) => (<div key={skill} className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold transition-all hover:scale-105 cursor-default ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:text-white' : 'bg-slate-50 border-slate-200 text-slate-600 hover:shadow-sm'}`}><span>{skill}</span></div>))}</div>
                                 </div>
                             </Reveal>
                         </div>
