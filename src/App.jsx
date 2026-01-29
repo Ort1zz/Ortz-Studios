@@ -67,8 +67,10 @@ const getStyles = (isDark) => `
   .fixed-ui-enter { animation: fadeInUp 1.5s ease-out forwards; }
   .legal-panel-enter { animation: slideFromBottom 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
+  /* Alterado cursor: pointer para cursor: default nos cards de vidro */
+  /* E removido no mobile via display:none no media query abaixo */
   .glass-container { position: relative; display: flex; justify-content: center; align-items: center; padding: 40px 0; flex-wrap: wrap; gap: 20px; }
-  .glass-container .glass { position: relative; width: 140px; height: 180px; background: var(--glass-bg); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); display: flex; justify-content: center; align-items: center; transition: 0.5s; border-radius: 16px; margin: 0 -20px; backdrop-filter: blur(10px); transform: rotate(calc(var(--r) * 1deg)); cursor: pointer; }
+  .glass-container .glass { position: relative; width: 140px; height: 180px; background: var(--glass-bg); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); display: flex; justify-content: center; align-items: center; transition: 0.5s; border-radius: 16px; margin: 0 -20px; backdrop-filter: blur(10px); transform: rotate(calc(var(--r) * 1deg)); cursor: default; }
   .glass-container:hover .glass { transform: rotate(0deg); margin: 0 10px; border-color: var(--accent); background: var(--glass-highlight); }
   .glass-container .glass::before { content: attr(data-text); position: absolute; bottom: 0; width: 100%; height: 40px; background: var(--glass-highlight); display: flex; justify-content: center; align-items: center; color: var(--text-primary); font-family: monospace; font-weight: bold; font-size: 0.8rem; letter-spacing: 1px; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
   .glass-container .glass svg { font-size: 3em; color: var(--text-primary); filter: drop-shadow(0 0 5px rgba(216, 180, 254, 0.1)); transition: 0.3s; }
@@ -123,7 +125,7 @@ const getStyles = (isDark) => `
   .preview-info-minimal.active { transform: translateY(0); opacity: 1; }
 
   @media (max-width: 768px) {
-    .nav-pill-wrapper { bottom: 1rem; } 
+    .nav-pill-wrapper { bottom: 1.1rem; } 
     .showcase-wrapper { flex-direction: column; height: auto; gap: 15px; }
     .project-preview { height: 220px; width: 100%; flex: none; border-radius: 20px; }
     .project-list { flex: none; width: 100%; margin-bottom: 0; display: flex; flex-direction: column; gap: 8px; }
@@ -136,15 +138,6 @@ const getStyles = (isDark) => `
     .glass-container { display: none; }
   }
 `;
-
-// --- NOVO LOGO (OrtLogo) ---
-const OrtLogo = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 14h6v6H4z" opacity="0.6" />
-    <path d="M9 9h6v6H9z" opacity="0.8" />
-    <path d="M14 4h6v6h-6z" />
-  </svg>
-);
 
 // --- COMPONENTS ---
 const LoadingScreen = ({ onComplete }) => {
@@ -368,8 +361,15 @@ export default function OrtLabsPortfolio() {
         }
         return;
     }
-    console.log("Enviando...", formData);
-    alert("Mensagem enviada com sucesso! (Simulação)");
+    
+    // Constrói a mensagem para o WhatsApp
+    const message = `Olá! Meu nome é *${formData.name}*.\nMeu e-mail é: ${formData.email}\n\nMensagem:\n${formData.message}`;
+    const whatsappUrl = `https://wa.me/5511994082371?text=${encodeURIComponent(message)}`;
+    
+    // Abre a URL do WhatsApp em uma nova aba
+    window.open(whatsappUrl, '_blank');
+    
+    // Limpa o formulário
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -383,7 +383,7 @@ export default function OrtLabsPortfolio() {
         <>
             <div className="fixed inset-0 z-[-1] site-content-enter"><div className={`absolute inset-0 ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}><div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 ${isDarkMode ? 'bg-purple-900' : 'bg-purple-200'}`}></div><div className={`absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 ${isDarkMode ? 'bg-indigo-900' : 'bg-indigo-200'}`}></div></div></div>
             <ThemeToggle isDark={isDarkMode} toggle={toggleTheme} />
-            <div className="fixed top-6 left-6 z-50 fixed-ui-enter"><div className="flex items-center gap-2 cursor-pointer group" onClick={() => scrollTo('home')}><div className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center border transition-all ${isDarkMode ? 'bg-slate-800/50 border-slate-700 group-hover:border-purple-300' : 'bg-white/80 border-slate-200 group-hover:border-purple-500 shadow-sm'}`}><OrtLogo className={`transition-colors ${isDarkMode ? 'text-purple-300 group-hover:text-purple-200' : 'text-violet-700 group-hover:text-violet-900'}`} size={20} /></div><span className={`text-xl font-bold tracking-tight transition-colors hidden sm:block ${isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-slate-900'}`}>ORT<span className={`${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>LABS</span></span></div></div>
+            <div className="fixed top-6 left-6 z-50 fixed-ui-enter"><div className="flex items-center gap-2 cursor-pointer group" onClick={() => scrollTo('home')}><div className={`w-[3em] h-[3em] backdrop-blur-md rounded-full flex items-center justify-center border transition-all ${isDarkMode ? 'bg-slate-800/50 border-slate-700 group-hover:border-purple-300' : 'bg-white/80 border-slate-200 group-hover:border-purple-500 shadow-sm'} p-2`}><Layers strokeWidth={1.5} className={`transition-colors ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`} size={24} /></div><span className={`text-xl font-bold tracking-tight transition-colors hidden sm:block ${isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-slate-900'}`}>ORT<span className={`${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>LABS</span></span></div></div>
 
             <div className="nav-pill-wrapper fixed-ui-enter">
                 <div className="dock-container">
@@ -437,7 +437,8 @@ export default function OrtLabsPortfolio() {
                                 <Reveal delay={600}>
                                     <div className="flex flex-col sm:flex-row gap-4 w-[320px] sm:w-auto">
                                         <button onClick={() => scrollTo('portfolio')} className="neu-button purple-glass w-full sm:w-auto">Ver Projetos</button>
-                                        <button onClick={() => scrollTo('contato')} className="neu-button w-full sm:w-auto">Fale Comigo</button>
+                                        {/* Botão Fale Comigo agora abre WhatsApp */}
+                                        <button onClick={() => window.open('https://wa.me/5511994082371', '_blank')} className="neu-button w-full sm:w-auto">Fale Comigo</button>
                                     </div>
                                 </Reveal>
                             </div>
@@ -465,7 +466,7 @@ export default function OrtLabsPortfolio() {
                             
                             {/* FRAMEWORKS (Movia para a esquerda) */}
                              <Reveal delay={300}>
-                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 select-none ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}><Layers size={16} /> Frameworks & Libs</h3><div className="flex flex-wrap gap-3 justify-center lg:justify-start select-none">{['React.js', 'Next.js', 'Tailwind CSS', 'Node.js', 'Vite'].map((tech) => (<div key={tech} className={`group flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-semibold transition-all hover:-translate-y-1 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white hover:bg-purple-900/30 hover:border-purple-500' : 'bg-white border-slate-200 text-slate-800 hover:bg-violet-50 hover:border-violet-500 shadow-sm'}`}>{tech}</div>))}</div></div>
+                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 select-none ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}><Layers size={16} /> Frameworks & Libs</h3><div className="flex flex-wrap gap-3 justify-center lg:justify-start select-none">{[{ name: 'React.js', desc: 'Core' }, { name: 'Next.js', desc: 'Fullstack/SEO' }, { name: 'Tailwind CSS', desc: 'Estilização' }, { name: 'Node.js', desc: 'Backend Basics' }, { name: 'Vite', desc: 'Build Tool' }].map((tech) => (<div key={tech.name} className={`group flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-semibold transition-all hover:-translate-y-1 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white hover:bg-purple-900/30 hover:border-purple-500' : 'bg-white border-slate-200 text-slate-800 hover:bg-violet-50 hover:border-violet-500 shadow-sm'}`}><span>{tech.name}</span></div>))}</div></div>
                             </Reveal>
                         </div>
 
@@ -562,7 +563,7 @@ export default function OrtLabsPortfolio() {
                     <div className="relative pt-8 md:pt-12 pb-8">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                             <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
-                                <div className="text-center md:text-left"><div className={`flex items-center justify-center md:justify-start gap-2 mb-1 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}><div className={`p-1.5 rounded-lg ${isDarkMode ? 'bg-white/5' : 'bg-slate-200'}`}><OrtLogo className={`transition-colors ${isDarkMode ? 'text-purple-500' : 'text-purple-600'}`} size={20} /></div><span className="text-lg font-bold tracking-tight">ORT<span className="text-purple-500">LABS</span></span></div><p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Transformando ideias em experiências digitais.</p></div>
+                                <div className="text-center md:text-left"><div className={`flex items-center justify-center md:justify-start gap-2 mb-1 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}><div className={`p-2 rounded-full ${isDarkMode ? 'bg-white/5' : 'bg-slate-200'}`}><Layers strokeWidth={1.5} className={`transition-colors ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`} size={24} /></div><span className="text-lg font-bold tracking-tight">ORT<span className="text-purple-500">LABS</span></span></div><p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Transformando ideias em experiências digitais.</p></div>
                                 <div className="flex gap-4">{SOCIAL_LINKS.map(s => (<a key={s.id} href={s.link} target="_blank" rel="noopener noreferrer" className={`p-2 rounded-full transition-all ${isDarkMode ? 'bg-white/5 hover:bg-white/10 text-white' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'}`}><s.icon size={18} /></a>))}</div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
