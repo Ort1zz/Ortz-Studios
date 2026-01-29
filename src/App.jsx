@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Layers, Mail, Code, Smartphone, Cpu, Braces, User, MessageSquare, Sun, Moon, Github, Linkedin, Instagram, ArrowUpRight, Home, Lock, ArrowRight, ChevronUp, Award, X, Zap, CheckCircle } from 'lucide-react';
+import { Layers, Mail, Code, Smartphone, Cpu, Braces, User, MessageSquare, Sun, Moon, Github, Linkedin, Instagram, ArrowUpRight, Home, Lock, ArrowRight, ChevronUp, Award, X, Zap, CheckCircle, AlertCircle } from 'lucide-react';
 
-// --- DADOS E CONSTANTES (Clean Code: Centralizando informações) ---
+// --- DADOS E CONSTANTES (Links Atualizados) ---
 const SOCIAL_LINKS = [
-  { id: 'gh', icon: Github, link: "https://github.com/ortzlabs", label: "Github" },
-  { id: 'li', icon: Linkedin, link: "https://linkedin.com/in/ortzlabs", label: "Linkedin" },
+  { id: 'gh', icon: Github, link: "https://github.com/Ort1zz", label: "Github" },
+  { id: 'li', icon: Linkedin, link: "https://www.linkedin.com/in/lucas-ortiz-3043a7284/", label: "Linkedin" },
   { id: 'in', icon: Instagram, link: "https://www.instagram.com/ortlabs/", label: "Instagram" }
 ];
 
@@ -17,27 +17,28 @@ const NAV_ITEMS = [
 
 const PROJECTS = [
   { id: 1, title: "VitaeSenior", category: "Health Tech", year: "2024", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80", description: "Plataforma de cuidado e gestão para saúde sênior.", tech: ["React", "Tailwind", "Node.js"], link: "https://www.vitaesenior.com.br", comingSoon: false },
-  { id: 2, title: "Frizzo Corretora", category: "Fintech", year: "2023", image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?w=800&q=80", description: "Soluções inteligentes em seguros e gestão de apólices.", tech: ["HTML", "Tailwind", "React"], link: "#", comingSoon: true },
-  { id: 3, title: "ORTLabs", category: "Design & Dev", year: "2025", image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&q=80", description: "Portfólio imersivo com design de vidro e performance.", tech: ["React", "Vite", "Tailwind"], link: "https://www.ortzstudios.com.br", comingSoon: false },
-  { id: 4, title: "Luana Dias", category: "Portfólio", year: "2024", image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80", description: "Portfólio minimalista para marca pessoal.", tech: ["HTML", "CSS", "JS"], link: "#", comingSoon: false }
+  { id: 2, title: "ORTLabs", category: "Design & Dev", year: "2025", image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&q=80", description: "Portfólio imersivo com design de vidro e performance.", tech: ["React", "Vite", "Tailwind"], link: "https://www.ortzstudios.com.br", comingSoon: false },
+  { id: 3, title: "Frizzo Corretora", category: "Fintech", year: "2023", image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?w=800&q=80", description: "Soluções inteligentes em seguros e gestão de apólices.", tech: ["HTML", "Tailwind", "React"], link: "#", comingSoon: true },
+  { id: 4, title: "Luana Dias", category: "Portfólio", year: "2024", image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80", description: "Portfólio minimalista para marca pessoal.", tech: ["HTML", "CSS", "JS"], link: "#", comingSoon: true }
 ];
 
 // --- STYLES ---
 const getStyles = (isDark) => `
   :root {
-    --glass-bg: ${isDark ? 'linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)' : 'linear-gradient(145deg, rgba(147, 51, 234, 0.05) 0%, rgba(147, 51, 234, 0.02) 100%)'};
-    --glass-border: ${isDark ? 'rgba(216, 180, 254, 0.1)' : 'rgba(147, 51, 234, 0.2)'};
-    --glass-shadow: ${isDark ? '0 15px 35px rgba(0, 0, 0, 0.5)' : '0 15px 35px rgba(147, 51, 234, 0.1)'};
-    --glass-highlight: ${isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(147, 51, 234, 0.1)'};
-    --text-primary: ${isDark ? '#e9d5ff' : '#6b21a8'};
-    --text-secondary: ${isDark ? '#94a3b8' : '#64748b'};
-    --accent: ${isDark ? '#d8b4fe' : '#9333ea'};
-    /* Nav Sólida com leve transparência para efeito vidro fosco "Apple" */
+    --glass-bg: ${isDark ? 'linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)' : 'linear-gradient(145deg, rgba(109, 40, 217, 0.05) 0%, rgba(109, 40, 217, 0.02) 100%)'};
+    --glass-border: ${isDark ? 'rgba(216, 180, 254, 0.1)' : 'rgba(109, 40, 217, 0.2)'};
+    --glass-shadow: ${isDark ? '0 15px 35px rgba(0, 0, 0, 0.5)' : '0 15px 35px rgba(109, 40, 217, 0.1)'};
+    --glass-highlight: ${isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(109, 40, 217, 0.1)'};
+    
+    --text-primary: ${isDark ? '#e9d5ff' : '#581c87'};
+    --text-secondary: ${isDark ? '#94a3b8' : '#475569'};
+    --accent: ${isDark ? '#d8b4fe' : '#7c3aed'};
+    
     --nav-bg: ${isDark ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)'};
-    --nav-border: ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(147, 51, 234, 0.1)'};
+    --nav-border: ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(109, 40, 217, 0.1)'};
     --nav-text: ${isDark ? '#94a3b8' : '#64748b'};
-    --nav-text-active: ${isDark ? '#ffffff' : '#ffffff'};
-    --glider-bg: ${isDark ? '#d8b4fe' : '#9333ea'};
+    --nav-text-active: ${isDark ? '#ffffff' : '#581c87'};
+    --glider-bg: ${isDark ? '#d8b4fe' : '#ddd6fe'};
   }
 
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
@@ -50,6 +51,9 @@ const getStyles = (isDark) => `
   @keyframes enterContent { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
   @keyframes slideFromBottom { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+  .animate-shake { animation: shake 0.3s ease-in-out; }
 
   .cursor-blink { display: inline-block; width: 3px; height: 1em; background-color: var(--accent); margin-left: 4px; vertical-align: middle; animation: blink 1s infinite; }
   .loading-letter { display: inline-block; opacity: 0; color: white; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); animation: fadeInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
@@ -71,9 +75,7 @@ const getStyles = (isDark) => `
   .glass-container .glass:hover svg { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.4)); color: var(--accent); }
   @media (max-width: 640px) { .glass-container .glass { margin: 0; transform: none; } .glass-container { gap: 15px; } }
 
-  /* Nav Centralizada com Flexbox e Translate */
-  .nav-pill-wrapper { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 100; width: auto; max-width: 95vw; display: flex; justify-content: center; }
-  
+  .nav-pill-wrapper { position: fixed; bottom: 2rem; left: 0; right: 0; margin-left: auto; margin-right: auto; z-index: 100; width: fit-content; max-width: 95vw; display: flex; justify-content: center; }
   .dock-container { display: flex; align-items: center; background: var(--nav-bg); border-radius: 24px; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--nav-border); box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1); padding: 6px 12px; height: 64px; transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); }
   
   .nav-section { position: relative; display: flex; align-items: center; height: 100%; }
@@ -92,19 +94,19 @@ const getStyles = (isDark) => `
   .social-link { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; color: var(--nav-text); transition: all 0.3s ease; }
   .social-link:hover { background-color: ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'}; color: ${isDark ? 'white' : 'black'}; transform: translateY(-3px); }
 
-  .neu-button { background-color: ${isDark ? '#1e293b' : '#e0e0e0'}; border-radius: 50px; box-shadow: ${isDark ? 'inset 4px 4px 10px #0f172a, inset -4px -4px 10px #334155' : 'inset 4px 4px 10px #bcbcbc, inset -4px -4px 10px #ffffff'}; color: ${isDark ? '#cbd5e1' : '#4d4d4d'}; cursor: pointer; font-size: 18px; padding: 15px 40px; transition: all 0.2s ease-in-out; border: 2px solid ${isDark ? '#334155' : 'rgb(206, 206, 206)'}; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600; }
-  .neu-button:hover { box-shadow: ${isDark ? 'inset 2px 2px 5px #0f172a, inset -2px -2px 5px #334155' : 'inset 2px 2px 5px #bcbcbc, inset -2px -2px 5px #ffffff, 2px 2px 5px #bcbcbc, -2px -2px 5px #ffffff'}; transform: translateY(-2px); color: ${isDark ? '#fff' : '#000'}; }
-  .neu-button.purple-glass { background-color: ${isDark ? 'rgba(168, 85, 247, 0.15)' : 'rgba(147, 51, 234, 0.1)'}; backdrop-filter: blur(8px); color: ${isDark ? '#ffffff' : '#1e293b'}; border: 2px solid ${isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.2)'}; box-shadow: ${isDark ? 'inset 4px 4px 10px rgba(0, 0, 0, 0.5), inset -4px -4px 10px rgba(255, 255, 255, 0.1)' : 'inset 4px 4px 10px rgba(147, 51, 234, 0.1), inset -4px -4px 10px rgba(255, 255, 255, 0.8), 0 10px 20px rgba(147, 51, 234, 0.15)'}; }
-  .neu-button.purple-glass:hover { background-color: ${isDark ? 'rgba(168, 85, 247, 0.25)' : 'rgba(147, 51, 234, 0.2)'}; box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3), inset -2px -2px 5px rgba(255, 255, 255, 0.2), 0 0 20px ${isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.3)'}; }
+  .neu-button { background-color: ${isDark ? '#1e293b' : '#e2e8f0'}; border-radius: 50px; box-shadow: ${isDark ? 'inset 4px 4px 10px #0f172a, inset -4px -4px 10px #334155' : 'inset 4px 4px 10px #cbd5e1, inset -4px -4px 10px #ffffff'}; color: ${isDark ? '#cbd5e1' : '#475569'}; cursor: pointer; font-size: 18px; padding: 15px 40px; transition: all 0.2s ease-in-out; border: 2px solid ${isDark ? '#334155' : '#cbd5e1'}; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600; }
+  .neu-button:hover { box-shadow: ${isDark ? 'inset 2px 2px 5px #0f172a, inset -2px -2px 5px #334155' : 'inset 2px 2px 5px #cbd5e1, inset -2px -2px 5px #ffffff, 2px 2px 5px #cbd5e1, -2px -2px 5px #ffffff'}; transform: translateY(-2px); color: ${isDark ? '#fff' : '#1e293b'}; }
+  .neu-button.purple-glass { background-color: ${isDark ? 'rgba(168, 85, 247, 0.15)' : 'rgba(124, 58, 237, 0.1)'}; backdrop-filter: blur(8px); color: ${isDark ? '#ffffff' : '#5b21b6'}; border: 2px solid ${isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(124, 58, 237, 0.3)'}; box-shadow: ${isDark ? 'inset 4px 4px 10px rgba(0, 0, 0, 0.5), inset -4px -4px 10px rgba(255, 255, 255, 0.1)' : 'inset 4px 4px 10px rgba(124, 58, 237, 0.1), inset -4px -4px 10px rgba(255, 255, 255, 0.5), 0 10px 20px rgba(124, 58, 237, 0.15)'}; }
+  .neu-button.purple-glass:hover { background-color: ${isDark ? 'rgba(168, 85, 247, 0.25)' : 'rgba(124, 58, 237, 0.2)'}; box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3), inset -2px -2px 5px rgba(255, 255, 255, 0.2), 0 0 20px ${isDark ? 'rgba(168, 85, 247, 0.3)' : 'rgba(124, 58, 237, 0.3)'}; }
 
   .showcase-wrapper { display: flex; gap: 40px; height: 600px; position: relative; }
   .project-list { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 15px; position: relative; }
   .project-glider { position: absolute; left: 0; width: 100%; background: var(--glass-highlight); border: 1px solid var(--glass-border); border-radius: 100px; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 0; pointer-events: none; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
   .project-item { font-size: 1.8rem; font-weight: 700; color: ${isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)'}; cursor: default; position: relative; padding: 20px 30px; border-radius: 100px; transition: color 0.4s ease; background: transparent; display: flex; align-items: center; justify-content: space-between; z-index: 1; }
   .project-item.active { color: ${isDark ? '#fff' : '#1e293b'}; }
-  .project-action-btn { width: 48px; height: 48px; border-radius: 50%; background: ${isDark ? '#d8b4fe' : '#9333ea'}; display: flex; align-items: center; justify-content: center; color: ${isDark ? '#1e293b' : '#fff'}; opacity: 0; transform: scale(0.8); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; pointer-events: none; }
+  .project-action-btn { width: 48px; height: 48px; border-radius: 50%; background: ${isDark ? '#d8b4fe' : '#8b5cf6'}; display: flex; align-items: center; justify-content: center; color: ${isDark ? '#1e293b' : '#fff'}; opacity: 0; transform: scale(0.8); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; pointer-events: none; }
   .project-item.active .project-action-btn { opacity: 1; transform: scale(1); pointer-events: auto; }
-  .project-action-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px ${isDark ? 'rgba(216, 180, 254, 0.5)' : 'rgba(147, 51, 234, 0.5)'}; }
+  .project-action-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px ${isDark ? 'rgba(216, 180, 254, 0.5)' : 'rgba(139, 92, 246, 0.5)'}; }
   .coming-soon-item { font-size: 1.2rem; font-weight: 500; color: ${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'}; cursor: not-allowed; display: flex; align-items: center; gap: 10px; padding: 20px 30px; }
   
   .project-preview { flex: 2.5; position: relative; border-radius: 32px; border: 1px solid var(--glass-border); background: var(--glass-bg); overflow: hidden; box-shadow: var(--glass-shadow); }
@@ -119,11 +121,12 @@ const getStyles = (isDark) => `
   .preview-info-minimal.active { transform: translateY(0); opacity: 1; }
 
   @media (max-width: 768px) {
-    /* Melhoria no Layout Mobile dos Projetos */
     .showcase-wrapper { flex-direction: column; height: auto; gap: 20px; }
-    .project-preview { height: 45vh; min-height: 350px; width: 100%; flex: none; } /* Mais altura para o iframe respirar */
+    .project-preview { height: 45vh; min-height: 350px; width: 100%; flex: none; }
     .project-list { flex: none; width: 100%; margin-bottom: 10px; }
     .project-item { font-size: 1.4rem; padding: 15px 20px; }
+    .project-action-btn { width: 36px; height: 36px; } 
+    .project-action-btn svg { width: 18px; height: 18px; }
   }
 `;
 
@@ -150,7 +153,7 @@ const LoadingScreen = ({ onComplete }) => {
   );
 };
 
-const TypewriterTitle = ({ isDark, phrases }) => {
+const TypewriterTitle = ({ isDark, phrases, highlightClassName }) => {
     const [index, setIndex] = useState(0);
     const [text, setText] = useState("");
     const [deleting, setDeleting] = useState(false);
@@ -179,7 +182,10 @@ const TypewriterTitle = ({ isDark, phrases }) => {
     const part2 = splitIndex !== -1 ? fullText.slice(splitIndex) : "";
     const showPart2 = text.length > part1.length;
     
-    return <>{text.slice(0, part1.length)}<br className="hidden md:block"/> <span className={isDark ? "text-purple-300" : "text-purple-600"}>{showPart2 ? text.slice(part1.length) : ""}</span><span className="cursor-blink"></span></>;
+    // CORREÇÃO: Use a classe passada ou o padrão
+    const highlightColor = highlightClassName ? highlightClassName : (isDark ? "text-purple-300" : "text-violet-700");
+    
+    return <>{text.slice(0, part1.length)}<br className="hidden md:block"/> <span className={highlightColor}>{showPart2 ? text.slice(part1.length) : ""}</span><span className="cursor-blink"></span></>;
 };
 
 const Reveal = ({ children, delay = 0 }) => {
@@ -207,6 +213,7 @@ const ThemeToggle = ({ isDark, toggle }) => (
 const ProfileCard = ({ isDark }) => {
   const cardRef = useRef(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const [isPressed, setIsPressed] = useState(false); // New state for subtle interaction
   
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -214,11 +221,27 @@ const ProfileCard = ({ isDark }) => {
     setRotate({ x: ((e.clientY - rect.top - rect.height / 2) / rect.height) * -10, y: ((e.clientX - rect.left - rect.width / 2) / rect.width) * 10 });
   };
 
+  const handleEasterEgg = (e) => {
+      e.stopPropagation();
+      setIsPressed(true);
+      setTimeout(() => setIsPressed(false), 200); // Quick press effect
+  };
+
   return (
     <div className="perspective-1000 w-full h-full flex items-center justify-center p-4">
-      <div ref={cardRef} onMouseMove={handleMouseMove} onMouseLeave={() => setRotate({ x: 0, y: 0 })} onClick={() => document.getElementById('contato').scrollIntoView({ behavior: 'smooth' })} 
-        style={{ transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`, transition: 'transform 0.1s ease-out', WebkitMaskImage: '-webkit-radial-gradient(white, black)', borderRadius: '1.5rem' }} 
-        className={`relative w-[320px] h-[480px] rounded-3xl overflow-hidden shadow-2xl group transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(147,51,234,0.3)] preserve-3d cursor-pointer backface-hidden will-change-transform ${isDark ? 'bg-slate-900 ring-1 ring-slate-800' : 'bg-white ring-1 ring-slate-200'}`}>
+      <div 
+        ref={cardRef} 
+        onMouseMove={handleMouseMove} 
+        onMouseLeave={() => setRotate({ x: 0, y: 0 })} 
+        onClick={handleEasterEgg} 
+        style={{ 
+            transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale(${isPressed ? 0.95 : 1})`, 
+            transition: 'transform 0.1s ease-out', 
+            WebkitMaskImage: '-webkit-radial-gradient(white, black)', 
+            borderRadius: '1.5rem' 
+        }} 
+        className={`relative w-[320px] h-[480px] rounded-3xl overflow-hidden shadow-2xl group cursor-pointer backface-hidden will-change-transform ${isPressed ? 'brightness-110' : ''} ${isDark ? 'bg-slate-900 ring-1 ring-slate-800' : 'bg-white ring-1 ring-slate-200'}`}
+      >
         <div className="absolute inset-0 h-full w-full bg-slate-800">
             <img src="/img/Lucas.png" alt="Lucas Ortiz" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90"></div>
@@ -287,6 +310,8 @@ export default function OrtLabsPortfolio() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [legalContent, setLegalContent] = useState(null); 
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formError, setFormError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -311,6 +336,30 @@ export default function OrtLabsPortfolio() {
 
   const scrollTo = (id) => { setActiveSection(id); document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (formError) setFormError(false); // Limpa o erro ao digitar
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+        setFormError(true);
+        // Pequena vibração ou feedback visual
+        const formBtn = document.getElementById('submit-btn');
+        if(formBtn) {
+            formBtn.classList.add('animate-shake');
+            setTimeout(() => formBtn.classList.remove('animate-shake'), 300);
+        }
+        return;
+    }
+    // Lógica de envio aqui (console log por enquanto)
+    console.log("Enviando...", formData);
+    alert("Mensagem enviada com sucesso! (Simulação)");
+    setFormData({ name: '', email: '', message: '' });
+  };
+
   return (
     <div className={`min-h-screen font-sans overflow-x-hidden pb-32 transition-colors duration-500 ${isDarkMode ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
       <style>{getStyles(isDarkMode)}</style>
@@ -321,7 +370,7 @@ export default function OrtLabsPortfolio() {
         <>
             <div className="fixed inset-0 z-[-1] site-content-enter"><div className={`absolute inset-0 ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}><div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 ${isDarkMode ? 'bg-purple-900' : 'bg-purple-200'}`}></div><div className={`absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 ${isDarkMode ? 'bg-indigo-900' : 'bg-indigo-200'}`}></div></div></div>
             <ThemeToggle isDark={isDarkMode} toggle={toggleTheme} />
-            <div className="fixed top-6 left-6 z-50 fixed-ui-enter"><div className="flex items-center gap-2 cursor-pointer group" onClick={() => scrollTo('home')}><div className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center border transition-all ${isDarkMode ? 'bg-slate-800/50 border-slate-700 group-hover:border-purple-300' : 'bg-white/80 border-slate-200 group-hover:border-purple-500 shadow-sm'}`}><Layers className={`transition-colors ${isDarkMode ? 'text-purple-300 group-hover:text-purple-200' : 'text-purple-600 group-hover:text-purple-700'}`} size={20} /></div><span className={`text-xl font-bold tracking-tight transition-colors hidden sm:block ${isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-slate-900'}`}>ORT<span className={`${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>LABS</span></span></div></div>
+            <div className="fixed top-6 left-6 z-50 fixed-ui-enter"><div className="flex items-center gap-2 cursor-pointer group" onClick={() => scrollTo('home')}><div className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center border transition-all ${isDarkMode ? 'bg-slate-800/50 border-slate-700 group-hover:border-purple-300' : 'bg-white/80 border-slate-200 group-hover:border-purple-500 shadow-sm'}`}><Layers className={`transition-colors ${isDarkMode ? 'text-purple-300 group-hover:text-purple-200' : 'text-violet-700 group-hover:text-violet-900'}`} size={20} /></div><span className={`text-xl font-bold tracking-tight transition-colors hidden sm:block ${isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-slate-900'}`}>ORT<span className={`${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>LABS</span></span></div></div>
 
             <div className="nav-pill-wrapper fixed-ui-enter">
                 <div className="dock-container">
@@ -336,28 +385,24 @@ export default function OrtLabsPortfolio() {
 
             <div className="site-content-enter">
                 {/* HERO SECTION - Grid Assimétrico para Mobile/Desktop */}
-                <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 pb-20">
+                <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-48 pb-12 md:pb-20"> {/* Reduzi pt e pb para mobile */}
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-                        {/* Layout Responsivo:
-                            Mobile (flex-col): 1. Texto (div) -> 2. Card (ProfileCard) -> 3. Botões (div) 
-                            Desktop (grid): Col 1: Texto e Botões | Col 2: Card
-                        */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
+                        {/* Gap reduzido para mobile: gap-6 em vez de gap-8 */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center relative z-10">
                             
                             {/* Bloco de Texto (Ordem 1 no Mobile, Col 1 Row 1 no Desktop) */}
-                            {/* Adicionado min-h no título para evitar pulo na animação */}
                             <div className="text-center md:text-left order-1 md:col-start-1 md:row-start-1">
                                 <Reveal>
                                     <div className={`inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border backdrop-blur-sm ${isDarkMode ? 'border-purple-300/20 bg-purple-400/5' : 'border-purple-200 bg-white/50'}`}>
-                                        <span className={`w-2 h-2 rounded-full animate-pulse ${isDarkMode ? 'bg-purple-300' : 'bg-purple-600'}`}></span>
-                                        <span className={`text-xs font-bold tracking-wider ${isDarkMode ? 'text-purple-300' : 'text-purple-700'}`}>ORTLABS FRONT-END</span>
+                                        <span className={`w-2 h-2 rounded-full animate-pulse ${isDarkMode ? 'bg-purple-300' : 'bg-violet-700'}`}></span>
+                                        <span className={`text-xs font-bold tracking-wider ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>ORTLABS FRONT-END</span>
                                     </div>
                                 </Reveal>
                                 <Reveal delay={200}>
                                     {/* min-h-[3.2em] garante espaço para 2 linhas de texto, evitando o "pulo" */}
-                                    <h1 className={`text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight min-h-[3.2em] md:min-h-[2.5em] ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>
+                                    <h1 className={`text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight min-h-[3.2em] md:min-h-[2.5em] ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>
                                         <TypewriterTitle isDark={isDarkMode} phrases={["Transformando ideias em | experiências digitais", "Tem um projeto? | Vamos trabalhar?"]} />
                                     </h1>
                                 </Reveal>
@@ -369,12 +414,12 @@ export default function OrtLabsPortfolio() {
                             </div>
 
                             {/* Bloco do Card (Ordem 2 no Mobile, Col 2 Row 1-2 no Desktop) */}
-                            <div className="order-2 md:col-start-2 md:row-start-1 md:row-span-2 flex justify-center perspective-container py-4 md:py-0">
+                            {/* Padding reduzido no container do card */}
+                            <div className="order-2 md:col-start-2 md:row-start-1 md:row-span-2 flex justify-center perspective-container py-2 md:py-0">
                                 <Reveal delay={300}><ProfileCard isDark={isDarkMode} /></Reveal>
                             </div>
 
                             {/* Bloco de Botões (Ordem 3 no Mobile, Col 1 Row 2 no Desktop) */}
-                            {/* Ajustado: flex-col no mobile, row no desktop, largura full no mobile */}
                             <div className="order-3 md:col-start-1 md:row-start-2 flex flex-col sm:flex-row gap-6 justify-center md:justify-start items-center">
                                 <Reveal delay={600}>
                                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -390,44 +435,50 @@ export default function OrtLabsPortfolio() {
                 <section id="sobre" className={`py-24 relative border-t overflow-hidden ${isDarkMode ? 'border-slate-900' : 'border-slate-100'}`}>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-16 items-start"> 
+                        {/* COLUNA ESQUERDA: VISUAL + STACK TÉCNICA */}
                         <div className="order-2 lg:order-1 flex flex-col gap-10">
                             <Reveal>
                                 <div className="glass-container py-10">
-                                    <div data-text="HTML / CSS" style={{ '--r': -15 }} className="glass group"><Braces size={48} strokeWidth={1.5} /></div>
-                                    <div data-text="JavaScript" style={{ '--r': 5 }} className="glass group"><Cpu size={48} strokeWidth={1.5} /></div>
-                                    <div data-text="React / Next" style={{ '--r': 25 }} className="glass group"><Layers size={48} strokeWidth={1.5} /></div>
+                                    <div data-text="HTML / CSS" style={{ '--r': -15 }} className="glass group select-none"><Braces size={48} strokeWidth={1.5} /></div>
+                                    <div data-text="JavaScript" style={{ '--r': 5 }} className="glass group select-none"><Cpu size={48} strokeWidth={1.5} /></div>
+                                    <div data-text="React / Next" style={{ '--r': 25 }} className="glass group select-none"><Layers size={48} strokeWidth={1.5} /></div>
                                 </div>
                             </Reveal>
+                            
+                            {/* LINGUAGENS (Movia para a esquerda) */}
                             <Reveal delay={200}>
-                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}><Award size={16} /> Certificações</h3>
-                                    <div className="flex flex-wrap gap-2 justify-center lg:justify-start">{['Desenvolvimento Web Completo', 'Algoritmos e Lógica', 'React: The Complete Guide', 'UX/UI Fundamentals'].map((cert) => (<div key={cert} className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold transition-all hover:scale-105 cursor-default ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:text-white' : 'bg-slate-50 border-slate-200 text-slate-600 hover:shadow-sm'}`}><span>{cert}</span></div>))}</div>
-                                </div>
+                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 select-none ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}><Code size={16} /> Linguagens</h3><div className="flex flex-wrap gap-3 justify-center lg:justify-start select-none">{['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3 / SASS'].map((item) => (<div key={item} className={`px-4 py-2 rounded-lg border text-sm font-semibold transition-all hover:-translate-y-1 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:border-purple-500 hover:text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-violet-500 hover:text-violet-700 shadow-sm'}`}>{item}</div>))}</div></div>
                             </Reveal>
-                            <Reveal delay={300}>
-                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}><User size={16} /> Soft Skills</h3>
-                                    <div className="flex flex-wrap gap-2 justify-center lg:justify-start">{['Comunicação Clara', 'Resolução de Problemas', 'Trabalho em Equipe', 'Aprendizado Contínuo'].map((skill) => (<div key={skill} className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold transition-all hover:scale-105 cursor-default ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:text-white' : 'bg-slate-50 border-slate-200 text-slate-600 hover:shadow-sm'}`}><span>{skill}</span></div>))}</div>
-                                </div>
+                            
+                            {/* FRAMEWORKS (Movia para a esquerda) */}
+                             <Reveal delay={300}>
+                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 select-none ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}><Layers size={16} /> Frameworks & Libs</h3><div className="flex flex-wrap gap-3 justify-center lg:justify-start select-none">{[{ name: 'React.js', desc: 'Core' }, { name: 'Next.js', desc: 'Fullstack/SEO' }, { name: 'Tailwind CSS', desc: 'Estilização' }, { name: 'Node.js', desc: 'Backend Basics' }, { name: 'Vite', desc: 'Build Tool' }].map((tech) => (<div key={tech.name} className={`group flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-semibold transition-all hover:-translate-y-1 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white hover:bg-purple-900/30 hover:border-purple-500' : 'bg-white border-slate-200 text-slate-800 hover:bg-violet-50 hover:border-violet-500 shadow-sm'}`}><span>{tech.name}</span><span className={`text-[10px] uppercase px-1.5 py-0.5 rounded opacity-60 group-hover:opacity-100 transition-opacity ${isDarkMode ? 'bg-slate-700 text-purple-200' : 'bg-slate-100 text-violet-700'}`}>{tech.desc}</span></div>))}</div></div>
                             </Reveal>
                         </div>
+
+                        {/* COLUNA DIREITA: NARRATIVA + CERTIFICAÇÕES */}
                         <div className="order-1 lg:order-2">
                         <Reveal delay={200}>
-                            <div className={`inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border ${isDarkMode ? 'border-purple-300/30 bg-purple-400/5' : 'border-purple-200 bg-purple-50'}`}><Code size={14} className={`${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`} /><span className={`text-xs font-bold tracking-wider ${isDarkMode ? 'text-purple-300' : 'text-purple-700'}`}>STACK & BIO</span></div>
+                            <div className={`inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border ${isDarkMode ? 'border-purple-300/30 bg-purple-400/5' : 'border-violet-200 bg-violet-50'}`}><Code size={14} className={`${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`} /><span className={`text-xs font-bold tracking-wider ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>QUEM SOU</span></div>
                             <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}><TypewriterTitle isDark={isDarkMode} phrases={["Lucas Ortiz | Developer", "A Missão da | OrtLabs"]} /></h2>
                             <div className={`space-y-6 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                                 <p className="text-lg leading-relaxed">Sou <strong className={isDarkMode ? 'text-slate-200' : 'text-slate-800'}>Lucas Ortiz</strong>, 25 anos, desenvolvedor Front-End e estudante de Gestão de TI. A OrtLabs é meu estúdio de criação digital focado em resultados.</p>
                                 <div className="my-6">
                                     <h3 className={`text-sm font-bold uppercase tracking-widest mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>O que eu faço por você:</h3>
                                     <ul className="space-y-3">
-                                        <li className="flex gap-3"><span className={`mt-1.5 min-w-[6px] h-1.5 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-purple-600'}`}></span><span><strong className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>Landing Pages de Alta Conversão:</strong> Sites rápidos desenhados para transformar visitantes em clientes.</span></li>
-                                        <li className="flex gap-3"><span className={`mt-1.5 min-w-[6px] h-1.5 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-purple-600'}`}></span><span><strong className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>Dashboards & Sistemas:</strong> Painéis administrativos intuitivos para organizar a gestão do seu negócio.</span></li>
-                                        <li className="flex gap-3"><span className={`mt-1.5 min-w-[6px] h-1.5 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-purple-600'}`}></span><span><strong className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>Otimização de Performance:</strong> Transformo sites lentos em experiências instantâneas que o Google adora.</span></li>
+                                        <li className="flex gap-3"><span className={`mt-1.5 min-w-[6px] h-1.5 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-violet-600'}`}></span><span><strong className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>Landing Pages de Alta Conversão:</strong> Sites rápidos desenhados para transformar visitantes em clientes.</span></li>
+                                        <li className="flex gap-3"><span className={`mt-1.5 min-w-[6px] h-1.5 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-violet-600'}`}></span><span><strong className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>Dashboards & Sistemas:</strong> Painéis administrativos intuitivos para organizar a gestão do seu negócio.</span></li>
+                                        <li className="flex gap-3"><span className={`mt-1.5 min-w-[6px] h-1.5 rounded-full ${isDarkMode ? 'bg-purple-400' : 'bg-violet-600'}`}></span><span><strong className={isDarkMode ? 'text-slate-300' : 'text-slate-700'}>Otimização de Performance:</strong> Transformo sites lentos em experiências instantâneas que o Google adora.</span></li>
                                     </ul>
                                 </div>
                                 <p className="text-lg leading-relaxed">Meu objetivo é tirar a complexidade técnica da frente e entregar soluções que apenas funcionam, elevam sua marca e geram valor real.</p>
                             </div>
-                            <div className="mt-10 space-y-8">
-                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center gap-2 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}><Code size={16} /> Linguagens</h3><div className="flex flex-wrap gap-3">{['JavaScript (ES6+)', 'TypeScript', 'HTML5', 'CSS3 / SASS'].map((item) => (<div key={item} className={`px-4 py-2 rounded-lg border text-sm font-semibold transition-all hover:-translate-y-1 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:border-purple-500 hover:text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-purple-500 hover:text-purple-700 shadow-sm'}`}>{item}</div>))}</div></div>
-                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center gap-2 ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}><Layers size={16} /> Frameworks & Libs</h3><div className="flex flex-wrap gap-3">{[{ name: 'React.js', desc: 'Core' }, { name: 'Next.js', desc: 'Fullstack/SEO' }, { name: 'Tailwind CSS', desc: 'Estilização' }, { name: 'Node.js', desc: 'Backend Basics' }, { name: 'Vite', desc: 'Build Tool' }].map((tech) => (<div key={tech.name} className={`group flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-semibold transition-all hover:-translate-y-1 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white hover:bg-purple-900/30 hover:border-purple-500' : 'bg-white border-slate-200 text-slate-800 hover:bg-purple-50 hover:border-purple-500 shadow-sm'}`}><span>{tech.name}</span><span className={`text-[10px] uppercase px-1.5 py-0.5 rounded opacity-60 group-hover:opacity-100 transition-opacity ${isDarkMode ? 'bg-slate-700 text-purple-200' : 'bg-slate-100 text-purple-700'}`}>{tech.desc}</span></div>))}</div></div>
+                            
+                            {/* CERTIFICAÇÕES (Movia para a direita) */}
+                            <div className="mt-10">
+                                <div><h3 className={`text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-center lg:justify-start gap-2 select-none ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}><Award size={16} /> Certificações</h3>
+                                    <div className="flex flex-wrap gap-2 justify-center lg:justify-start select-none">{['Desenvolvimento Web Completo', 'Algoritmos e Lógica', 'React: The Complete Guide', 'UX/UI Fundamentals'].map((cert) => (<div key={cert} className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold transition-all hover:scale-105 cursor-default ${isDarkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:text-white' : 'bg-white border-slate-200 text-slate-600 hover:shadow-sm'}`}><span>{cert}</span></div>))}</div>
+                                </div>
                             </div>
                         </Reveal>
                         </div>
@@ -437,7 +488,7 @@ export default function OrtLabsPortfolio() {
 
                 <section id="portfolio" className={`py-24 border-t ${isDarkMode ? 'border-slate-900' : 'border-slate-200'}`}>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <Reveal><div className="mb-16"><span className={`font-bold tracking-widest text-sm uppercase ${isDarkMode ? 'text-purple-300' : 'text-purple-600'}`}>OrtLabs Work</span><h2 className={`text-3xl md:text-5xl font-bold mt-2 ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>Projetos Selecionados</h2></div></Reveal>
+                    <Reveal><div className="mb-16"><span className={`font-bold tracking-widest text-sm uppercase ${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>OrtLabs Work</span><h2 className={`text-3xl md:text-5xl font-bold mt-2 ${isDarkMode ? 'text-slate-100' : 'text-slate-900'}`}>Projetos Selecionados</h2></div></Reveal>
                     <ProjectShowcase isDark={isDarkMode} />
                     </div>
                 </section>
@@ -446,22 +497,49 @@ export default function OrtLabsPortfolio() {
                     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-24">
                     <Reveal>
                         <div className={`rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row ${isDarkMode ? 'bg-slate-900/50 border border-slate-800' : 'bg-white border border-slate-200 shadow-xl'}`}>
-                            <div className={`md:w-2/5 p-10 md:p-12 flex flex-col justify-between relative overflow-hidden ${isDarkMode ? 'bg-purple-900/20' : 'bg-purple-600'}`}>
+                            <div className={`md:w-2/5 p-10 md:p-12 flex flex-col justify-between relative overflow-hidden ${isDarkMode ? 'bg-purple-900/20' : 'bg-violet-900/80'}`}> {/* Violeta escuro sólido no light mode */}
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/30 blur-[80px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
-                                <div className="relative z-10"><h2 className={`text-3xl md:text-4xl font-bold mb-6 leading-tight ${isDarkMode ? 'text-white' : 'text-white'}`}><TypewriterTitle isDark={isDarkMode} phrases={["Vamos tirar seu | Projeto do Papel?", "Tem uma ideia? | Vamos trabalhar?"]} /></h2><p className={`text-lg mb-8 ${isDarkMode ? 'text-slate-300' : 'text-purple-100'}`}>Tem um desafio ambicioso? Vamos conversar e transformar isso em realidade.</p></div>
-                                <div className="space-y-6 relative z-10">
-                                     <div className="flex items-center gap-4"><div className={`w-12 h-12 rounded-full flex items-center justify-center ${isDarkMode ? 'bg-white/10 text-white' : 'bg-white/20 text-white'}`}><Mail size={20} /></div><div><p className={`text-xs uppercase tracking-wider font-bold ${isDarkMode ? 'text-slate-400' : 'text-purple-200'}`}>Email</p><p className={`font-medium ${isDarkMode ? 'text-white' : 'text-white'}`}>ortlabs@gmail.com</p></div></div>
-                                     <div className="flex items-center gap-4"><div className={`w-12 h-12 rounded-full flex items-center justify-center ${isDarkMode ? 'bg-white/10 text-white' : 'bg-white/20 text-white'}`}><Smartphone size={20} /></div><div><p className={`text-xs uppercase tracking-wider font-bold ${isDarkMode ? 'text-slate-400' : 'text-purple-200'}`}>Whatsapp</p><p className={`font-medium ${isDarkMode ? 'text-white' : 'text-white'}`}>(11) 99408-2371</p></div></div>
+                                <div className="relative z-10">
+                                    <h2 className={`text-3xl md:text-4xl font-bold mb-6 leading-tight min-h-[3.2em] md:min-h-[2.5em] ${isDarkMode ? 'text-white' : 'text-white'}`}>
+                                        {/* CORREÇÃO: Força a cor roxa clara (purple-300) no destaque, mesmo no modo claro, pois o fundo do card é sempre roxo escuro */}
+                                        <TypewriterTitle isDark={isDarkMode} phrases={["Vamos tirar seu | Projeto do Papel?", "Tem uma ideia? | Vamos trabalhar?"]} highlightClassName="text-purple-300" />
+                                    </h2>
+                                    <p className={`text-lg mb-8 ${isDarkMode ? 'text-slate-300' : 'text-purple-100'}`}>Tem um desafio ambicioso? Vamos conversar e transformar isso em realidade.</p>
                                 </div>
+                                <div className="space-y-6 relative z-10">
+                                     <a href="mailto:ortlabs@gmail.com" className={`flex items-center gap-4 group cursor-pointer`}>
+                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-transform group-hover:scale-110 ${isDarkMode ? 'bg-white/10 text-white' : 'bg-white/20 text-white'}`}><Mail size={20} /></div>
+                                        <div><p className={`text-xs uppercase tracking-wider font-bold ${isDarkMode ? 'text-slate-400' : 'text-purple-200'}`}>Email</p><p className={`font-medium ${isDarkMode ? 'text-white' : 'text-white'}`}>ortlabs@gmail.com</p></div>
+                                     </a>
+                                     <a href="https://wa.me/5511994082371" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-4 group cursor-pointer`}>
+                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-transform group-hover:scale-110 ${isDarkMode ? 'bg-white/10 text-white' : 'bg-white/20 text-white'}`}><Smartphone size={20} /></div>
+                                        <div><p className={`text-xs uppercase tracking-wider font-bold ${isDarkMode ? 'text-slate-400' : 'text-purple-200'}`}>Whatsapp</p><p className={`font-medium ${isDarkMode ? 'text-white' : 'text-white'}`}>(11) 99408-2371</p></div>
+                                     </a>
+                                </div>
+                                {/* Copyright removido daqui conforme solicitado */}
                             </div>
                             <div className={`md:w-3/5 p-10 md:p-12 ${isDarkMode ? 'bg-transparent' : 'bg-white'}`}>
-                                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                                <form className="space-y-6" onSubmit={handleSubmit}>
                                     <div className="grid grid-cols-2 gap-6">
-                                        <div className="col-span-2 md:col-span-1"><label className={`block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>Nome</label><input type="text" placeholder="Seu nome" className={`w-full bg-transparent border-b-2 px-0 py-2 focus:outline-none transition-all placeholder:text-slate-600 ${isDarkMode ? 'border-slate-700 text-white focus:border-purple-500' : 'border-slate-200 text-slate-800 focus:border-purple-600'}`} /></div>
-                                        <div className="col-span-2 md:col-span-1"><label className={`block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>Email</label><input type="email" placeholder="seu@email.com" className={`w-full bg-transparent border-b-2 px-0 py-2 focus:outline-none transition-all placeholder:text-slate-600 ${isDarkMode ? 'border-slate-700 text-white focus:border-purple-500' : 'border-slate-200 text-slate-800 focus:border-purple-600'}`} /></div>
+                                        <div className="col-span-2 md:col-span-1">
+                                            <label className={`block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>Nome</label>
+                                            <input name="name" value={formData.name} onChange={handleInputChange} type="text" placeholder="Seu nome" className={`w-full bg-transparent border-b-2 px-0 py-2 focus:outline-none transition-all placeholder:text-slate-600 ${formError && !formData.name ? 'border-red-500 placeholder:text-red-400' : isDarkMode ? 'border-slate-700 text-white focus:border-purple-500' : 'border-slate-200 text-slate-800 focus:border-violet-600'}`} />
+                                        </div>
+                                        <div className="col-span-2 md:col-span-1">
+                                            <label className={`block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>Email</label>
+                                            <input name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder="seu@email.com" className={`w-full bg-transparent border-b-2 px-0 py-2 focus:outline-none transition-all placeholder:text-slate-600 ${formError && !formData.email ? 'border-red-500 placeholder:text-red-400' : isDarkMode ? 'border-slate-700 text-white focus:border-purple-500' : 'border-slate-200 text-slate-800 focus:border-violet-600'}`} />
+                                        </div>
                                     </div>
-                                    <div><label className={`block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>Mensagem</label><textarea rows="4" placeholder="Conte sobre seu projeto..." className={`w-full bg-transparent border-b-2 px-0 py-2 focus:outline-none transition-all resize-none placeholder:text-slate-600 ${isDarkMode ? 'border-slate-700 text-white focus:border-purple-500' : 'border-slate-200 text-slate-800 focus:border-purple-600'}`}></textarea></div>
-                                    <div className="pt-4"><button className={`group w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 ${isDarkMode ? 'bg-purple-600 text-white hover:bg-purple-500' : 'bg-purple-600 text-white hover:bg-purple-700'}`}>Enviar Mensagem <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" /></button></div>
+                                    <div>
+                                        <label className={`block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>Mensagem</label>
+                                        <textarea name="message" value={formData.message} onChange={handleInputChange} rows="4" placeholder="Conte sobre seu projeto..." className={`w-full bg-transparent border-b-2 px-0 py-2 focus:outline-none transition-all resize-none placeholder:text-slate-600 ${formError && !formData.message ? 'border-red-500 placeholder:text-red-400' : isDarkMode ? 'border-slate-700 text-white focus:border-purple-500' : 'border-slate-200 text-slate-800 focus:border-violet-600'}`}></textarea>
+                                    </div>
+                                    {formError && <div className="text-red-500 text-sm flex items-center gap-2"><AlertCircle size={16} /> Por favor, preencha todos os campos.</div>}
+                                    <div className="pt-4">
+                                        <button id="submit-btn" type="submit" className={`group w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 ${isDarkMode ? 'bg-purple-600 text-white hover:bg-purple-500' : 'bg-violet-700 text-white hover:bg-violet-800'}`}>
+                                            Enviar Mensagem <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
