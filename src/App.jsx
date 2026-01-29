@@ -75,7 +75,7 @@ const getStyles = (isDark) => `
   .glass-container .glass:hover svg { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.4)); color: var(--accent); }
   @media (max-width: 640px) { .glass-container .glass { margin: 0; transform: none; } .glass-container { gap: 15px; } }
 
-  /* Nav Centralizada (Método margin: auto) - CORRIGIDO */
+  /* Nav Centralizada */
   .nav-pill-wrapper { position: fixed; bottom: 2rem; left: 0; right: 0; margin-left: auto; margin-right: auto; z-index: 100; width: fit-content; max-width: 95vw; display: flex; justify-content: center; }
   
   .dock-container { display: flex; align-items: center; background: var(--nav-bg); border-radius: 24px; backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border: 1px solid var(--nav-border); box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1); padding: 6px 12px; height: 64px; transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); }
@@ -123,9 +123,7 @@ const getStyles = (isDark) => `
   .preview-info-minimal.active { transform: translateY(0); opacity: 1; }
 
   @media (max-width: 768px) {
-    /* Navbar mais baixa no mobile */
     .nav-pill-wrapper { bottom: 1rem; } 
-    /* Compactação dos Espaços para Mobile */
     .showcase-wrapper { flex-direction: column; height: auto; gap: 15px; }
     .project-preview { height: 220px; width: 100%; flex: none; border-radius: 20px; }
     .project-list { flex: none; width: 100%; margin-bottom: 0; display: flex; flex-direction: column; gap: 8px; }
@@ -138,6 +136,15 @@ const getStyles = (isDark) => `
     .glass-container { display: none; }
   }
 `;
+
+// --- NOVO LOGO (OrtLogo) ---
+const OrtLogo = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 14h6v6H4z" opacity="0.6" />
+    <path d="M9 9h6v6H9z" opacity="0.8" />
+    <path d="M14 4h6v6h-6z" />
+  </svg>
+);
 
 // --- COMPONENTS ---
 const LoadingScreen = ({ onComplete }) => {
@@ -376,7 +383,7 @@ export default function OrtLabsPortfolio() {
         <>
             <div className="fixed inset-0 z-[-1] site-content-enter"><div className={`absolute inset-0 ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}><div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 ${isDarkMode ? 'bg-purple-900' : 'bg-purple-200'}`}></div><div className={`absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 ${isDarkMode ? 'bg-indigo-900' : 'bg-indigo-200'}`}></div></div></div>
             <ThemeToggle isDark={isDarkMode} toggle={toggleTheme} />
-            <div className="fixed top-6 left-6 z-50 fixed-ui-enter"><div className="flex items-center gap-2 cursor-pointer group" onClick={() => scrollTo('home')}><div className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center border transition-all ${isDarkMode ? 'bg-slate-800/50 border-slate-700 group-hover:border-purple-300' : 'bg-white/80 border-slate-200 group-hover:border-purple-500 shadow-sm'}`}><Layers className={`transition-colors ${isDarkMode ? 'text-purple-300 group-hover:text-purple-200' : 'text-violet-700 group-hover:text-violet-900'}`} size={20} /></div><span className={`text-xl font-bold tracking-tight transition-colors hidden sm:block ${isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-slate-900'}`}>ORT<span className={`${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>LABS</span></span></div></div>
+            <div className="fixed top-6 left-6 z-50 fixed-ui-enter"><div className="flex items-center gap-2 cursor-pointer group" onClick={() => scrollTo('home')}><div className={`w-10 h-10 backdrop-blur-md rounded-full flex items-center justify-center border transition-all ${isDarkMode ? 'bg-slate-800/50 border-slate-700 group-hover:border-purple-300' : 'bg-white/80 border-slate-200 group-hover:border-purple-500 shadow-sm'}`}><OrtLogo className={`transition-colors ${isDarkMode ? 'text-purple-300 group-hover:text-purple-200' : 'text-violet-700 group-hover:text-violet-900'}`} size={20} /></div><span className={`text-xl font-bold tracking-tight transition-colors hidden sm:block ${isDarkMode ? 'text-slate-200 group-hover:text-white' : 'text-slate-800 group-hover:text-slate-900'}`}>ORT<span className={`${isDarkMode ? 'text-purple-300' : 'text-violet-700'}`}>LABS</span></span></div></div>
 
             <div className="nav-pill-wrapper fixed-ui-enter">
                 <div className="dock-container">
@@ -555,7 +562,7 @@ export default function OrtLabsPortfolio() {
                     <div className="relative pt-8 md:pt-12 pb-8">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                             <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
-                                <div className="text-center md:text-left"><div className={`flex items-center justify-center md:justify-start gap-2 mb-1 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}><div className={`p-1.5 rounded-lg ${isDarkMode ? 'bg-white/5' : 'bg-slate-200'}`}><Layers size={20} className="text-purple-500" /></div><span className="text-lg font-bold tracking-tight">ORT<span className="text-purple-500">LABS</span></span></div><p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Transformando ideias em experiências digitais.</p></div>
+                                <div className="text-center md:text-left"><div className={`flex items-center justify-center md:justify-start gap-2 mb-1 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}><div className={`p-1.5 rounded-lg ${isDarkMode ? 'bg-white/5' : 'bg-slate-200'}`}><OrtLogo className={`transition-colors ${isDarkMode ? 'text-purple-500' : 'text-purple-600'}`} size={20} /></div><span className="text-lg font-bold tracking-tight">ORT<span className="text-purple-500">LABS</span></span></div><p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Transformando ideias em experiências digitais.</p></div>
                                 <div className="flex gap-4">{SOCIAL_LINKS.map(s => (<a key={s.id} href={s.link} target="_blank" rel="noopener noreferrer" className={`p-2 rounded-full transition-all ${isDarkMode ? 'bg-white/5 hover:bg-white/10 text-white' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'}`}><s.icon size={18} /></a>))}</div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
