@@ -385,7 +385,7 @@ export default function OrtLabsPortfolio() {
 
             <div className="site-content-enter">
                 {/* HERO SECTION - Grid Assimétrico para Mobile/Desktop */}
-                <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-18 md:pt-48 pb-12 md:pb-20"> {/* Reduzi pt e pb para mobile */}
+                <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 md:pt-48 pb-12 md:pb-20"> {/* Reduzi pt e pb para mobile */}
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
 
